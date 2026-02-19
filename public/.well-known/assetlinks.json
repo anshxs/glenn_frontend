@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.absolute.glenn",
+      "sha256_cert_fingerprints": [
+        "C6:73:CD:36:15:58:63:2A:E9:8F:FE:5B:69:19:BF:48:A5:FC:95:DD:3F:5D:CB:9A:74:08:DC:74:46:7B:B0:9B"
+      ]
+    }
+  }
+]
