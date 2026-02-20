@@ -325,7 +325,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="mt-12 w-full border-t border-zinc-800 pt-8 pb-12">
           <div className="mx-auto max-w-6xl px-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="flex flex-col gap-8">
               <div className="space-y-4">
                 <a href="/" aria-label="Home" className="-ml-3 inline-block">
                   <img src="/logos.svg" alt="GLENN" className="h-10 invert-100" />
