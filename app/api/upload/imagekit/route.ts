@@ -117,11 +117,12 @@ export async function POST(request: NextRequest) {
 
     // Prepare ImageKit upload
     const uploadFormData = new FormData();
-    const blob = new Blob([buffer]);
+    // Create blob with proper type
+    const blob = new Blob([buffer], { type: file.type || 'application/octet-stream' });
     uploadFormData.append('file', blob, uniqueFileName);
     uploadFormData.append('fileName', uniqueFileName);
     uploadFormData.append('folder', `/${folder}`);
-    uploadFormData.append('useUniqueFileName', 'true');
+    uploadFormData.append('useUniqueFileName', 'false'); // We're already making it unique
     uploadFormData.append('tags', `glenn-app,${folder}`);
 
     // Upload to ImageKit with Basic Auth
