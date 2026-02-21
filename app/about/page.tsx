@@ -21,7 +21,7 @@ export default function About() {
 
           <div className="flex items-center mr-2">
             <a
-              href="https://github.com/anshxs/glenn_frontend/releases/download/v1.0.0/Glenn.apk"
+              href="https://github.com/anshxs/glenn_frontend/releases/download/v1.0.0/app-release.apk"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 rounded-lg bg-[#c8ff00] px-5 py-2 text-black font-sans transition-all duration-200 hover:scale-105 hover:shadow-lg animate-fadeIn"
@@ -146,7 +146,7 @@ export default function About() {
               Whether you're a casual player or a competitive grinder, GLENN is your platform.
             </p>
             <a
-              href="https://github.com/anshxs/glenn_frontend/releases/download/v1.0.0/Glenn.apk"
+              href="https://github.com/anshxs/glenn_frontend/releases/download/v1.0.0/app-release.apk"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 rounded-lg bg-[#c8ff00] px-6 py-3 text-black font-semibold transition-all duration-200 hover:scale-105 hover:shadow-lg"

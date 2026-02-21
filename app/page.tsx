@@ -26,7 +26,7 @@ export default function Home() {
           {/* Right: Play Store button */}
           <div className="flex items-center mr-2">
             <a
-              href="https://github.com/anshxs/glenn_frontend/releases/download/v1.0.0/Glenn.apk"
+              href="https://github.com/anshxs/glenn_frontend/releases/download/v1.0.0/app-release.apk"
               target="_blank"
               rel="noopener noreferrer"
               className="
@@ -298,7 +298,7 @@ export default function Home() {
 
           <div className="mx-auto max-w-2xl text-center">
             <a
-              href="https://github.com/anshxs/glenn_frontend/releases/download/v1.0.0/Glenn.apk"
+              href="https://github.com/anshxs/glenn_frontend/releases/download/v1.0.0/app-release.apk"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 mx-auto rounded-lg bg-[#c8ff00] px-6 py-3 text-black font-semibold transition-all duration-200 hover:scale-105 hover:shadow-lg"
