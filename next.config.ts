@@ -5,6 +5,13 @@ const nextConfig: NextConfig = {
   trailingSlash: false,
   // Skip trailing slash redirect
   skipTrailingSlashRedirect: true,
+  // Ensure API routes are not rewritten
+  async rewrites() {
+    return [];
+  },
+  async redirects() {
+    return [];
+  },
 };
 
 export default nextConfig;
