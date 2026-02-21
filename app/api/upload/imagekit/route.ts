@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+// Route segment config
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 // Rate limiting storage (in-memory, consider Redis for production)
 const uploadHistory = new Map<string, number[]>();
 

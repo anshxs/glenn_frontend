@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/lib/supabase';
 
+// Route segment config
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 // Helper function to verify JWT token
 async function verifyToken(authHeader: string | null): Promise<string | null> {
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
