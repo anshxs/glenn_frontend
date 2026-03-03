@@ -65,7 +65,7 @@ export default function WithdrawalPolicy() {
               </p>
               <ul className="list-disc list-inside space-y-2 ml-2">
                 <li><strong className="text-white">Account Verification:</strong> Your account must be fully verified with valid phone number and documents.</li>
-                <li><strong className="text-white">Minimum Balance:</strong> Your wallet must have at least ₹100 available for withdrawal.</li>
+                <li><strong className="text-white">Minimum Balance:</strong> Your wallet must have at least 100 available for withdrawal.</li>
                 <li><strong className="text-white">No Pending Issues:</strong> Your account must not have any fraud flags, pending disputes, or violations.</li>
                 <li><strong className="text-white">KYC Completion:</strong> Valid government-issued ID and bank account details must be on file.</li>
                 <li><strong className="text-white">Good Standing:</strong> Your account must not be under investigation or suspension.</li>
@@ -81,19 +81,19 @@ export default function WithdrawalPolicy() {
               <div className="bg-[#1a1a1a] p-4 rounded-lg space-y-2 mt-3">
                 <div className="flex justify-between">
                   <span className="text-gray-400">Minimum Withdrawal:</span>
-                  <span className="text-white font-semibold">₹100</span>
+                  <span className="text-white font-semibold">100</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-400">Maximum Per Transaction:</span>
-                  <span className="text-white font-semibold">₹50,000</span>
+                  <span className="text-white font-semibold">50,000</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-400">Daily Limit:</span>
-                  <span className="text-white font-semibold">₹1,00,000</span>
+                  <span className="text-white font-semibold">1,00,000</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-400">Monthly Limit:</span>
-                  <span className="text-white font-semibold">₹5,00,000</span>
+                  <span className="text-white font-semibold">5,00,000</span>
                 </div>
               </div>
               <p className="text-yellow-400 text-xs mt-3">
@@ -129,20 +129,20 @@ export default function WithdrawalPolicy() {
               <p>GLENN charges the following fees for withdrawals:</p>
               <div className="bg-[#1a1a1a] p-4 rounded-lg space-y-2 mt-3">
                 <div className="flex justify-between">
-                  <span className="text-gray-400">₹100 - ₹999:</span>
-                  <span className="text-white font-semibold">₹10 + GST</span>
+                  <span className="text-gray-400">100 - 999:</span>
+                  <span className="text-white font-semibold">10 + GST</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">₹1,000 - ₹9,999:</span>
-                  <span className="text-white font-semibold">₹15 + GST</span>
+                  <span className="text-gray-400">1,000 - 9,999:</span>
+                  <span className="text-white font-semibold">15 + GST</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">₹10,000 - ₹49,999:</span>
-                  <span className="text-white font-semibold">₹25 + GST</span>
+                  <span className="text-gray-400">10,000 - 49,999:</span>
+                  <span className="text-white font-semibold">25 + GST</span>
                 </div>
                 <div className="flex justify-between">
-                  <span className="text-gray-400">₹50,000+:</span>
-                  <span className="text-white font-semibold">₹50 + GST</span>
+                  <span className="text-gray-400">50,000+:</span>
+                  <span className="text-white font-semibold">50 + GST</span>
                 </div>
               </div>
               <p className="text-green-400 text-sm mt-3">
@@ -162,7 +162,7 @@ export default function WithdrawalPolicy() {
                 <li><strong className="text-green-400">Tournament Winnings:</strong> ✅ Withdrawable after 24-hour cooling period</li>
                 <li><strong className="text-green-400">Deposited Funds:</strong> ✅ Withdrawable immediately</li>
                 <li><strong className="text-yellow-400">Bonus Amount:</strong> ⚠️ Must be used for tournament entries (non-withdrawable)</li>
-                <li><strong className="text-yellow-400">Referral Bonus:</strong> ⚠️ Withdrawable after 7 days and ₹500 minimum earnings</li>
+                <li><strong className="text-yellow-400">Referral Bonus:</strong> ⚠️ Withdrawable after 7 days and 500 minimum earnings</li>
                 <li><strong className="text-red-400">Promotional Credits:</strong> ❌ Non-withdrawable (tournament use only)</li>
               </ul>
               <p className="text-white font-semibold mt-3">
@@ -179,7 +179,7 @@ export default function WithdrawalPolicy() {
               <ol className="list-decimal list-inside space-y-2 ml-2">
                 <li>Open the GLENN app and go to your Wallet</li>
                 <li>Tap on "Withdraw" button</li>
-                <li>Enter the amount you wish to withdraw (minimum ₹100)</li>
+                <li>Enter the amount you wish to withdraw (minimum 100)</li>
                 <li>Select your verified bank account or add a new one</li>
                 <li>Review the withdrawal details and fees</li>
                 <li>Confirm the withdrawal request</li>
@@ -204,7 +204,7 @@ export default function WithdrawalPolicy() {
                 <li><strong className="text-white">Verification Pending:</strong> If your KYC documents are incomplete or under review</li>
                 <li><strong className="text-white">Tournament Investigation:</strong> If you're involved in an ongoing cheating or dispute investigation</li>
                 <li><strong className="text-white">Legal Requirements:</strong> If required by law enforcement or regulatory authorities</li>
-                <li><strong className="text-white">TDS Deduction:</strong> Tax deduction at source may apply as per Indian Income Tax laws (for winnings above ₹10,000)</li>
+                <li><strong className="text-white">TDS Deduction:</strong> Tax deduction at source may apply as per Indian Income Tax laws (for winnings above 10,000)</li>
                 <li><strong className="text-white">Account Suspension:</strong> If your account is banned or temporarily suspended</li>
               </ul>
               <p className="text-red-400 font-semibold mt-3">
@@ -221,7 +221,7 @@ export default function WithdrawalPolicy() {
                 As per Indian Income Tax regulations, GLENN is required to deduct Tax Deducted at Source (TDS) on net winnings:
               </p>
               <ul className="list-disc list-inside space-y-2 ml-2">
-                <li><strong className="text-white">TDS Rate:</strong> 30% on net winnings exceeding ₹10,000 in a financial year</li>
+                <li><strong className="text-white">TDS Rate:</strong> 30% on net winnings exceeding 10,000 in a financial year</li>
                 <li><strong className="text-white">TDS Certificate:</strong> Form 16A/26AS will be provided for tax filing purposes</li>
                 <li><strong className="text-white">PAN Requirement:</strong> Valid PAN card must be linked; otherwise, higher TDS may apply</li>
               </ul>

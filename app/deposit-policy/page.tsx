@@ -84,19 +84,19 @@ export default function DepositPolicy() {
               <div className="bg-[#1a1a1a] p-4 rounded-lg space-y-2 mt-3">
                 <div className="flex justify-between">
                   <span className="text-gray-400">Minimum Deposit:</span>
-                  <span className="text-white font-semibold">₹10</span>
+                  <span className="text-white font-semibold">10</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-400">Maximum Per Transaction:</span>
-                  <span className="text-white font-semibold">₹50,000</span>
+                  <span className="text-white font-semibold">50,000</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-400">Daily Limit:</span>
-                  <span className="text-white font-semibold">₹2,00,000</span>
+                  <span className="text-white font-semibold">2,00,000</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-400">Monthly Limit:</span>
-                  <span className="text-white font-semibold">₹10,00,000</span>
+                  <span className="text-white font-semibold">10,00,000</span>
                 </div>
               </div>
               <p className="text-yellow-400 text-xs mt-3">
@@ -141,7 +141,7 @@ export default function DepositPolicy() {
                 <li>GST is applicable on payment gateway charges as per Indian tax laws</li>
               </ul>
               <p className="text-white font-semibold mt-3">
-                What you see is what you get - ₹100 added = ₹100 credited to your wallet!
+                What you see is what you get - 100 added = 100 credited to your wallet!
               </p>
             </div>
           </section>
@@ -154,7 +154,7 @@ export default function DepositPolicy() {
               <ol className="list-decimal list-inside space-y-2 ml-2">
                 <li>Open the GLENN app and go to your Wallet</li>
                 <li>Tap on "Add Money" button</li>
-                <li>Enter the amount (minimum ₹10)</li>
+                <li>Enter the amount (minimum 10)</li>
                 <li>Choose from quick amounts or enter custom amount</li>
                 <li>Tap "Enter" to proceed to payment gateway</li>
                 <li>Select your preferred payment method (UPI, Card, Net Banking)</li>
