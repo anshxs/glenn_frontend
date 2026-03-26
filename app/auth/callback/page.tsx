@@ -95,7 +95,7 @@ export default function AuthCallbackPage() {
                 Please install the Glenn app and then open this link again.
               </p>
               <a
-                href="https://github.com/anshxs/glenn_frontend/releases/download/v1.0.0/app-release.apk"
+                href="https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn-v1.0.0.apk"
                 className="inline-flex items-center gap-2 rounded-lg bg-[#c8ff00] px-6 py-3 text-black font-semibold text-sm hover:scale-105 transition-transform"
               >
                 Download Glenn

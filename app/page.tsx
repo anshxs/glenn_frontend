@@ -6,7 +6,7 @@ import { StackedHeroShowcase } from "@/components/home/stacked-hero-showcase";
 import { WhyGlennSection } from "@/components/home/why-glenn-section";
 
 const downloadHref =
-  "https://github.com/anshxs/glenn_frontend/releases/download/v1.0.0/app-release.apk";
+  "https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn-v1.0.0.apk";
 
 export default function Home() {
   return (

@@ -82,7 +82,7 @@ export function PolicyPageShell({
               Updated {updatedAt}
             </div>
 
-            <div className="mt-8 space-y-1">
+            <div className="mt-8 space-y-1 flex flex-wrap justify-start">
               <p className="text-5xl font-black uppercase tracking-[-0.06em] text-[#aa3aff] sm:text-7xl lg:text-[6.2rem]">
                 {titleLines[0]}
               </p>

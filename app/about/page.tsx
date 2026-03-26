@@ -13,7 +13,7 @@ import { LandingFooter } from "@/components/home/landing-footer";
 import { LandingHeader } from "@/components/home/landing-header";
 
 const downloadHref =
-  "https://github.com/anshxs/glenn_frontend/releases/download/v1.0.0/app-release.apk";
+  "https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn-v1.0.0.apk";
 
 const stats = [
   { value: "Daily", label: "tournament energy" },
@@ -95,7 +95,7 @@ export default function About() {
               About GLENN
             </div>
 
-            <div className="mt-8 space-y-1">
+            <div className="mt-8 space-y-1 flex flex-wrap justify-start">
               <p className="text-5xl font-black uppercase tracking-[-0.06em] text-[#aa3aff] sm:text-7xl lg:text-[6.4rem]">
                 Built.
               </p>

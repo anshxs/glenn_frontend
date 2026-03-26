@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const cards = [
   {
-    src: "/5.png",
+    src: "/profile.png",
     alt: "GLENN player profile preview",
     className:
       "left-0 top-16 z-10 rotate-[-10deg] sm:left-8 sm:top-10 lg:left-12",
@@ -13,7 +13,7 @@ const cards = [
     className: "left-1/2 top-0 z-30 -translate-x-1/2",
   },
   {
-    src: "/6.png",
+    src: "/community.png",
     alt: "GLENN social feed preview",
     className:
       "right-0 top-16 z-20 rotate-[10deg] sm:right-8 sm:top-10 lg:right-12",
@@ -31,14 +31,14 @@ export function StackedHeroShowcase() {
       {cards.map((card) => (
         <div
           key={card.src}
-          className={`glass-panel absolute h-[21rem] w-[10rem] overflow-hidden rounded-[1.8rem] bg-[#0c0c0c] sm:h-[24rem] sm:w-[12rem] lg:h-[32rem] lg:w-[16rem] ${card.className}`}
+          className={`glass-panel absolute h-[22rem] w-[10rem] overflow-hidden rounded-[1.8rem] bg-[#0c0c0c] sm:h-[24rem] sm:w-[12rem] lg:h-[32rem] lg:w-[14.5rem] ${card.className}`}
         >
           <Image
             src={card.src}
             alt={card.alt}
             fill
             sizes="(max-width: 640px) 160px, (max-width: 1024px) 192px, 256px"
-            className="object-cover object-top"
+            className="object-contain object-bottom"
             priority
           />
         </div>

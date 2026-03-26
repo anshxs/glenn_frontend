@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { Mic, Sparkles, Trophy, Users, Wallet } from "lucide-react";
+import { Mic, Sparkles, Trophy, User, Users, Wallet } from "lucide-react";
 import type { ComponentType } from "react";
 
 const downloadHref =
-  "https://github.com/anshxs/glenn_frontend/releases/download/v1.0.0/app-release.apk";
+  "https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn-v1.0.0.apk";
 
 type WhyNote = {
   body: string;
@@ -23,10 +23,10 @@ type WhyItem = {
 
 const whyItems: WhyItem[] = [
   {
-    title: "Voice-rooms and Chat",
+    title: "Elite Tournaments, Big Recognition",
     description:
-      "Connect in real-time. Collaborate with your circle, share ideas, and turn every interaction into a memorable experience.",
-    image: "/4.png",
+      "Showcase your skills, compete daily, climb the leaderboards, and unlock prizes with real visibility.",
+    image: "/home.png",
     imageAlt: "GLENN chat preview",
     icon: Mic,
     accent: "green",
@@ -45,7 +45,7 @@ const whyItems: WhyItem[] = [
     title: "A Powerhouse Community",
     description:
       "Be part of a fast-growing player base, creator circles, and squads shaping Free Fire culture together.",
-    image: "/6.png",
+    image: "/community.png",
     imageAlt: "GLENN community preview",
     icon: Users,
     accent: "purple",
@@ -62,10 +62,10 @@ const whyItems: WhyItem[] = [
     ],
   },
   {
-    title: "Elite Tournaments, Big Recognition",
+    title: "Squad Chats, Real Vibes",
     description:
-      "Showcase your skills, compete daily, climb the leaderboards, and unlock prizes with real visibility.",
-    image: "/3.png",
+      "Jump into live chats with your squad, plan strategies, share clips, and vibe together like real teammates — not just players.",
+    image: "/message.png",
     imageAlt: "GLENN tournaments preview",
     icon: Trophy,
     accent: "green",
@@ -81,14 +81,34 @@ const whyItems: WhyItem[] = [
     ],
   },
   {
-    title: "Passion That Pays",
+    title: "Discover What Matters",
     description:
-      "Turn your grind into rewards, better opportunities, and momentum that actually means something.",
-    image: "/7.png",
+      "Explore new squads, rising players, and opportunities that match your grind and push you forward.",
+    image: "/explore.png",
     imageAlt: "GLENN rewards preview",
     icon: Wallet,
     accent: "purple",
     reverse: true,
+    notes: [
+      {
+        body: "Wallet rewards unlocked after your next verified win.",
+        className: "left-0 top-14 rotate-[4deg] sm:-left-2 lg:-left-8",
+      },
+      {
+        body: "New reward drops and missions just landed.",
+        className: "right-1 top-[12.5rem] -rotate-[6deg] sm:-right-4 lg:-right-9",
+      },
+    ],
+  },
+  {
+    title: "Your Identity, Your Legacy",
+    description:
+      "Showcase your stats, achievements, and journey — everything that defines you as a player.",
+    image: "/profile.png",
+    imageAlt: "GLENN rewards preview",
+    icon: User,
+    accent: "green",
+    reverse: false,
     notes: [
       {
         body: "Wallet rewards unlocked after your next verified win.",
@@ -149,7 +169,7 @@ function PhoneFrame({
   imageAlt: string;
 }) {
   return (
-    <div className="absolute left-1/2 top-1/2 h-[28rem] w-[15.5rem] -translate-x-1/2 -translate-y-1/2 rounded-[2.4rem] border border-white/[0.16] bg-[#09090b] p-2 shadow-[0_30px_80px_rgba(0,0,0,0.5)]">
+    <div className="absolute left-1/2 top-1/2 h-[34rem] w-[15.5rem] -translate-x-1/2 -translate-y-1/2 rounded-[2.4rem] border border-white/[0.16] bg-[#09090b] p-2 shadow-[0_30px_80px_rgba(0,0,0,0.5)]">
       <div className="absolute left-1/2 top-3 h-6 w-28 -translate-x-1/2 rounded-full bg-black" />
       <div className="relative h-full w-full overflow-hidden rounded-[2rem] border border-white/[0.08] bg-[#050505]">
         <Image
