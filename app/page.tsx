@@ -2,6 +2,7 @@ import Image from "next/image";
 
 import { LandingFooter } from "@/components/home/landing-footer";
 import { LandingHeader } from "@/components/home/landing-header";
+import { SocialsSection } from "@/components/home/socials-section";
 import { StackedHeroShowcase } from "@/components/home/stacked-hero-showcase";
 import { WhyGlennSection } from "@/components/home/why-glenn-section";
 
@@ -70,6 +71,7 @@ export default function Home() {
       </section>
 
       <WhyGlennSection />
+      
       <LandingFooter />
     </main>
   );

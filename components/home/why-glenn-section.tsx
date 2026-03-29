@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Mic, Sparkles, Trophy, User, Users, Wallet } from "lucide-react";
 import type { ComponentType } from "react";
+import { SocialsSection } from "./socials-section";
 
 const downloadHref =
   "https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn-v1.0.0.apk";
@@ -277,6 +278,7 @@ export function WhyGlennSection() {
             <WhyRow key={item.title} item={item} />
           ))}
         </div>
+        
 
         <div className="mt-14 text-center">
           <div className="relative left-1/2 w-[calc(100vw+5rem)] -translate-x-1/2 sm:w-[calc(100vw+7rem)] lg:w-[calc(100vw+9rem)]">
@@ -291,6 +293,9 @@ export function WhyGlennSection() {
                 </p>
               </div>
             </div>
+          </div>
+          <div className="mt-16">
+          <SocialsSection />
           </div>
 
           <div className="mt-20 flex justify-center">
