@@ -13,7 +13,7 @@ import { LandingFooter } from "@/components/home/landing-footer";
 import { LandingHeader } from "@/components/home/landing-header";
 
 const downloadHref =
-  "https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn-v1.0.0.apk";
+  "https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn.apk";
 
 const stats = [
   { value: "Daily", label: "tournament energy" },

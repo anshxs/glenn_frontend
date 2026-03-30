@@ -9,7 +9,7 @@ const navLinks = [
 ];
 
 const downloadHref =
-  "https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn-v1.0.0.apk";
+  "https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn.apk";
 
 export function SiteHeader() {
   return (
