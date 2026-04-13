@@ -201,6 +201,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        <script defer data-tracker="db35212a-244c-4c3a-a04f-03d525b61d39" data-hosts="glennesports.app" src="https://www.webtracky.com/analytics.js"></script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-black text-white antialiased min-h-screen flex items-center justify-center`}
