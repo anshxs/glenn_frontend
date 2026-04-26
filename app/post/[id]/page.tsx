@@ -1,71 +1,129 @@
-'use client';
+import type { Metadata } from 'next';
+import { createClient } from '@supabase/supabase-js';
 
-import { useParams } from 'next/navigation';
-import { useEffect, useMemo, useState } from 'react';
+import PostRedirectClient from './PostRedirectClient';
 
-type Status = 'opening' | 'fallback';
+type PageProps = {
+  params: Promise<{ id: string }>;
+};
 
-export default function PostLinkPage() {
-  const params = useParams<{ id: string }>();
-  const postId = typeof params?.id === 'string' ? params.id : '';
-  const [status, setStatus] = useState<Status>('opening');
+type PostRecord = {
+  id: string;
+  user_id: string;
+  text: string | null;
+  image_url: string | null;
+  created_at: string | null;
+};
 
-  const postUrl = useMemo(
-    () => `https://glennesports.app/post/${postId}`,
-    [postId],
-  );
+type AuthorRecord = {
+  id: string;
+  username: string | null;
+  name: string | null;
+};
 
-  useEffect(() => {
-    if (!postId || postId === 'undefined' || postId === 'null') {
-      setStatus('fallback');
-      return;
-    }
+function getSupabaseServerClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key =
+    process.env.SUPABASE_SERVICE_ROLE_KEY ||
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-    const deepLink = `glenn://post/${postId}`;
-    window.location.href = deepLink;
+  if (!url || !key) {
+    return null;
+  }
 
-    const timer = window.setTimeout(() => {
-      setStatus('fallback');
-    }, 2200);
+  return createClient(url, key, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+}
 
-    return () => window.clearTimeout(timer);
-  }, [postId]);
+function truncateText(value: string, max = 160) {
+  const trimmed = value.trim().replace(/\s+/g, ' ');
+  if (trimmed.length <= max) return trimmed;
+  return `${trimmed.slice(0, max - 1)}…`;
+}
 
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-black px-6 text-white">
-      <div className="w-full max-w-md rounded-[28px] border border-white/10 bg-white/[0.04] p-8 text-center">
-        <img src="/logos.svg" alt="Glenn" className="mx-auto mb-8 h-10 invert" />
-        {status === 'opening' ? (
-          <>
-            <h1 className="text-2xl font-semibold">Opening post…</h1>
-            <p className="mt-3 text-sm text-white/60">
-              Trying to open this Glenn post in the app.
-            </p>
-          </>
-        ) : (
-          <>
-            <h1 className="text-2xl font-semibold">Open this post in Glenn</h1>
-            <p className="mt-3 text-sm text-white/60">
-              If the app did not open automatically, use the button below or install Glenn first.
-            </p>
-            <div className="mt-6 flex flex-col gap-3">
-              <a
-                href={`glenn://post/${postId}`}
-                className="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-black"
-              >
-                Open in App
-              </a>
-              <a
-                href="https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn.apk"
-                className="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white"
-              >
-                Download Glenn
-              </a>
-              <p className="text-xs text-white/40 break-all">{postUrl}</p>
-            </div>
-          </>
-        )}
-      </div>
-    </div>
-  );
+async function getPostData(postId: string) {
+  if (!postId || postId === 'undefined' || postId === 'null') {
+    return null;
+  }
+
+  const supabase = getSupabaseServerClient();
+  if (!supabase) return null;
+
+  const { data: post } = await supabase
+    .from('community_messages')
+    .select('id, user_id, text, image_url, created_at')
+    .eq('id', postId)
+    .maybeSingle<PostRecord>();
+
+  if (!post) return null;
+
+  const { data: author } = await supabase
+    .from('public_userdata')
+    .select('id, username, name')
+    .eq('id', post.user_id)
+    .maybeSingle<AuthorRecord>();
+
+  return { post, author };
+}
+
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
+  const { id } = await params;
+  const data = await getPostData(id);
+
+  if (!data) {
+    return {
+      title: 'Post',
+      description: 'Open this Glenn post in the app.',
+      openGraph: {
+        title: 'Glenn Post',
+        description: 'Open this Glenn post in the app.',
+        url: `https://glennesports.app/post/${id}`,
+        images: ['/logo.png'],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: 'Glenn Post',
+        description: 'Open this Glenn post in the app.',
+        images: ['/logo.png'],
+      },
+    };
+  }
+
+  const { post, author } = data;
+  const authorName = author?.name?.trim() || author?.username?.trim() || 'Glenn User';
+  const body = truncateText(post.text || 'See this post on Glenn.');
+  const title = `${authorName} on Glenn`;
+  const image = post.image_url?.trim() || '/logo.png';
+  const url = `https://glennesports.app/post/${post.id}`;
+
+  return {
+    title,
+    description: body,
+    openGraph: {
+      type: 'article',
+      url,
+      title,
+      description: body,
+      images: [
+        {
+          url: image,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description: body,
+      images: [image],
+    },
+  };
+}
+
+export default async function PostLinkPage({ params }: PageProps) {
+  const { id } = await params;
+  return <PostRedirectClient postId={id} />;
 }
