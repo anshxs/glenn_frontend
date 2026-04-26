@@ -78,16 +78,25 @@ export async function generateMetadata({
       title: 'Post',
       description: 'Open this Glenn post in the app.',
       openGraph: {
+        type: 'article',
+        siteName: 'GLENN Esports',
         title: 'Glenn Post',
         description: 'Open this Glenn post in the app.',
         url: `https://glennesports.app/post/${id}`,
-        images: ['/logo.png'],
+        images: [
+          {
+            url: 'https://glennesports.app/logo.png',
+            width: 1200,
+            height: 630,
+            alt: 'Glenn Post',
+          },
+        ],
       },
       twitter: {
         card: 'summary_large_image',
         title: 'Glenn Post',
         description: 'Open this Glenn post in the app.',
-        images: ['/logo.png'],
+        images: ['https://glennesports.app/logo.png'],
       },
     };
   }
@@ -96,7 +105,7 @@ export async function generateMetadata({
   const authorName = author?.name?.trim() || author?.username?.trim() || 'Glenn User';
   const body = truncateText(post.text || 'See this post on Glenn.');
   const title = `${authorName} on Glenn`;
-  const image = post.image_url?.trim() || '/logo.png';
+  const image = post.image_url?.trim() || 'https://glennesports.app/logo.png';
   const url = `https://glennesports.app/post/${post.id}`;
 
   return {
@@ -104,12 +113,15 @@ export async function generateMetadata({
     description: body,
     openGraph: {
       type: 'article',
+      siteName: 'GLENN Esports',
       url,
       title,
       description: body,
       images: [
         {
           url: image,
+          width: 1200,
+          height: 630,
           alt: title,
         },
       ],
