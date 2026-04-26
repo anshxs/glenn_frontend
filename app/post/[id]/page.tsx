@@ -1,15 +1,13 @@
 'use client';
 
+import { useParams } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 
 type Status = 'opening' | 'fallback';
 
-export default function PostLinkPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const postId = params.id;
+export default function PostLinkPage() {
+  const params = useParams<{ id: string }>();
+  const postId = typeof params?.id === 'string' ? params.id : '';
   const [status, setStatus] = useState<Status>('opening');
 
   const postUrl = useMemo(
@@ -18,6 +16,11 @@ export default function PostLinkPage({
   );
 
   useEffect(() => {
+    if (!postId || postId === 'undefined' || postId === 'null') {
+      setStatus('fallback');
+      return;
+    }
+
     const deepLink = `glenn://post/${postId}`;
     window.location.href = deepLink;
 
