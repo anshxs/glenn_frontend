@@ -30,8 +30,9 @@ function getSupabaseServerClient() {
 }
 
 function normalizeUsername(slug: string) {
-  if (!slug) return null;
-  return slug.startsWith('@') ? slug.slice(1) : slug;
+  const decodedSlug = decodeURIComponent(slug || '');
+  if (!decodedSlug) return null;
+  return decodedSlug.startsWith('@') ? decodedSlug.slice(1) : decodedSlug;
 }
 
 function truncateText(value: string, max = 160) {
@@ -127,9 +128,11 @@ export async function generateMetadata({
 
 export default async function ProfilePage({ params }: PageProps) {
   const { slug } = await params;
-  if (!slug.startsWith('@')) {
+  const decodedSlug = decodeURIComponent(slug);
+
+  if (!decodedSlug.startsWith('@')) {
     notFound();
   }
 
-  return <ProfileRedirectClient username={slug} />;
+  return <ProfileRedirectClient username={decodedSlug} />;
 }

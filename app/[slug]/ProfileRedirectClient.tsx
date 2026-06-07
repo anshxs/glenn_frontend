@@ -5,6 +5,9 @@ import { useEffect, useMemo, useState } from 'react';
 
 type Status = 'opening' | 'fallback';
 
+const downloadHref =
+  'https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn.apk';
+
 export default function ProfileRedirectClient({
   username,
 }: {
@@ -24,15 +27,22 @@ export default function ProfileRedirectClient({
   useEffect(() => {
     if (!isValid) return;
 
-    const deepLink = `glenn://profile/${normalizedUsername}`;
-    window.location.href = deepLink;
+    const encodedProfilePath = encodeURIComponent(normalizedUsername);
+    const fallbackUrl = encodeURIComponent(downloadHref);
+    const isAndroid = /Android/i.test(window.navigator.userAgent);
+
+    const deepLink = isAndroid
+      ? `intent://profile/${encodedProfilePath}#Intent;scheme=glenn;package=com.absolute.glenn;S.browser_fallback_url=${fallbackUrl};end`
+      : `glenn://profile/${encodedProfilePath}`;
+
+    window.location.replace(deepLink);
 
     const timer = window.setTimeout(() => {
       setStatus('fallback');
     }, 2200);
 
     return () => window.clearTimeout(timer);
-  }, [isValid, normalizedUsername]);
+  }, [isValid, normalizedUsername, profileUrl]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-black px-6 text-white">
@@ -59,7 +69,7 @@ export default function ProfileRedirectClient({
             </p>
             <div className="mt-6 flex flex-col gap-3">
               <a
-                href="https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn.apk"
+                href={downloadHref}
                 className="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white"
               >
                 Download Glenn
