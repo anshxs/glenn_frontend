@@ -5,6 +5,9 @@ import { useEffect, useMemo, useState } from 'react';
 
 type Status = 'opening' | 'fallback';
 
+const downloadHref =
+  'https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn.apk';
+
 export default function PostRedirectClient({ postId }: { postId: string }) {
   const isValidPostId =
     postId.length > 0 && postId !== 'undefined' && postId !== 'null';
@@ -20,12 +23,17 @@ export default function PostRedirectClient({ postId }: { postId: string }) {
       return;
     }
 
-    const deepLink = `glenn://post/${postId}`;
-    window.location.href = deepLink;
+    const fallbackUrl = encodeURIComponent(downloadHref);
+    const isAndroid = /Android/i.test(window.navigator.userAgent);
+    const deepLink = isAndroid
+      ? `intent://post/${postId}#Intent;scheme=glenn;package=com.absolute.glenn;S.browser_fallback_url=${fallbackUrl};end`
+      : `glenn://post/${postId}`;
+
+    window.location.replace(deepLink);
 
     const timer = window.setTimeout(() => {
       setStatus('fallback');
-    }, 2200);
+    }, 900);
 
     return () => window.clearTimeout(timer);
   }, [isValidPostId, postId]);
@@ -55,7 +63,7 @@ export default function PostRedirectClient({ postId }: { postId: string }) {
             </p>
             <div className="mt-6 flex flex-col gap-3">
               <a
-                href="https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn.apk"
+                href={downloadHref}
                 className="inline-flex items-center justify-center rounded-full border border-white/15 px-5 py-3 text-sm font-semibold text-white"
               >
                 Download Glenn
