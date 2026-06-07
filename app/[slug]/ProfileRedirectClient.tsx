@@ -39,7 +39,7 @@ export default function ProfileRedirectClient({
 
     const timer = window.setTimeout(() => {
       setStatus('fallback');
-    }, 2200);
+    }, 900);
 
     return () => window.clearTimeout(timer);
   }, [isValid, normalizedUsername, profileUrl]);
