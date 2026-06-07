@@ -48,7 +48,7 @@ async function getProfileData(slug: string) {
   if (!supabase) return null;
 
   const { data } = await supabase
-    .from('public_userdata')
+    .from('sensitive_userdata')
     .select('id, username, name, avatarurl, bio')
     .eq('username', username)
     .maybeSingle<ProfileRecord>();

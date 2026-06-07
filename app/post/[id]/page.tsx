@@ -59,7 +59,7 @@ async function getPostData(postId: string) {
   if (!post) return null;
 
   const { data: author } = await supabase
-    .from('public_userdata')
+    .from('sensitive_userdata')
     .select('id, username, name')
     .eq('id', post.user_id)
     .maybeSingle<AuthorRecord>();
