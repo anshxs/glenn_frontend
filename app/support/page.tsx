@@ -1,10 +1,8 @@
 'use client';
 
-import Image from "next/image";
 import {
   Clock3,
   Instagram,
-  LifeBuoy,
   Mail,
   MessageCircle,
   TriangleAlert,
@@ -28,7 +26,7 @@ const quickChannels = [
     icon: Instagram,
   },
   {
-    href: "mailto:support@glenn.co",
+    href: "mailto:glennesports7@gmail.com",
     label: "Email",
     subtext: "For direct support",
     icon: Mail,
@@ -82,262 +80,229 @@ export default function Support() {
   const [openFAQ, setOpenFAQ] = useState<number | null>(0);
 
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#040404] text-white">
+    <main className="relative min-h-screen overflow-hidden bg-white text-black">
       <LandingHeader activeHref="/support" />
 
-      <section className="relative mx-auto flex min-h-screen w-full max-w-7xl items-center px-6 pb-14 pt-28 sm:px-8 sm:pt-32 lg:px-12 lg:pt-36">
-        <div className="grid w-full items-center gap-16 lg:grid-cols-[0.98fr_1.02fr]">
-          <div>
-            <div className="inline-flex items-center rounded-full border border-white/[0.08] bg-white/[0.06] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
-              GLENN Support
+      <section className="mx-auto w-full px-6 pb-12 pt-22 sm:px-8 lg:px-12 lg:pt-24">
+        <div className="border-t border-black pt-8">
+          <div className="grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
+            <div>
+              <p className="text-xs uppercase tracking-[0.28em] text-black/55">
+                Glenn Support
+              </p>
+              <h1
+                className="mt-4 text-5xl font-normal uppercase leading-[0.92] sm:text-7xl lg:text-[7rem]"
+                style={{ fontFamily: '"Anton", sans-serif' }}
+              >
+                NEED HELP.
+                <span className="block text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.96)]">
+                  GET IT FAST.
+                </span>
+              </h1>
             </div>
 
-            <div className="mt-8 space-y-1 flex flex-wrap justify-start">
-              <p className="text-5xl font-black uppercase tracking-[-0.06em] text-[#aa3aff] sm:text-7xl lg:text-[6.2rem]">
-                Need.
+            <div className="border-l-0 border-black lg:border-l lg:pl-8">
+              <p className="text-base leading-8 text-black/72 sm:text-lg">
+                Whether you are stuck on rewards, account issues, tournament
+                details, or reporting a problem, this is where we point you to
+                the fastest route back into the action.
               </p>
-              <p className="text-5xl font-black uppercase tracking-[-0.06em] text-transparent [text-shadow:0_0_0_rgba(255,255,255,0.95)] [-webkit-text-stroke:1.4px_rgba(255,255,255,0.95)] sm:text-7xl lg:text-[6.2rem]">
-                Help.
-              </p>
-              <p className="text-5xl font-black uppercase tracking-[-0.06em] text-white sm:text-7xl lg:text-[6.2rem]">
-                Fast.
-              </p>
-            </div>
-
-            <p className="mt-8 max-w-2xl text-base leading-8 text-white/[0.68] sm:text-lg">
-              Whether you are stuck on rewards, reporting an issue, or trying
-              to sort tournament details, this is the fastest way to get back
-              into the action.
-            </p>
-
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              {quickChannels.map((channel) => {
-                const Icon = channel.icon;
-
-                return (
-                  <a
-                    key={channel.label}
-                    href={channel.href}
-                    target={channel.href.startsWith("mailto:") ? undefined : "_blank"}
-                    rel={channel.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                    className="rounded-[1.7rem] border border-white/[0.08] bg-white/[0.04] px-5 py-5 transition hover:bg-white/[0.07]"
-                  >
-                    <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-black">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <p className="mt-4 text-lg font-black tracking-[-0.04em] text-white">
-                      {channel.label}
-                    </p>
-                    <p className="mt-1 text-sm leading-6 text-white/[0.58]">
-                      {channel.subtext}
-                    </p>
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className="relative mx-auto h-[34rem] w-full max-w-[30rem]">
-            <div className="absolute left-1/2 top-1/2 h-[17rem] w-[17rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c8ff00]/[0.18] blur-[70px]" />
-
-            <div className="absolute left-0 top-10 z-10 rounded-[1.6rem] border border-white/[0.08] bg-white/[0.06] px-4 py-3 shadow-[0_24px_70px_rgba(0,0,0,0.3)]">
-              <p className="text-sm font-black tracking-[-0.03em] text-white">
-                24-48h response
-              </p>
-              <p className="mt-1 text-xs text-white/[0.58]">
-                Typical support turnaround
-              </p>
-            </div>
-
-            <div className="absolute right-0 top-24 z-10 rounded-[1.6rem] border border-white/[0.08] bg-white/[0.06] px-4 py-3 shadow-[0_24px_70px_rgba(0,0,0,0.3)]">
-              <p className="text-sm font-black tracking-[-0.03em] text-white">
-                Urgent issues
-              </p>
-              <p className="mt-1 text-xs text-white/[0.58]">
-                Email support@glenn.co
-              </p>
-            </div>
-
-            <div className="absolute left-1/2 top-8 z-30 h-[24rem] w-[13rem] -translate-x-1/2 overflow-hidden rounded-[2.2rem] border border-white/[0.14] bg-[#09090b] shadow-[0_30px_90px_rgba(0,0,0,0.52)] sm:h-[28rem] sm:w-[15rem]">
-              <Image
-                src="/4.png"
-                alt="GLENN support and community preview"
-                fill
-                sizes="240px"
-                className="object-cover object-top"
-                priority
-              />
-            </div>
-
-            <div className="absolute bottom-10 left-0 rounded-full border border-white/[0.1] bg-white/[0.06] px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-white/[0.75]">
-              Help center
-            </div>
-
-            <div className="absolute bottom-0 right-0 rounded-full border border-white/[0.1] bg-white/[0.06] px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-white/[0.75]">
-              Real support
             </div>
           </div>
         </div>
-      </section>
 
-      <section className="relative mx-auto max-w-7xl px-6 py-8 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-center gap-3 text-center">
-          <span className="h-3 w-3 rounded-full bg-[#aa3aff]" />
-          <h2 className="text-3xl font-black tracking-[-0.05em] text-white sm:text-5xl">
-            Frequently Asked Questions
-          </h2>
-          <span className="h-3 w-3 rounded-full bg-[#c8ff00]" />
-        </div>
-
-        <div className="mt-10 grid gap-4 md:grid-cols-2">
-          {faqs.map((faq, index) => {
-            const isOpen = openFAQ === index;
+        <div className="mt-14 grid gap-0 border border-black md:grid-cols-3">
+          {quickChannels.map((channel, index) => {
+            const Icon = channel.icon;
 
             return (
-              <div
-                key={faq.question}
-                className="rounded-[1.8rem] border border-white/[0.08] bg-white/[0.04] overflow-hidden"
+              <a
+                key={channel.label}
+                href={channel.href}
+                target={channel.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={channel.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                className={`bg-white p-6 transition hover:bg-[#f3f3ee] sm:p-8 ${index < quickChannels.length - 1 ? "border-b border-black md:border-b-0 md:border-r" : ""}`}
               >
-                <button
-                  onClick={() => setOpenFAQ(isOpen ? null : index)}
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                <Icon className="h-5 w-5" />
+                <p
+                  className="mt-6 text-2xl font-normal uppercase"
+                  style={{ fontFamily: '"Anton", sans-serif' }}
                 >
-                  <span className="text-lg font-black tracking-[-0.03em] text-white">
-                    {faq.question}
-                  </span>
-                  <span className="text-2xl font-light text-[#c8ff00]">
-                    {isOpen ? "−" : "+"}
-                  </span>
-                </button>
-
-                {isOpen && (
-                  <div className="px-6 pb-6 text-base leading-8 text-white/[0.64]">
-                    {faq.answer}
-                  </div>
-                )}
-              </div>
+                  {channel.label}
+                </p>
+                <p className="mt-3 text-sm leading-7 text-black/72 sm:text-base">
+                  {channel.subtext}
+                </p>
+              </a>
             );
           })}
         </div>
-      </section>
 
-      <section className="relative mx-auto max-w-7xl px-6 pb-24 pt-14 sm:px-8 lg:px-12">
-        <div className="grid gap-8 lg:grid-cols-[0.88fr_1.12fr] lg:items-start">
-          <div className="rounded-[2rem] border border-white/[0.08] bg-white/[0.04] px-7 py-7">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-black">
-              <LifeBuoy className="h-6 w-6" />
-            </div>
-
-            <h2 className="mt-5 text-3xl font-black tracking-[-0.05em] text-white">
-              Still Need Help?
-            </h2>
-            <p className="mt-4 text-base leading-8 text-white/[0.64]">
-              Drop the details below and we will get back to you as quickly as
-              possible. For critical problems like hacked accounts or payment
-              disputes, email us directly.
+        <section className="mt-14 grid gap-0 border border-black lg:grid-cols-[0.82fr_1.18fr]">
+          <div className="border-b border-black bg-black p-6 text-white sm:p-8 lg:border-b-0 lg:border-r">
+            <p className="text-xs uppercase tracking-[0.28em] text-white/55">
+              Response Flow
             </p>
+            <h2
+              className="mt-4 text-4xl font-normal uppercase leading-none sm:text-5xl"
+              style={{ fontFamily: '"Anton", sans-serif' }}
+            >
+              REAL
+              <span className="block text-transparent [-webkit-text-stroke:1.3px_rgba(255,255,255,0.95)]">
+                SUPPORT.
+              </span>
+            </h2>
 
             <div className="mt-8 space-y-4">
-              <div className="rounded-[1.4rem] border border-white/[0.08] bg-black px-5 py-4">
+              <div className="border border-white/20 px-5 py-4">
                 <div className="flex items-center gap-3">
-                  <Clock3 className="h-5 w-5 text-[#c8ff00]" />
-                  <p className="text-sm font-semibold uppercase tracking-[0.14em] text-white/[0.52]">
-                    Usual response window
+                  <Clock3 className="h-4 w-4 text-white" />
+                  <p className="text-sm uppercase tracking-[0.16em] text-white/58">
+                    Usual response
                   </p>
                 </div>
-                <p className="mt-3 text-xl font-black tracking-[-0.03em] text-white">
-                  24 to 48 hours
-                </p>
+                <p className="mt-3 text-xl uppercase text-white">24 to 48 hours</p>
               </div>
 
-              <div className="rounded-[1.4rem] border border-white/[0.08] bg-black px-5 py-4">
+              <div className="border border-white/20 px-5 py-4">
                 <div className="flex items-center gap-3">
-                  <TriangleAlert className="h-5 w-5 text-[#aa3aff]" />
-                  <p className="text-sm font-semibold uppercase tracking-[0.14em] text-white/[0.52]">
+                  <TriangleAlert className="h-4 w-4 text-white" />
+                  <p className="text-sm uppercase tracking-[0.16em] text-white/58">
                     Urgent issues
                   </p>
                 </div>
                 <a
-                  href="mailto:support@glenn.co"
-                  className="mt-3 inline-block text-xl font-black tracking-[-0.03em] text-white transition hover:text-[#c8ff00]"
+                  href="mailto:glennesports7@gmail.com"
+                  className="mt-3 inline-block text-xl text-white transition hover:text-white/70"
                 >
-                  support@glenn.co
+                  glennesports7@gmail.com
                 </a>
               </div>
             </div>
           </div>
 
-          <div className="rounded-[2rem] border border-white/[0.08] bg-white/[0.04] px-7 py-7">
-            <form className="space-y-4" onSubmit={(event) => event.preventDefault()}>
-              <div>
-                <label className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-white/[0.55]">
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  placeholder="Enter your name"
-                  className="w-full rounded-[1rem] border border-white/[0.08] bg-black px-4 py-3 text-white placeholder:text-white/[0.34] focus:border-[#c8ff00] focus:outline-none"
-                />
+          <div className="bg-white p-6 sm:p-8">
+            <p className="text-xs uppercase tracking-[0.28em] text-black/55">
+              Contact Form
+            </p>
+            <form className="mt-6 space-y-4" onSubmit={(event) => event.preventDefault()}>
+              <div className="grid gap-4 md:grid-cols-2">
+                <div>
+                  <label className="mb-2 block text-xs uppercase tracking-[0.22em] text-black/55">
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter your name"
+                    className="w-full border border-black bg-white px-4 py-3 text-black placeholder:text-black/35 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-xs uppercase tracking-[0.22em] text-black/55">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="your.email@example.com"
+                    className="w-full border border-black bg-white px-4 py-3 text-black placeholder:text-black/35 focus:outline-none"
+                  />
+                </div>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <div>
+                  <label className="mb-2 block text-xs uppercase tracking-[0.22em] text-black/55">
+                    Glenn Username
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your in-app username"
+                    className="w-full border border-black bg-white px-4 py-3 text-black placeholder:text-black/35 focus:outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="mb-2 block text-xs uppercase tracking-[0.22em] text-black/55">
+                    Issue Type
+                  </label>
+                  <select className="w-full border border-black bg-white px-4 py-3 text-black focus:outline-none">
+                    <option>Select an issue type</option>
+                    <option>Account and Login</option>
+                    <option>Tournament Issues</option>
+                    <option>Payment and Rewards</option>
+                    <option>Technical Bug</option>
+                    <option>Report Cheater</option>
+                    <option>Feature Request</option>
+                    <option>Other</option>
+                  </select>
+                </div>
               </div>
 
               <div>
-                <label className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-white/[0.55]">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  placeholder="your.email@example.com"
-                  className="w-full rounded-[1rem] border border-white/[0.08] bg-black px-4 py-3 text-white placeholder:text-white/[0.34] focus:border-[#c8ff00] focus:outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-white/[0.55]">
-                  GLENN Username
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your in-app username"
-                  className="w-full rounded-[1rem] border border-white/[0.08] bg-black px-4 py-3 text-white placeholder:text-white/[0.34] focus:border-[#c8ff00] focus:outline-none"
-                />
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-white/[0.55]">
-                  Issue Type
-                </label>
-                <select className="w-full rounded-[1rem] border border-white/[0.08] bg-black px-4 py-3 text-white focus:border-[#c8ff00] focus:outline-none">
-                  <option>Select an issue type</option>
-                  <option>Account and Login</option>
-                  <option>Tournament Issues</option>
-                  <option>Payment and Rewards</option>
-                  <option>Technical Bug</option>
-                  <option>Report Cheater</option>
-                  <option>Feature Request</option>
-                  <option>Other</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="mb-2 block text-sm font-semibold uppercase tracking-[0.14em] text-white/[0.55]">
+                <label className="mb-2 block text-xs uppercase tracking-[0.22em] text-black/55">
                   Describe Your Issue
                 </label>
                 <textarea
-                  rows={5}
+                  rows={6}
                   placeholder="Tell us what happened in detail..."
-                  className="w-full resize-none rounded-[1rem] border border-white/[0.08] bg-black px-4 py-3 text-white placeholder:text-white/[0.34] focus:border-[#c8ff00] focus:outline-none"
+                  className="w-full resize-none border border-black bg-white px-4 py-3 text-black placeholder:text-black/35 focus:outline-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="inline-flex items-center rounded-full bg-white px-8 py-4 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:scale-[1.03]"
+                className="inline-flex items-center border border-black bg-black px-7 py-3 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black"
               >
                 Submit Request
               </button>
             </form>
           </div>
-        </div>
+        </section>
+
+        <section className="mt-14">
+          <div className="border-t border-black pt-6">
+            <p className="text-xs uppercase tracking-[0.28em] text-black/55">
+              Frequently Asked Questions
+            </p>
+            <h2
+              className="mt-4 text-4xl font-normal uppercase leading-none sm:text-6xl"
+              style={{ fontFamily: '"Anton", sans-serif' }}
+            >
+              COMMON
+              <span className="block text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.96)]">
+                QUESTIONS.
+              </span>
+            </h2>
+          </div>
+
+          <div className="mt-8 border border-black">
+            {faqs.map((faq, index) => {
+              const isOpen = openFAQ === index;
+
+              return (
+                <div key={faq.question} className={index < faqs.length - 1 ? "border-b border-black" : ""}>
+                  <button
+                    onClick={() => setOpenFAQ(isOpen ? null : index)}
+                    className="flex w-full items-center justify-between gap-4 bg-white px-6 py-5 text-left hover:bg-[#f3f3ee]"
+                  >
+                    <span
+                      className="text-2xl font-normal uppercase"
+                      style={{ fontFamily: '"Anton", sans-serif' }}
+                    >
+                      {faq.question}
+                    </span>
+                    <span className="text-3xl leading-none">{isOpen ? "−" : "+"}</span>
+                  </button>
+
+                  {isOpen && (
+                    <div className="bg-[#f3f3ee] px-6 pb-6 text-sm leading-8 text-black/74 sm:text-base">
+                      {faq.answer}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
       </section>
 
       <LandingFooter />

@@ -48,50 +48,63 @@ const socialItems: SocialItem[] = [
 
 export function SocialsSection() {
   return (
-    <section className="relative bg-[#020202] px-6 py-20 sm:px-8 lg:px-12">
+    <section className="relative px-6 py-18 sm:px-8 lg:px-12 lg:py-20">
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex items-center rounded-full border border-white/[0.08] bg-white/[0.05] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
-            Socials
+        <div className="border-t border-black pt-8">
+          <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+            <div>
+              <p className="text-xs uppercase tracking-[0.28em] text-black/55">
+                Socials
+              </p>
+              <h1
+                className="mt-4 text-5xl font-normal uppercase leading-[0.92] sm:text-7xl lg:text-[7rem]"
+                style={{ fontFamily: '"Anton", sans-serif' }}
+              >
+                STAY CLOSE.
+                <span className="block text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.96)]">
+                  STAY LOCKED.
+                </span>
+              </h1>
+            </div>
+
+            <div className="border-l-0 border-black lg:border-l lg:pl-8">
+              <p className="text-base leading-8 text-black/72 sm:text-lg">
+                Follow Glenn across the platforms where updates, clips,
+                announcements, and community movement happen fastest. Scan the QR
+                or open the direct link.
+              </p>
+            </div>
           </div>
-          <h2 className="mt-6 text-3xl font-black tracking-[-0.05em] text-white sm:text-5xl">
-            Scan In. Tap Through. Stay Locked With GLENN.
-          </h2>
-          <p className="mt-5 text-base leading-8 text-white/[0.64] sm:text-lg">
-            Pick your platform, scan the QR, or open the direct link and stay
-            close to the GLENN Esports community.
-          </p>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="mt-14 grid gap-0 border border-black lg:grid-cols-3">
           {socialItems.map((item) => {
             const Icon = item.icon;
 
             return (
               <article
                 key={item.name}
-                className="group relative overflow-hidden rounded-[2rem] border border-white/[0.08] bg-white/[0.04] p-5 shadow-[0_24px_80px_rgba(0,0,0,0.26)] transition duration-300 hover:-translate-y-1 hover:bg-white/[0.06]"
+                className="group bg-white p-6 transition hover:bg-[#f3f3ee] sm:p-8 lg:border-r lg:border-black last:lg:border-r-0"
               >
-                <div
-                  className={`absolute right-5 top-5 h-24 w-24 rounded-full blur-3xl opacity-60 ${item.accentClassName}`}
-                />
-
-                <div className="relative z-10 flex items-center justify-between">
+                <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/[0.08] bg-black/60">
-                      <Icon className="h-5 w-5 text-white" />
+                    <div className="flex h-11 w-11 items-center justify-center border border-black bg-black text-white">
+                      <Icon className="h-4 w-4" />
                     </div>
                     <div>
-                      <p className="text-xl font-black tracking-[-0.04em] text-white">
+                      <p
+                        className="text-2xl font-normal uppercase"
+                        style={{ fontFamily: '"Anton", sans-serif' }}
+                      >
                         {item.name}
                       </p>
-                      <p className="text-sm text-white/55">{item.displayHref}</p>
+                      <p className="text-sm text-black/55">{item.displayHref}</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="relative z-10 mt-5 overflow-hidden rounded-[1.7rem] border border-white/[0.08] bg-[#1d1d1d2b] p-3">
-                  <div className="relative aspect-square overflow-hidden rounded-[1.25rem]">
+                <div className="mt-6 border border-black bg-white p-3">
+                  <div className="relative aspect-square overflow-hidden border border-black">
                     <Image
                       src={item.qrSrc}
                       alt={item.qrAlt}
@@ -102,7 +115,7 @@ export function SocialsSection() {
                   </div>
                 </div>
 
-                <p className="relative z-10 mt-5 text-sm leading-7 text-white/[0.66]">
+                <p className="mt-5 text-sm leading-7 text-black/72">
                   {item.blurb}
                 </p>
 
@@ -110,7 +123,7 @@ export function SocialsSection() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative z-10 mt-6 inline-flex items-center gap-2 rounded-full border border-white/[0.1] bg-black/55 px-4 py-3 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:border-white/20 hover:bg-black/75"
+                  className="mt-6 inline-flex items-center gap-2 border border-black bg-black px-4 py-3 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black"
                 >
                   Open Link
                   <ArrowUpRight className="h-4 w-4" />

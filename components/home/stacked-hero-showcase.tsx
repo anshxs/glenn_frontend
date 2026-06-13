@@ -22,16 +22,16 @@ const cards = [
 
 export function StackedHeroShowcase() {
   return (
-    <div className="relative mx-auto h-[27rem] w-full max-w-4xl sm:h-[30rem] lg:h-[39rem]">
-      <div className="absolute inset-x-10 bottom-2 h-28 rounded-full bg-[#c8ff00]/[0.18] blur-3xl sm:h-32" />
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#ffffff00] to-transparent" />
+    <div className="relative mx-auto h-108 w-full max-w-4xl sm:h-120 lg:h-156">
+      {/* <div className="absolute inset-x-10 bottom-2 h-28 rounded-full bg-[#c8ff00]/12 blur-3xl sm:h-32" /> */}
+      {/* <div className="absolute inset-x-0 bottom-0 h-32 bg-linear-to-t from-transparent to-transparent" /> */}
 
-      <div className="glass-panel absolute left-1/2 top-4 h-[90%] w-[92%] max-w-5xl -translate-x-1/2 rounded-[2.5rem] bg-white/[0.03]" />
+      {/* <div className="glass-panel absolute left-1/2 top-4 h-[90%] w-[92%] max-w-5xl -translate-x-1/2 rounded-[2.5rem] border border-black/10 bg-white/70 shadow-[0_30px_80px_rgba(0,0,0,0.08)]" /> */}
 
       {cards.map((card) => (
         <div
           key={card.src}
-          className={`glass-panel absolute h-[22rem] w-[10rem] overflow-hidden rounded-[1.8rem] bg-[#0c0c0c] sm:h-[24rem] sm:w-[12rem] lg:h-[32rem] lg:w-[14.5rem] ${card.className}`}
+          className={`glass-panel absolute h-88 w-40 overflow-hidden rounded-[1.8rem] border border-black/10 bg-white shadow-[0_20px_60px_rgba(0,0,0,0.12)] sm:h-96 sm:w-48 lg:h-128 lg:w-58 ${card.className}`}
         >
           <Image
             src={card.src}

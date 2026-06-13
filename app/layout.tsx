@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -193,6 +188,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+          rel="stylesheet"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -204,7 +205,7 @@ export default function RootLayout({
         <script defer data-tracker="db35212a-244c-4c3a-a04f-03d525b61d39" data-hosts="glennesports.app" src="https://www.webtracky.com/analytics.js"></script>
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} bg-black text-white antialiased min-h-screen flex items-center justify-center`}
+        className={`${geistMono.variable} bg-white text-black antialiased min-h-screen flex items-center justify-center`}
       >
         {children}
       </body>

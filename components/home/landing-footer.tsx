@@ -14,7 +14,7 @@ const socialLinks = [
     icon: MessageCircle,
   },
   {
-    href: "mailto:support@glenn.co",
+    href: "mailto:glennesports7@gmail.com",
     label: "Email",
     icon: Mail,
   },
@@ -44,7 +44,7 @@ export function LandingFooter() {
                     aria-label={item.label}
                     className="text-white transition hover:opacity-75"
                   >
-                    <Icon className="h-6 w-6 stroke-[2.1]" />
+                    <Icon className="h-5 w-5 stroke-[2.1]" />
                   </a>
                 );
               })}
@@ -52,21 +52,30 @@ export function LandingFooter() {
 
             <p className="mt-6 text-md text-white/80">
               Made By:{" "}
-              <span className="font-black uppercase tracking-[0.03em] text-white">
+              <span
+                className="uppercase tracking-[0.12em] text-white"
+                style={{ fontFamily: '"Anton", sans-serif' }}
+              >
                 FF Esports Community, For The Community
               </span>
             </p>
           </div>
 
           <div className="max-w-md text-left lg:text-right">
-            <h3 className="text-2xl font-black tracking-[-0.04em] text-white">
+            <h3
+              className="text-2xl font-normal uppercase tracking-[0.08em] text-white"
+              style={{ fontFamily: '"Anton", sans-serif' }}
+            >
               Reach Us
             </h3>
-            <p className="mt-2 text-xl font-medium text-blue-500">
+            <a
+              href="mailto:glennesports7@gmail.com"
+              className="mt-2 block text-xl text-white transition hover:text-white/75"
+            >
               glennesports7@gmail.com
-            </p>
-            <p className="mt-2 text-xl font-medium leading-10 text-white/90">
-              Built for the Free Fire community across India
+            </a>
+            <p className="mt-2 text-lg leading-9 text-white/78">
+              Built for the Indian esports community.
             </p>
           </div>
         </div>
@@ -84,13 +93,20 @@ export function LandingFooter() {
             />
           </Link>
 
-          <div className="flex flex-wrap items-center gap-4 text-md font-medium text-white/90 lg:justify-end">
+          <div
+            className="flex flex-wrap items-center gap-4 text-sm uppercase tracking-[0.12em] text-white/90 lg:justify-end"
+            style={{ fontFamily: '"Anton", sans-serif' }}
+          >
             <Link href="/terms" className="transition hover:opacity-75">
               Terms and Conditions
             </Link>
             <span className="text-white/35">|</span>
             <Link href="/support" className="transition hover:opacity-75">
               Support
+            </Link>
+            <span className="text-white/35">|</span>
+            <Link href="/socials" className="transition hover:opacity-75">
+              Socials
             </Link>
           </div>
         </div>

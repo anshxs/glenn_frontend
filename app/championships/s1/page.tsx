@@ -1,14 +1,12 @@
 "use client";
 
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import type { CSSProperties, FormEvent } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import {
   Check,
   ChevronRight,
-  Crosshair,
   ExternalLink,
-  Gamepad2,
   Loader2,
   Medal,
   ShieldCheck,
@@ -16,15 +14,15 @@ import {
   Users,
 } from "lucide-react";
 
-import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
+import { LandingHeader } from "@/components/home/landing-header";
 
 const downloadHref =
   "https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn.apk";
 const groupHref =
   "https://chat.whatsapp.com/K7HvplKHEJZ8Xcwrk6MHtZ?mode=gi_t";
 const channelHref = "https://whatsapp.com/channel/0029VbCEtxY3mFY4yhChto3h";
-const whatsappLogoHref =
-  "https://static.vecteezy.com/system/resources/previews/016/716/480/non_2x/whatsapp-icon-free-png.png";
+const whatsappLogoSrc = "/whatslogo.webp";
+// const instagramLogoSrc = "/instalogo.webp";
 
 type Step = "intro" | "form" | "whatsapp" | "success";
 
@@ -109,7 +107,6 @@ function validateTeamDetails(teamName: string, players: Player[]) {
     if (!values.name || !values.phone || !values.uid || !values.ign) {
       return `Player ${index + 1} needs name, phone, UID, and IGN.`;
     }
-
   }
 
   return "";
@@ -264,130 +261,108 @@ export default function ChampionshipSeasonOnePage() {
   }
 
   return (
-    <main className="relative min-h-screen w-full overflow-hidden bg-[#050607] text-white">
-      <AnimatedGridPattern
-        width={42}
-        height={42}
-        numSquares={46}
-        maxOpacity={0.24}
-        duration={2.6}
-        repeatDelay={0.7}
-        className="fixed inset-0 text-[#c8ff00]/35 [mask-image:linear-gradient(to_bottom,white,transparent_78%)]"
-      />
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_20%_0%,rgba(200,255,0,0.16),transparent_28%),radial-gradient(circle_at_86%_20%,rgba(218,143,255,0.16),transparent_30%),linear-gradient(120deg,rgba(255,61,113,0.08),transparent_42%)]" />
-      <div className="fixed inset-0 opacity-[0.13] [background-image:repeating-linear-gradient(135deg,#ffffff_0_1px,transparent_1px_14px)]" />
+    <main className="relative min-h-screen overflow-hidden bg-white text-black">
+      <LandingHeader activeHref="/" />
 
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#050607]/0 backdrop-blur-sm">
-        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-8 lg:px-12">
-          <Link href="/" className="flex min-w-0 items-center">
-            <Image
-              src="/logos.svg"
-              alt="GLENN"
-              width={168}
-              height={48}
-              className="-ml-3 h-auto w-28 invert sm:w-40"
-              priority
-            />
-          </Link>
-
-          <a
-            href={downloadHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex h-10 shrink-0 items-center gap-2 bg-[#c8ff00] px-4 text-xs font-black uppercase text-black transition hover:-translate-y-0.5 hover:bg-white sm:h-12 sm:px-5 [clip-path:polygon(10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%,0_10px)]"
-          >
-            <Image
-              src="/android.svg"
-              alt=""
-              width={18}
-              height={18}
-              className="h-[18px] w-[18px]"
-            />
-            Download
-          </a>
-        </div>
-      </header>
-
-      <section className="relative z-10 mx-auto w-full max-w-6xl px-3 pb-32 pt-[4.7rem] sm:px-8 sm:pt-28 lg:px-12">
+      <section className="mx-auto w-full max-w-7xl px-6 pb-32 pt-10 sm:px-8 lg:px-12 lg:pt-24">
         {step === "intro" && (
-          <div className="mx-auto max-w-5xl">
-            <div className="relative overflow-hidden border border-white/12 bg-black/48 p-4 shadow-2xl shadow-black/50 backdrop-blur-xl sm:p-7 lg:p-9 [clip-path:polygon(16px_0,100%_0,100%_calc(100%-28px),calc(100%-28px)_100%,0_100%,0_16px)]">
-              <div className="absolute right-3 top-3 hidden h-28 w-28 border border-[#c8ff00]/20 sm:block [clip-path:polygon(28px_0,100%_0,100%_100%,0_100%,0_28px)]" />
-              <div className="absolute -right-16 bottom-0 h-48 w-48 bg-[#c8ff00]/10 blur-3xl" />
-
-              <div className="inline-flex items-center gap-2 bg-white px-3 py-2 text-[10px] font-black uppercase text-black sm:text-xs [clip-path:polygon(8px_0,100%_0,100%_100%,0_100%,0_8px)]">
-                <Gamepad2 className="h-4 w-4" />
-                Registration Open
-              </div>
-
-              <h1 className="mt-5 max-w-4xl text-[2.65rem] font-black uppercase leading-[0.86] sm:text-7xl lg:text-8xl">
-                Glenn
-                <span className="block text-[#c8ff00]">Championship</span>
-                <span className="block text-white">Cup S1</span>
-              </h1>
-
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-white/68 sm:text-base">
-                Build your 4-player Free Fire squad, add an optional substitute,
-                join the official WhatsApp group, follow GLENN Esports, and
-                lock your team into Season 1.
-              </p>
-
-              <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                {[
-                  { icon: Trophy, label: "Tournament", value: "Season 1 Cup" },
-                  { icon: Users, label: "Roster", value: "4 mandatory + 1 sub" },
-                  { icon: ShieldCheck, label: "Final check", value: "Group + channel" },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    className="border border-white/10 bg-white/[0.055] p-4 [clip-path:polygon(12px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_12px)]"
+          <div className="mx-auto max-w-6xl">
+            <div className="border-t border-black pt-8">
+              <div className="grid gap-12 lg:grid-cols-[1.08fr_0.92fr] lg:items-end">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.28em] text-black/55">
+                    Registration Open
+                  </p>
+                  <h1
+                    className="mt-4 text-5xl font-normal uppercase leading-[0.92] sm:text-7xl lg:text-[7rem]"
+                    style={{ fontFamily: '"Anton", sans-serif' }}
                   >
-                    <item.icon className="h-5 w-5 text-[#c8ff00]" />
-                    <p className="mt-3 text-[10px] font-black uppercase text-white/40">
-                      {item.label}
-                    </p>
-                    <p className="mt-1 text-sm font-black uppercase text-white">
-                      {item.value}
-                    </p>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-6 border-y border-white/10 py-4">
-                <div className="grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-2 text-center text-[10px] font-black uppercase text-white/55 sm:text-xs">
-                  <span className="text-[#c8ff00]">Read Rules</span>
-                  <ChevronRight className="h-4 w-4 text-[#c8ff00]" />
-                  <span>Enter Team</span>
-                  <ChevronRight className="h-4 w-4 text-[#c8ff00]" />
-                  <span>Verify Socials</span>
+                    GLENN
+                    <span className="block text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.96)]">
+                      CHAMPIONSHIP
+                    </span>
+                    <span className="block">CUP S1.</span>
+                  </h1>
                 </div>
-              </div>
 
-              <div className="mt-6 grid gap-2 text-sm font-bold text-white/72 sm:grid-cols-2">
-                {[
-                  "No auth required, only accurate squad details.",
-                  "First four player rows must be complete.",
-                  "Use correct UID and in-game names.",
-                  "Your entry counts only after WhatsApp verification.",
-                ].map((rule) => (
-                  <div key={rule} className="flex items-start gap-2">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#c8ff00]" />
-                    <span>{rule}</span>
-                  </div>
-                ))}
+                <div className="border-l-0 border-black lg:border-l lg:pl-8">
+                  <p className="text-base leading-8 text-black/72 sm:text-lg">
+                    Build your 4-player Free Fire squad, add an optional substitute,
+                    verify the official WhatsApp links, and lock your team into
+                    Season 1.
+                  </p>
+                  <a
+                    href={downloadHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-8 inline-flex items-center gap-3 border border-black bg-black px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:bg-white hover:text-black"
+                  >
+                    Download Glenn
+                  </a>
+                </div>
               </div>
             </div>
 
-            <div className="mt-4 hidden items-center justify-between border border-[#da8fff]/24 bg-[#da8fff]/8 px-5 py-4 sm:flex [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)]">
-              <div>
-                <p className="text-xs font-black uppercase text-[#f0c8ff]">
-                  Queue Status
-                </p>
-                <p className="mt-1 text-sm font-bold text-white/64">
-                  Registration pipeline is live for Glenn Championship Cup.
-                </p>
+            <div className="mt-14 grid gap-0 border border-black lg:grid-cols-3">
+              {[
+                { icon: Trophy, label: "Tournament", value: "Season 1 Cup" },
+                { icon: Users, label: "Roster", value: "4 mandatory + 1 sub" },
+                { icon: ShieldCheck, label: "Final check", value: "Group + channel" },
+              ].map((item, index) => (
+                <div
+                  key={item.label}
+                  className={`bg-white p-6 sm:p-8 ${index < 2 ? "border-b border-black lg:border-b-0 lg:border-r" : ""}`}
+                >
+                  <item.icon className="h-5 w-5" />
+                  <p className="mt-6 text-xs uppercase tracking-[0.22em] text-black/48">
+                    {item.label}
+                  </p>
+                  <p
+                    className="mt-2 text-2xl font-normal uppercase"
+                    style={{ fontFamily: '"Anton", sans-serif' }}
+                  >
+                    {item.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-14 border border-black bg-black px-6 py-6 text-white sm:px-8">
+              <div className="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-center">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.28em] text-white/55">
+                    Entry Flow
+                  </p>
+                  <p
+                    className="mt-3 text-3xl font-normal uppercase sm:text-4xl"
+                    style={{ fontFamily: '"Anton", sans-serif' }}
+                  >
+                    Read Rules. Enter Team. Verify Socials.
+                  </p>
+                </div>
+                <div className="grid gap-2 text-sm text-white/78">
+                  {[
+                    "No auth required, only accurate squad details.",
+                    "First four player rows must be complete.",
+                    "Use correct UID and in-game names.",
+                    "Your entry counts only after WhatsApp verification.",
+                  ].map((rule) => (
+                    <div key={rule} className="flex items-start gap-2">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-white" />
+                      <span>{rule}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <Crosshair className="h-7 w-7 text-[#c8ff00]" />
+            </div>
+
+            <div className="mt-4 border border-black bg-[#f3f3ee] px-5 py-4">
+              <p className="text-xs uppercase tracking-[0.22em] text-black/52">
+                Queue Status
+              </p>
+              <p className="mt-1 text-sm text-black/72">
+                Registration pipeline is live for Glenn Championship Cup.
+              </p>
             </div>
           </div>
         )}
@@ -396,7 +371,7 @@ export default function ChampionshipSeasonOnePage() {
           <form
             data-registration-form
             onSubmit={handleProceed}
-            className="mx-auto max-w-5xl border border-white/12 bg-[#080a0c]/84 p-3 shadow-2xl shadow-black/50 backdrop-blur-xl sm:p-6 [clip-path:polygon(14px_0,100%_0,100%_calc(100%-24px),calc(100%-24px)_100%,0_100%,0_14px)]"
+            className="mx-auto max-w-6xl border border-black bg-white p-4 sm:p-6"
           >
             <StepHeader
               eyebrow="Step 01"
@@ -404,41 +379,44 @@ export default function ChampionshipSeasonOnePage() {
               subtitle={`${completedPlayers}/5 player slots completed. First 4 are mandatory.`}
             />
 
-            <label className="mt-4 block">
-              <span className="mb-2 block text-xs font-black uppercase text-white/50">
+            <label className="mt-5 block">
+              <span className="mb-2 block text-xs uppercase tracking-[0.22em] text-black/55">
                 Team name
               </span>
               <input
                 value={teamName}
                 onChange={(event) => setTeamName(event.target.value)}
                 placeholder="Enter squad name"
-                className="h-12 w-full border border-white/12 bg-black/45 px-4 text-sm font-bold text-white outline-none transition placeholder:text-white/28 focus:border-[#c8ff00]"
+                className="h-12 w-full border border-black bg-white px-4 text-sm text-black outline-none placeholder:text-black/28"
               />
             </label>
 
-            <div className="mt-4 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-1.5 border border-white/10 bg-black/32 px-3 py-2 text-center text-[9px] font-black uppercase text-white/50 sm:text-[10px] [clip-path:polygon(10px_0,100%_0,100%_calc(100%-10px),calc(100%-10px)_100%,0_100%,0_10px)]">
-              <span className="text-[#c8ff00]">Roster</span>
-              <span className="h-px bg-white/20" />
+            {/* <div className="mt-5 grid grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-1.5 border border-black bg-[#f3f3ee] px-3 py-3 text-center text-[10px] uppercase tracking-[0.16em] text-black/62">
+              <span>Roster</span>
+              <span className="h-px bg-black/20" />
               <span>UID Check</span>
-              <span className="h-px bg-white/20" />
+              <span className="h-px bg-black/20" />
               <span>Social Verify</span>
-            </div>
+            </div> */}
 
-            <div className="mt-4 grid gap-2.5 sm:gap-4">
+            <div className="mt-5 grid gap-3 sm:gap-4">
               {players.map((player, index) => (
                 <section
                   key={index}
-                  className="border border-white/10 bg-white/[0.045] p-2.5 sm:p-4 [clip-path:polygon(12px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_12px)]"
+                  className="border border-black bg-[#f8f8f3] p-3 sm:p-4"
                 >
-                  <div className="mb-2 flex items-center gap-2 sm:mb-3 sm:gap-3">
-                    <span className="flex h-8 w-8 items-center justify-center bg-[#c8ff00] text-xs font-black text-black sm:h-9 sm:w-9 sm:text-sm [clip-path:polygon(9px_0,100%_0,100%_100%,0_100%,0_9px)]">
+                  <div className="mb-3 flex items-center gap-3">
+                    <span className="flex h-9 w-9 items-center justify-center border border-black bg-black text-sm text-white">
                       {index + 1}
                     </span>
                     <div>
-                      <p className="text-xs font-black uppercase sm:text-sm">
+                      <p
+                        className="text-2xl font-normal uppercase"
+                        style={{ fontFamily: '"Anton", sans-serif' }}
+                      >
                         Player {index + 1}
                       </p>
-                      <p className="text-[10px] font-bold uppercase text-white/42 sm:text-xs">
+                      <p className="text-xs uppercase tracking-[0.18em] text-black/45">
                         {index < 4 ? "Mandatory" : "Optional substitute"}
                       </p>
                     </div>
@@ -447,7 +425,7 @@ export default function ChampionshipSeasonOnePage() {
                   <div className="grid grid-cols-2 gap-2 sm:gap-3 xl:grid-cols-4">
                     {fieldLabels.map(([field, placeholder]) => (
                       <label key={field} className="block">
-                        <span className="mb-1 block text-[9px] font-bold uppercase text-white/42 sm:text-[11px]">
+                        <span className="mb-1 block text-[10px] uppercase tracking-[0.16em] text-black/45">
                           {placeholder}
                         </span>
                         <input
@@ -457,7 +435,7 @@ export default function ChampionshipSeasonOnePage() {
                           }
                           placeholder={placeholder}
                           inputMode={inputModeFor(field)}
-                          className="h-10 w-full min-w-0 border border-white/10 bg-black/38 px-2 text-xs text-white outline-none transition placeholder:text-white/24 focus:border-[#da8fff] sm:h-11 sm:px-3 sm:text-sm"
+                          className="h-11 w-full min-w-0 border border-black bg-white px-3 text-sm text-black outline-none placeholder:text-black/28"
                         />
                       </label>
                     ))}
@@ -475,7 +453,7 @@ export default function ChampionshipSeasonOnePage() {
         )}
 
         {step === "whatsapp" && (
-          <div className="mx-auto max-w-4xl border border-white/12 bg-[#080a0c]/86 p-4 shadow-2xl shadow-black/50 backdrop-blur-xl sm:p-7 [clip-path:polygon(18px_0,100%_0,100%_calc(100%-32px),calc(100%-32px)_100%,0_100%,0_18px)]">
+          <div className="mx-auto max-w-5xl border border-black bg-white p-4 sm:p-7">
             <StepHeader
               eyebrow="Step 02"
               title="Social Follow"
@@ -490,6 +468,8 @@ export default function ChampionshipSeasonOnePage() {
                   onClick: () => setJoinedGroup(true),
                   title: "Join Group",
                   subtitle: "Glenn Championship Cup season 1",
+                  logoSrc: whatsappLogoSrc,
+                  logoAlt: "WhatsApp",
                 },
                 {
                   href: channelHref,
@@ -497,6 +477,8 @@ export default function ChampionshipSeasonOnePage() {
                   onClick: () => setFollowedChannel(true),
                   title: "Follow Channel",
                   subtitle: "GLENN Esports official updates",
+                  logoSrc: whatsappLogoSrc,
+                  logoAlt: "WhatsApp",
                 },
               ].map((item) => (
                 <a
@@ -505,25 +487,32 @@ export default function ChampionshipSeasonOnePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={item.onClick}
-                  className="group flex min-h-16 items-center justify-between gap-4 rounded-2xl border border-[#25d366]/25 bg-[#ffffff] px-4 py-3 text-black shadow-[0_18px_46px_rgba(37,211,102,0.16)] transition hover:-translate-y-0.5 hover:bg-[#36e176] sm:px-5"
+                  className="group flex min-h-16 w-full min-w-0 items-center justify-between gap-3 border border-black bg-[#f8f8f3] px-4 py-4 text-black transition hover:bg-[#ecece3] sm:px-5"
                 >
                   <span className="flex min-w-0 items-center gap-4">
-                    <span
-                      aria-hidden="true"
-                      className="h-10 w-10 shrink-0 rounded-full bg-white bg-contain bg-center bg-no-repeat shadow-sm"
-                      style={{ backgroundImage: `url(${whatsappLogoHref})` }}
-                    />
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-black bg-white">
+                      <Image
+                        src={item.logoSrc}
+                        alt={item.logoAlt}
+                        width={22}
+                        height={22}
+                        className="h-5 w-5 object-contain"
+                      />
+                    </span>
                     <span className="min-w-0">
-                      <span className="block text-base font-black sm:text-lg">
+                      <span
+                        className="block text-lg font-normal uppercase leading-tight sm:text-2xl"
+                        style={{ fontFamily: '"Anton", sans-serif' }}
+                      >
                         {item.title}
                       </span>
-                      <span className="mt-0.5 block truncate text-sm font-semibold text-black/62">
+                      <span className="mt-0.5 block text-xs text-black/62 sm:text-sm">
                         {item.subtitle}
                       </span>
                     </span>
                   </span>
                   {item.active ? (
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-black text-[#25d366]">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-black bg-black text-white">
                       <Check className="h-5 w-5" />
                     </span>
                   ) : (
@@ -540,10 +529,10 @@ export default function ChampionshipSeasonOnePage() {
               ].map(([label, active]) => (
                 <div
                   key={String(label)}
-                  className={`border px-4 py-3 text-center text-xs font-black uppercase ${
+                  className={`border px-4 py-3 text-center text-xs uppercase tracking-[0.18em] ${
                     active
-                      ? "border-[#c8ff00]/40 bg-[#c8ff00]/12 text-[#c8ff00]"
-                      : "border-white/10 bg-white/[0.04] text-white/42"
+                      ? "border-black bg-black text-white"
+                      : "border-black bg-white text-black/42"
                   }`}
                 >
                   {active ? "Opened" : "Pending"} {label}
@@ -552,7 +541,6 @@ export default function ChampionshipSeasonOnePage() {
             </div>
 
             {message && <ErrorMessage message={message} />}
-
           </div>
         )}
 
@@ -562,15 +550,15 @@ export default function ChampionshipSeasonOnePage() {
       </section>
 
       {(step === "intro" || step === "form" || step === "whatsapp") && (
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#050607]/88 px-3 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-xl sm:px-8">
-          <div className="mx-auto flex max-w-5xl items-center gap-3">
+        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-black bg-white px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+          <div className="mx-auto flex max-w-6xl items-center gap-3">
             <div className="hidden min-w-0 sm:block">
-              <p className="text-xs font-black uppercase text-[#c8ff00]">
+              <p className="text-xs uppercase tracking-[0.22em] text-black/55">
                 {step === "intro" && "Squad lobby ready"}
                 {step === "form" && "Roster entry"}
                 {step === "whatsapp" && "Final social check"}
               </p>
-              <p className="truncate text-sm text-white/55">
+              <p className="truncate text-sm text-black/62">
                 {step === "intro" &&
                   "Start registration for Glenn Championship Cup Season 1."}
                 {step === "form" &&
@@ -583,7 +571,7 @@ export default function ChampionshipSeasonOnePage() {
               <button
                 type="button"
                 onClick={() => goToStep("form")}
-                className="inline-flex h-13 w-full items-center justify-center gap-2 bg-[#c8ff00] px-6 text-sm font-black uppercase text-black transition active:scale-[0.99] sm:ml-auto sm:w-auto sm:min-w-72 [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)]"
+                className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-black px-6 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black sm:ml-auto sm:w-auto sm:min-w-72"
               >
                 Register now
                 <ChevronRight className="h-4 w-4" />
@@ -598,7 +586,7 @@ export default function ChampionshipSeasonOnePage() {
                   );
                   form?.requestSubmit();
                 }}
-                className="inline-flex h-13 w-full items-center justify-center gap-2 bg-[#c8ff00] px-6 text-sm font-black uppercase text-black transition active:scale-[0.99] sm:ml-auto sm:w-auto sm:min-w-72 [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)]"
+                className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-black px-6 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black sm:ml-auto sm:w-auto sm:min-w-72"
               >
                 Continue to social check
                 <ChevronRight className="h-4 w-4" />
@@ -609,7 +597,7 @@ export default function ChampionshipSeasonOnePage() {
                 type="button"
                 onClick={handleVerify}
                 disabled={submitting}
-                className="inline-flex h-13 w-full items-center justify-center gap-2 bg-white px-6 text-sm font-black uppercase text-black transition active:scale-[0.99] hover:bg-[#c8ff00] disabled:cursor-not-allowed disabled:opacity-70 sm:ml-auto sm:w-auto sm:min-w-72 [clip-path:polygon(14px_0,100%_0,100%_calc(100%-14px),calc(100%-14px)_100%,0_100%,0_14px)]"
+                className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-black px-6 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-70 sm:ml-auto sm:w-auto sm:min-w-72"
               >
                 {submitting ? (
                   <>
@@ -644,11 +632,11 @@ export default function ChampionshipSeasonOnePage() {
           0%,
           100% {
             transform: scale(1);
-            box-shadow: 0 0 0 rgba(200, 255, 0, 0);
+            box-shadow: 0 0 0 rgba(255, 255, 255, 0);
           }
           50% {
             transform: scale(1.05);
-            box-shadow: 0 0 54px rgba(200, 255, 0, 0.35);
+            box-shadow: 0 0 54px rgba(255, 255, 255, 0.2);
           }
         }
 
@@ -675,28 +663,31 @@ function StepHeader({
   subtitle: string;
 }) {
   return (
-    <div className="border-b border-white/10 pb-4">
+    <div className="border-b border-black pb-4">
       <div className="flex items-center gap-3">
-        <span className="flex h-12 w-12 items-center justify-center bg-[#c8ff00] text-black [clip-path:polygon(12px_0,100%_0,100%_100%,0_100%,0_12px)]">
+        <span className="flex h-12 w-12 items-center justify-center border border-black bg-black text-white">
           <ShieldCheck className="h-6 w-6" />
         </span>
         <div>
-          <p className="text-xs font-black uppercase text-[#c8ff00]">
+          <p className="text-xs uppercase tracking-[0.22em] text-black/55">
             {eyebrow}
           </p>
-          <h2 className="mt-1 text-2xl font-black uppercase sm:text-4xl">
+          <h2
+            className="mt-1 text-3xl font-normal uppercase sm:text-5xl"
+            style={{ fontFamily: '"Anton", sans-serif' }}
+          >
             {title}
           </h2>
         </div>
       </div>
-      <p className="mt-3 text-sm leading-6 text-white/58">{subtitle}</p>
+      <p className="mt-3 text-sm leading-6 text-black/62">{subtitle}</p>
     </div>
   );
 }
 
 function ErrorMessage({ message }: { message: string }) {
   return (
-    <p className="mt-5 border border-[#ff3d71]/35 bg-[#ff3d71]/12 px-4 py-3 text-sm font-semibold text-red-100">
+    <p className="mt-5 border border-black bg-[#f3f3ee] px-4 py-3 text-sm text-black">
       {message}
     </p>
   );
@@ -710,7 +701,7 @@ function SuccessScreen({
   teamName: string;
 }) {
   return (
-    <div className="relative mx-auto max-w-4xl overflow-hidden border border-[#c8ff00]/35 bg-[#101a08]/88 p-5 text-center shadow-2xl shadow-black/50 backdrop-blur-xl sm:p-10 [clip-path:polygon(18px_0,100%_0,100%_calc(100%-32px),calc(100%-32px)_100%,0_100%,0_18px)]">
+    <div className="relative mx-auto max-w-5xl overflow-hidden border border-white bg-white p-5 text-center text-black sm:p-10">
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         {Array.from({ length: 34 }).map((_, index) => (
           <span
@@ -724,32 +715,37 @@ function SuccessScreen({
                 "--delay": `${(index % 9) * -0.28}s`,
                 background:
                   index % 3 === 0
-                    ? "#c8ff00"
+                    ? "#ffffff"
                     : index % 3 === 1
-                      ? "#da8fff"
-                      : "#ff3d71",
-              } as React.CSSProperties
+                      ? "#00ff00"
+                      : "#00ff00",
+              } as CSSProperties
             }
           />
         ))}
       </div>
 
-      <div className="glenn-victory-badge relative mx-auto flex h-20 w-20 items-center justify-center bg-[#c8ff00] text-black [clip-path:polygon(20px_0,100%_0,100%_100%,0_100%,0_20px)]">
+      <div className="glenn-victory-badge relative mx-auto flex h-20 w-20 items-center justify-center border border-white bg-white text-black">
         <Medal className="h-11 w-11" />
       </div>
-      <p className="relative mt-6 text-xs font-black uppercase tracking-[0.3em] text-[#c8ff00]">
+      <p className="relative mt-6 text-xs uppercase tracking-[0.3em] text-black/58">
         Squad Locked
       </p>
-      <h2 className="relative mt-3 text-4xl font-black uppercase leading-none sm:text-6xl">
+      <h2
+        className="relative mt-3 text-4xl font-normal uppercase leading-none sm:text-6xl"
+        style={{ fontFamily: '"Anton", sans-serif' }}
+      >
         Successfully
-        <span className="block text-[#c8ff00]">Registered</span>
+        <span className="block text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.95)]">
+          Registered
+        </span>
       </h2>
-      <p className="relative mx-auto mt-5 max-w-xl text-sm leading-7 text-white/70">
+      <p className="relative mx-auto mt-5 max-w-xl text-sm leading-7 text-black/70">
         {teamName || "Your team"} is verified for Glenn Championship Cup Season
         1. Keep an eye on the WhatsApp group for match updates.
       </p>
       {registrationId && (
-        <p className="relative mt-6 break-all border border-white/12 bg-black/38 px-4 py-3 text-xs font-bold uppercase text-white/62">
+        <p className="relative mt-6 break-all border border-black/25 bg-black/8 px-4 py-3 text-xs uppercase text-black/72">
           ID: {registrationId}
         </p>
       )}

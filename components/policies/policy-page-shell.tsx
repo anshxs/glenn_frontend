@@ -50,9 +50,9 @@ type PolicyPageShellProps = {
 };
 
 const toneClasses: Record<Tone, string> = {
-  lime: "border-[#c8ff00]/30 bg-[#c8ff00]/10 text-[#edfdb6]",
-  violet: "border-[#aa3aff]/30 bg-[#aa3aff]/10 text-[#eed8ff]",
-  neutral: "border-white/[0.1] bg-white/[0.06] text-white/85",
+  lime: "border-black bg-[#f3f3ee] text-black",
+  violet: "border-black bg-[#ece7ff] text-black",
+  neutral: "border-black bg-white text-black",
 };
 
 export function PolicyPageShell({
@@ -63,48 +63,50 @@ export function PolicyPageShell({
   currentHref,
   highlights,
   sections,
-  contactLabel,
   contactHref,
   contactValue,
 }: PolicyPageShellProps) {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#040404] text-white">
-      <LandingHeader activeHref="/terms" />
+    <main className="relative min-h-screen overflow-hidden bg-white text-black">
+      <LandingHeader activeHref={currentHref} />
 
-      <section className="relative mx-auto flex w-full max-w-7xl items-center px-6 pb-16 pt-28 sm:px-8 sm:pt-32 lg:px-12 lg:pt-36">
-        <div className="grid w-full items-start gap-14 lg:grid-cols-[0.92fr_1.08fr]">
-          <div>
-            <div className="inline-flex items-center rounded-full border border-white/[0.08] bg-white/[0.06] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
-              {badge}
-            </div>
-
-            <div className="mt-4 inline-flex items-center rounded-full border border-white/[0.08] bg-black px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-white/[0.5]">
-              Updated {updatedAt}
-            </div>
-
-            <div className="mt-8 space-y-1 flex flex-wrap justify-start">
-              <p className="text-5xl font-black uppercase tracking-[-0.06em] text-[#aa3aff] sm:text-7xl lg:text-[6.2rem]">
+      <section className="mx-auto w-full px-6 pb-12 pt-22 sm:px-8 lg:px-12 lg:pt-24">
+        <div className="border-t border-black pt-8">
+          <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+            <div>
+              <p className="text-xs uppercase tracking-[0.28em] text-black/55">
+                {badge}
+              </p>
+              <p className="mt-4 text-xs uppercase tracking-[0.28em] text-black/45">
+                Updated {updatedAt}
+              </p>
+              <h1
+                className="mt-4 text-5xl font-normal uppercase leading-[0.92] sm:text-7xl lg:text-[7rem]"
+                style={{ fontFamily: '"Anton", sans-serif' }}
+              >
                 {titleLines[0]}
-              </p>
-              <p className="text-5xl font-black uppercase tracking-[-0.06em] text-transparent [text-shadow:0_0_0_rgba(255,255,255,0.95)] [-webkit-text-stroke:1.4px_rgba(255,255,255,0.95)] sm:text-7xl lg:text-[6.2rem]">
-                {titleLines[1]}
-              </p>
-              <p className="text-5xl font-black uppercase tracking-[-0.06em] text-white sm:text-7xl lg:text-[6.2rem]">
-                {titleLines[2]}
-              </p>
+                <span className="block text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.96)]">
+                  {titleLines[1]}
+                </span>
+                <span className="block">{titleLines[2]}</span>
+              </h1>
             </div>
 
-            <p className="mt-8 max-w-2xl text-base leading-8 text-white/[0.68] sm:text-lg">
-              {description}
-            </p>
+            <div className="border-l-0 border-black lg:border-l lg:pl-8">
+              <p className="text-base leading-8 text-black/72 sm:text-lg">
+                {description}
+              </p>
+            </div>
           </div>
+        </div>
 
-          <div className="relative">
-            <div className="absolute left-8 top-8 h-32 w-32 rounded-full bg-[#aa3aff]/[0.14] blur-[70px]" />
-            <div className="absolute bottom-8 right-8 h-40 w-40 rounded-full bg-[#c8ff00]/[0.14] blur-[80px]" />
-
-            <div className="relative rounded-[2.2rem] border border-white/[0.08] bg-white/[0.04] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.32)] sm:p-8">
-              <div className="flex flex-wrap gap-3">
+        <div className="mt-14 grid gap-0 border border-black lg:grid-cols-[0.92fr_1.08fr]">
+          <div>
+            <div className="border-b border-black bg-black p-6 text-white sm:p-8 lg:border-b-0 lg:border-r">
+              <p className="text-xs uppercase tracking-[0.28em] text-white/55">
+                Policy Links
+              </p>
+              <div className="mt-6 flex flex-col border border-white/20">
                 {policyLinks.map((link) => {
                   const isActive = link.href === currentHref;
 
@@ -112,10 +114,8 @@ export function PolicyPageShell({
                     <Link
                       key={link.href}
                       href={link.href}
-                      className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
-                        isActive
-                          ? "border-white bg-white text-black"
-                          : "border-white/[0.1] bg-black/60 text-white/70 hover:border-white/[0.18] hover:text-white"
+                      className={`border-b border-white/20 px-4 py-4 text-sm uppercase tracking-[0.16em] last:border-b-0 ${
+                        isActive ? "bg-white text-black" : "text-white/72 hover:bg-white/8"
                       }`}
                     >
                       {link.label}
@@ -124,88 +124,86 @@ export function PolicyPageShell({
                 })}
               </div>
 
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="mt-8 border border-white/20 p-5">
+                <div className="flex items-center gap-3">
+                  <LifeBuoy className="h-4 w-4 text-white" />
+                  <p className="text-sm uppercase tracking-[0.16em] text-white/58">
+                    Policy support
+                  </p>
+                </div>
+                <a
+                  href={contactHref}
+                  className="mt-4 inline-flex items-center gap-2 text-lg text-white transition hover:text-white/70"
+                >
+                  <Mail className="h-4 w-4" />
+                  {contactValue}
+                </a>
+                <Link
+                  href="/support"
+                  className="mt-6 inline-flex items-center gap-2 border border-white bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-black hover:text-white"
+                >
+                  Visit Support
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 sm:p-8">
+            <p className="text-xs uppercase tracking-[0.28em] text-black/55">
+              Key Highlights
+            </p>
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {highlights.map((item) => (
                   <article
                     key={item.label}
-                    className={`rounded-[1.6rem] border px-5 py-5 ${
+                    className={`border px-5 py-5 ${
                       toneClasses[item.tone ?? "neutral"]
                     }`}
                   >
-                    <p className="text-sm font-semibold uppercase tracking-[0.16em] text-white/55">
+                    <p className="text-sm uppercase tracking-[0.16em] text-black/55">
                       {item.label}
                     </p>
-                    <p className="mt-3 text-2xl font-black tracking-[-0.04em] text-white">
+                    <p className="mt-3 text-2xl uppercase text-black">
                       {item.value}
                     </p>
                   </article>
                 ))}
               </div>
-
-              <div className="mt-8 rounded-[1.8rem] border border-white/[0.08] bg-black/70 p-5">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-white text-black">
-                    <LifeBuoy className="h-5 w-5" />
-                  </div>
-                  <div>
-                    <p className="text-lg font-black tracking-[-0.04em] text-white">
-                      Policy support
-                    </p>
-                    <p className="text-sm text-white/[0.56]">
-                      Need clarification before you act?
-                    </p>
-                  </div>
-                </div>
-
-                <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.16em] text-white/[0.45]">
-                      {contactLabel}
-                    </p>
-                    <a
-                      href={contactHref}
-                      className="mt-2 inline-flex items-center gap-2 text-lg font-black tracking-[-0.03em] text-white transition hover:text-[#c8ff00]"
-                    >
-                      <Mail className="h-4 w-4" />
-                      {contactValue}
-                    </a>
-                  </div>
-
-                  <Link
-                    href="/support"
-                    className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:scale-[1.02]"
-                  >
-                    Visit Support
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
-      </section>
 
-      <section className="relative mx-auto max-w-7xl px-6 pb-24 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-center gap-3 text-center">
-          <span className="h-3 w-3 rounded-full bg-[#aa3aff]" />
-          <h2 className="text-3xl font-black tracking-[-0.05em] text-white sm:text-5xl">
-            Policy Breakdown
-          </h2>
-          <span className="h-3 w-3 rounded-full bg-[#c8ff00]" />
-        </div>
+        <section className="mt-14">
+          <div className="border-t border-black pt-6">
+            <p className="text-xs uppercase tracking-[0.28em] text-black/55">
+              Policy Breakdown
+            </p>
+            <h2
+              className="mt-4 text-4xl font-normal uppercase leading-none sm:text-6xl"
+              style={{ fontFamily: '"Anton", sans-serif' }}
+            >
+              THE
+              <span className="block text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.96)]">
+                DETAILS.
+              </span>
+            </h2>
+          </div>
 
-        <div className="mt-10 grid gap-5 xl:grid-cols-2">
+          <div className="mt-8 grid gap-0 border border-black xl:grid-cols-2">
           {sections.map((section, index) => (
             <article
               key={section.title}
-              className="rounded-[2rem] border border-white/[0.08] bg-white/[0.04] px-6 py-6 sm:px-7 sm:py-7"
+              className={`bg-white px-6 py-6 sm:px-7 sm:py-7 ${index < sections.length - 1 ? "border-b border-black xl:border-b-0" : ""} ${index % 2 === 0 ? "xl:border-r xl:border-black" : ""}`}
             >
               <div className="flex items-start gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/[0.1] bg-black text-sm font-black text-white/80">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center border border-black bg-black text-sm text-white">
                   {String(index + 1).padStart(2, "0")}
                 </div>
                 <div>
-                  <h3 className="text-2xl font-black tracking-[-0.04em] text-white">
+                  <h3
+                    className="text-2xl font-normal uppercase"
+                    style={{ fontFamily: '"Anton", sans-serif' }}
+                  >
                     {section.title}
                   </h3>
                 </div>
@@ -216,7 +214,7 @@ export function PolicyPageShell({
                   {section.paragraphs.map((paragraph) => (
                     <p
                       key={paragraph}
-                      className="text-base leading-8 text-white/[0.64]"
+                      className="text-base leading-8 text-black/74"
                     >
                       {paragraph}
                     </p>
@@ -225,17 +223,17 @@ export function PolicyPageShell({
               )}
 
               {section.stats && (
-                <div className="mt-5 rounded-[1.5rem] border border-white/[0.08] bg-black/60 p-5">
+                <div className="mt-5 border border-black p-5">
                   <div className="space-y-3">
                     {section.stats.map((stat) => (
                       <div
                         key={stat.label}
-                        className="flex items-center justify-between gap-4 border-b border-white/[0.06] pb-3 last:border-b-0 last:pb-0"
+                        className="flex items-center justify-between gap-4 border-b border-black/10 pb-3 last:border-b-0 last:pb-0"
                       >
-                        <span className="text-sm font-semibold uppercase tracking-[0.12em] text-white/[0.45]">
+                        <span className="text-sm uppercase tracking-[0.12em] text-black/55">
                           {stat.label}
                         </span>
-                        <span className="text-base font-black tracking-[-0.03em] text-white">
+                        <span className="text-base uppercase text-black">
                           {stat.value}
                         </span>
                       </div>
@@ -249,9 +247,9 @@ export function PolicyPageShell({
                   {section.bullets.map((bullet) => (
                     <li
                       key={bullet}
-                      className="flex items-start gap-3 text-base leading-7 text-white/[0.66]"
+                      className="flex items-start gap-3 text-base leading-7 text-black/74"
                     >
-                      <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-[#c8ff00]" />
+                      <span className="mt-2 h-2.5 w-2.5 shrink-0 bg-black" />
                       <span>{bullet}</span>
                     </li>
                   ))}
@@ -263,9 +261,9 @@ export function PolicyPageShell({
                   {section.orderedBullets.map((bullet, bulletIndex) => (
                     <li
                       key={bullet}
-                      className="flex items-start gap-3 text-base leading-7 text-white/[0.66]"
+                      className="flex items-start gap-3 text-base leading-7 text-black/74"
                     >
-                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/[0.1] bg-black text-xs font-black text-white/80">
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center border border-black bg-black text-xs text-white">
                         {bulletIndex + 1}
                       </span>
                       <span>{bullet}</span>
@@ -276,7 +274,7 @@ export function PolicyPageShell({
 
               {section.callout && (
                 <div
-                  className={`mt-5 rounded-[1.4rem] border px-4 py-4 text-sm font-semibold leading-7 ${
+                  className={`mt-5 border px-4 py-4 text-sm leading-7 ${
                     toneClasses[section.callout.tone ?? "neutral"]
                   }`}
                 >
@@ -285,17 +283,19 @@ export function PolicyPageShell({
               )}
             </article>
           ))}
-        </div>
-      </section>
+          </div>
+        </section>
 
-      <section className="relative mx-auto max-w-7xl px-6 pb-16 sm:px-8 lg:px-12">
-        <div className="rounded-[2.2rem] border border-white/[0.08] bg-white/[0.04] px-7 py-8 sm:px-8 sm:py-9">
+        <section className="mt-14 border border-black bg-black px-6 py-8 text-white sm:px-8 sm:py-9">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.22em] text-white/[0.45]">
+              <p className="text-sm uppercase tracking-[0.22em] text-white/[0.45]">
                 Need More Clarity?
               </p>
-              <h3 className="mt-3 text-3xl font-black tracking-[-0.05em] text-white sm:text-4xl">
+              <h3
+                className="mt-3 text-3xl font-normal uppercase sm:text-4xl"
+                style={{ fontFamily: '"Anton", sans-serif' }}
+              >
                 Reach out before you submit, withdraw, or dispute anything.
               </h3>
               <p className="mt-4 max-w-2xl text-base leading-8 text-white/[0.64]">
@@ -307,20 +307,20 @@ export function PolicyPageShell({
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
                 href="/support"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-4 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:scale-[1.02]"
+                className="inline-flex items-center justify-center gap-2 border border-white bg-white px-6 py-4 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-black hover:text-white"
               >
                 Open Support
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <a
                 href={contactHref}
-                className="inline-flex items-center justify-center rounded-full border border-white/[0.12] bg-black px-6 py-4 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:border-white/[0.2]"
+                className="inline-flex items-center justify-center border border-white px-6 py-4 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black"
               >
                 {contactValue}
               </a>
             </div>
           </div>
-        </div>
+        </section>
       </section>
 
       <LandingFooter />

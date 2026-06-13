@@ -1,13 +1,5 @@
 import Image from "next/image";
-import {
-  ArrowUpRight,
-  MessageCircle,
-  ShieldCheck,
-  Target,
-  Trophy,
-  Users,
-  Wallet,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import { LandingFooter } from "@/components/home/landing-footer";
 import { LandingHeader } from "@/components/home/landing-header";
@@ -15,295 +7,220 @@ import { LandingHeader } from "@/components/home/landing-header";
 const downloadHref =
   "https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn.apk";
 
-const stats = [
-  { value: "Daily", label: "tournament energy" },
-  { value: "Skill-first", label: "competitive design" },
-  { value: "Community", label: "built into the core" },
-];
-
-const pillars = [
+const focusAreas = [
   {
-    title: "Why We Exist",
-    body: "India has millions of serious Free Fire players, but not enough spaces that reward consistency, talent, and community at the same time.",
+    title: "The Organization",
+    body: "Glenn is an esports organization first, built to create strong teams, better player pathways, community structure, and long-term competitive presence.",
   },
   {
-    title: "Our Mission",
-    body: "Make competitive play feel accessible, trustworthy, and exciting for every player who wants more from the grind.",
+    title: "The Ecosystem",
+    body: "Alongside the organization, Glenn is building a wider ecosystem through the app, tournaments, scrims, community events, and player exposure.",
   },
   {
-    title: "Our Vision",
-    body: "Become the home base for India’s Free Fire esports culture, where players compete, connect, and get recognized.",
+    title: "The Mission",
+    body: "We want deserving Indian players to get visibility, the right teammates, stronger lineups, and a real chance to grow from community level to competitive level.",
   },
 ];
 
-const values = [
-  {
-    icon: Trophy,
-    title: "Competition With Meaning",
-    body: "We build around matches that matter, leaderboards that feel alive, and recognition players actually care about.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Fairness First",
-    body: "Verified stats, anti-abuse thinking, and transparent reward systems sit at the center of how GLENN is designed.",
-  },
-  {
-    icon: Users,
-    title: "Community Is The Product",
-    body: "Squads, rooms, chat, and player identity are not extras here. They are part of the whole experience.",
-  },
-  {
-    icon: Wallet,
-    title: "Progress That Pays",
-    body: "We want players to feel that the hours they put in can translate into rewards, reputation, and opportunity.",
-  },
+const appFeatures = [
+  "Gaming profiles",
+  "Team discovery",
+  "Nearby players",
+  "World chat",
+  "Groups and messages",
+  "Talent discovery",
 ];
 
-const journey = [
+const storyBlocks = [
   {
-    icon: Target,
-    title: "For the grinders",
-    body: "GLENN is made for players who queue up with intent, track performance, and want every match to push them forward.",
+    heading: "What Glenn Is Building",
+    body: "Glenn is building more than a brand. It is creating a complete esports ecosystem for the next generation of Indian gamers. The goal is to connect serious players with better teams, stronger competition, and more professional opportunities.",
   },
   {
-    icon: MessageCircle,
-    title: "For the squads",
-    body: "From finding your people to staying locked in before a match, we’re building the social side of esports with equal care.",
+    heading: "Why The App Matters",
+    body: "The Glenn app gives players a place to create their gaming identity, connect with other players, explore teams, find nearby talent, join groups, use world chat, send personal messages, and become part of an active esports network.",
   },
   {
-    icon: ArrowUpRight,
-    title: "For what comes next",
-    body: "We’re not building a one-feature app. We’re building an ecosystem that can keep expanding with the community.",
+    heading: "Why Scrims Matter",
+    body: "Our scrims channel is not built only for earning or business. It is mainly there so Glenn can organize quality scrims and use that support to provide free scrims for Glenn teams and members whenever possible.",
+  },
+  {
+    heading: "What We Want To Change",
+    body: "Glenn wants to challenge the idea that gaming is only a waste of time. With the right platform, guidance, discipline, and opportunities, esports can become a real career path for talented Indian players.",
   },
 ];
 
 export default function About() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#040404] text-white">
-      {/* <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-8rem] top-[7.5rem] h-[24rem] w-[24rem] rounded-full bg-[#aa3aff]/[0.14] blur-[120px]" />
-        <div className="absolute right-[-10rem] top-[4.5rem] h-[28rem] w-[28rem] rounded-full bg-[#c8ff00]/[0.12] blur-[140px]" />
-        <div className="absolute bottom-0 left-1/2 h-[24rem] w-[32rem] -translate-x-1/2 rounded-full bg-cyan-400/[0.08] blur-[140px]" />
-      </div> */}
-
+    <main className="relative min-h-screen overflow-hidden bg-white text-black">
       <LandingHeader activeHref="/about" />
 
-      <section className="relative mx-auto flex min-h-screen w-full max-w-7xl items-center px-6 pb-16 pt-28 sm:px-8 sm:pt-32 lg:px-12 lg:pt-36">
-        <div className="grid w-full items-center gap-16 lg:grid-cols-[1.02fr_0.98fr]">
-          <div>
-            <div className="inline-flex items-center rounded-full border border-white/[0.08] bg-white/[0.06] px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
-              About GLENN
+      <section className="mx-auto w-full px-6 pb-12 pt-22 sm:px-8 lg:px-12 lg:pt-24">
+        <div className="border-t border-black pt-8">
+          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <div>
+              <p className="text-xs uppercase tracking-[0.28em] text-black/55">
+                About Glenn
+              </p>
+              <h1
+                className="mt-4 max-w-5xl text-5xl font-normal uppercase leading-[0.92] sm:text-7xl lg:text-[7rem]"
+                style={{ fontFamily: '"Anton", sans-serif' }}
+              >
+                AN ESPORTS
+                <span className="block text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.96)]">
+                  ORGANIZATION
+                </span>
+                <span className="block">BUILDING</span>
+                <span className="block">AN ECOSYSTEM.</span>
+              </h1>
             </div>
 
-            <div className="mt-8 space-y-1 flex flex-wrap justify-start">
-              <p className="text-5xl font-black uppercase tracking-[-0.06em] text-[#aa3aff] sm:text-7xl lg:text-[6.4rem]">
-                Built.
+            <div className="border-l-0 border-black lg:border-l lg:pl-8">
+              <p className="text-base leading-8 text-black/72 sm:text-lg">
+                Glenn is not only an app and not only a community page. It is an
+                esports organization building teams, structure, player exposure,
+                scrims, tournaments, and digital tools so Indian gamers can move
+                with more purpose and professionalism.
               </p>
-              <p className="text-5xl font-black uppercase tracking-[-0.06em] text-transparent [text-shadow:0_0_0_rgba(255,255,255,0.95)] [-webkit-text-stroke:1.4px_rgba(255,255,255,0.95)] sm:text-7xl lg:text-[6.4rem]">
-                For.
-              </p>
-              <p className="text-5xl font-black uppercase tracking-[-0.06em] text-white sm:text-7xl lg:text-[6.4rem]">
-                Players.
-              </p>
-            </div>
-
-            <p className="mt-8 max-w-2xl text-base leading-8 text-white/[0.68] sm:text-lg">
-              GLENN exists because competitive Free Fire players deserve more
-              than scattered tournaments and throwaway communities. We are
-              building one place where competition, connection, progression,
-              and recognition live together.
-            </p>
-
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              {stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-[1.6rem] border border-white/[0.08] bg-white/[0.04] px-5 py-5"
-                >
-                  <p className="text-xl font-black tracking-[-0.04em] text-white">
-                    {stat.value}
-                  </p>
-                  <p className="mt-2 text-sm leading-6 text-white/[0.58]">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-10 flex flex-col items-start">
-              <Image
-                src="/fin1.png"
-                alt="Download highlight"
-                width={1280}
-                height={408}
-                className="pointer-events-none relative z-0 -mb-4 w-[220px] sm:w-[280px]"
-                priority
-              />
 
               <a
                 href={downloadHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative z-10 inline-flex items-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:scale-[1.03]"
+                className="mt-8 inline-flex items-center gap-3 border border-black bg-black px-6 py-3 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:bg-white hover:text-black"
               >
                 Download Glenn
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             </div>
           </div>
-
-          <div className="relative mx-auto h-[35rem] w-full max-w-[31rem]">
-            <div className="absolute left-1/2 top-1/2 h-[17rem] w-[17rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c8ff00]/[0.18] blur-[70px]" />
-
-            <div className="absolute left-0 top-[4.5rem] z-10 h-[20rem] w-[11rem] rotate-[-10deg] overflow-hidden rounded-[2rem] border border-white/[0.12] bg-[#0b0b0d] shadow-[0_30px_80px_rgba(0,0,0,0.45)] sm:left-4 sm:w-[12rem]">
-              <Image
-                src="/5.png"
-                alt="GLENN profile preview"
-                fill
-                sizes="192px"
-                className="object-cover object-top"
-              />
-            </div>
-
-            <div className="absolute left-1/2 top-6 z-30 h-[24rem] w-[13rem] -translate-x-1/2 overflow-hidden rounded-[2.2rem] border border-white/[0.14] bg-[#09090b] shadow-[0_30px_90px_rgba(0,0,0,0.52)] sm:h-[28rem] sm:w-[15rem]">
-              <Image
-                src="/home.png"
-                alt="GLENN home preview"
-                fill
-                sizes="240px"
-                className="object-cover object-top"
-                priority
-              />
-            </div>
-
-            <div className="absolute bottom-8 right-0 z-20 h-[18rem] w-[11rem] rotate-[10deg] overflow-hidden rounded-[2rem] border border-white/[0.12] bg-[#0b0b0d] shadow-[0_30px_80px_rgba(0,0,0,0.45)] sm:right-4 sm:h-[22rem] sm:w-[12rem]">
-              <Image
-                src="/6.png"
-                alt="GLENN community preview"
-                fill
-                sizes="192px"
-                className="object-cover object-top"
-              />
-            </div>
-
-            <div className="absolute right-0 top-16 rounded-full border border-white/[0.1] bg-white/[0.06] px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-white/[0.75]">
-              Skill-first
-            </div>
-
-            <div className="absolute bottom-0 left-0 rounded-full border border-white/[0.1] bg-white/[0.06] px-4 py-2 text-sm font-semibold uppercase tracking-[0.18em] text-white/[0.75]">
-              Built in India
-            </div>
-          </div>
         </div>
-      </section>
 
-      <section className="relative mx-auto max-w-7xl px-6 py-10 sm:px-8 lg:px-12">
-        <div className="grid gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-white/[0.5]">
-              The Story
+        <div className="mt-14 grid gap-0 border border-black lg:grid-cols-3">
+          {focusAreas.map((item, index) => (
+            <article
+              key={item.title}
+              className={`bg-white p-6 sm:p-8 ${index < focusAreas.length - 1 ? "border-b border-black lg:border-b-0 lg:border-r" : ""}`}
+            >
+              <p
+                className="text-2xl font-normal uppercase"
+                style={{ fontFamily: '"Anton", sans-serif' }}
+              >
+                {item.title}
+              </p>
+              <p className="mt-4 text-sm leading-7 text-black/72 sm:text-base">
+                {item.body}
+              </p>
+            </article>
+          ))}
+        </div>
+
+        <section className="mt-14 grid gap-0 border border-black lg:grid-cols-[0.95fr_1.05fr]">
+          <div className="border-b border-black bg-black p-6 text-white sm:p-8 lg:border-b-0 lg:border-r">
+            <p className="text-xs uppercase tracking-[0.28em] text-white/55">
+              Glenn App
             </p>
-            <h2 className="mt-4 max-w-lg text-4xl font-black tracking-[-0.05em] text-white sm:text-6xl">
-              We are building the platform we wish players already had.
+            <h2
+              className="mt-4 text-4xl font-normal uppercase leading-none sm:text-5xl"
+              style={{ fontFamily: '"Anton", sans-serif' }}
+            >
+              THE APP
+              <span className="block text-transparent [-webkit-text-stroke:1.3px_rgba(255,255,255,0.95)]">
+                SUPPORTS
+              </span>
+              <span className="block">THE ORG.</span>
             </h2>
-            <p className="mt-6 max-w-xl text-base leading-8 text-white/[0.66] sm:text-lg">
-              The idea behind GLENN is simple: if players are serious enough to
-              grind, improve, and show up every day, the platform around them
-              should feel just as serious. That means better identity, better
-              competition, and a stronger sense of belonging.
+
+            <p className="mt-6 max-w-xl text-base leading-8 text-white/72">
+              The app is one important part of Glenn. It helps players create
+              their identity, connect with others, discover lineups, and stay
+              active inside a real esports community around the organization.
             </p>
+
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              {appFeatures.map((item) => (
+                <div
+                  key={item}
+                  className="border border-white/20 px-4 py-3 text-sm uppercase tracking-[0.16em] text-white/82"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-3">
-            {pillars.map((pillar) => (
+          <div className="relative min-h-[24rem] bg-[#0d0d0d]">
+            <Image
+              src="/4.png"
+              alt="GLENN app preview"
+              fill
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              className="object-cover object-top opacity-88"
+            />
+          </div>
+        </section>
+
+        <section className="mt-14">
+          <div className="border-t border-black pt-6">
+            <p className="text-xs uppercase tracking-[0.28em] text-black/55">
+              The Glenn Story
+            </p>
+            <h2
+              className="mt-4 text-4xl font-normal uppercase leading-none sm:text-6xl"
+              style={{ fontFamily: '"Anton", sans-serif' }}
+            >
+              WHY WE ARE
+              <span className="block text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.96)]">
+                DOING THIS.
+              </span>
+            </h2>
+          </div>
+
+          <div className="mt-8 grid gap-0 border border-black md:grid-cols-2">
+            {storyBlocks.map((item, index) => (
               <article
-                key={pillar.title}
-                className="rounded-[1.9rem] border border-white/[0.08] bg-white/[0.04] px-6 py-6"
+                key={item.heading}
+                className={`p-6 sm:p-8 ${index % 2 === 0 ? "bg-[#f3f3ee]" : "bg-white"} ${index < storyBlocks.length - 2 ? "border-b border-black md:border-b" : ""} ${index % 2 === 0 ? "md:border-r md:border-black" : ""}`}
               >
-                <p className="text-sm font-semibold uppercase tracking-[0.18em] text-white/[0.48]">
-                  {pillar.title}
+                <p
+                  className="text-2xl font-normal uppercase"
+                  style={{ fontFamily: '"Anton", sans-serif' }}
+                >
+                  {item.heading}
                 </p>
-                <p className="mt-4 text-lg font-bold leading-8 text-white/[0.9]">
-                  {pillar.body}
+                <p className="mt-4 text-sm leading-8 text-black/74 sm:text-base">
+                  {item.body}
                 </p>
               </article>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="relative mx-auto max-w-7xl px-6 py-14 sm:px-8 lg:px-12">
-        <div className="flex items-center justify-center gap-3 text-center">
-          <span className="h-3 w-3 rounded-full bg-[#aa3aff]" />
-          <h2 className="text-3xl font-black tracking-[-0.05em] text-white sm:text-5xl">
-            What Drives GLENN
-          </h2>
-          <span className="h-3 w-3 rounded-full bg-[#c8ff00]" />
-        </div>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {values.map((item) => {
-            const Icon = item.icon;
-
-            return (
-              <article
-                key={item.title}
-                className="rounded-[2rem] border border-white/[0.08] bg-white/[0.04] px-7 py-7"
+        <section className="mt-14 border border-black bg-black px-6 py-8 text-white sm:px-8 sm:py-10">
+          <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div>
+              <p className="text-xs uppercase tracking-[0.28em] text-white/55">
+                Long-Term Vision
+              </p>
+              <h2
+                className="mt-4 text-4xl font-normal uppercase leading-none sm:text-6xl"
+                style={{ fontFamily: '"Anton", sans-serif' }}
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-black">
-                  <Icon className="h-6 w-6" />
-                </div>
-                <h3 className="mt-5 text-2xl font-black tracking-[-0.04em] text-white">
-                  {item.title}
-                </h3>
-                <p className="mt-4 text-base leading-8 text-white/[0.64]">
-                  {item.body}
-                </p>
-              </article>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="relative mx-auto max-w-7xl px-6 pb-24 pt-12 sm:px-8 lg:px-12">
-        <div className="grid gap-10 lg:grid-cols-[1fr_0.95fr] lg:items-center">
-          <div className="relative overflow-hidden rounded-[2.4rem] border border-white/[0.08] bg-white/[0.04] px-8 py-9">
-            <div className="absolute right-0 top-0 h-36 w-36 rounded-full bg-[#aa3aff]/[0.18] blur-[70px]" />
-            <div className="absolute bottom-0 left-0 h-36 w-36 rounded-full bg-[#c8ff00]/[0.15] blur-[70px]" />
-
-            <div className="relative space-y-6">
-              {journey.map((item) => {
-                const Icon = item.icon;
-
-                return (
-                  <div key={item.title} className="flex gap-4">
-                    <div className="mt-1 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/[0.12] bg-white/[0.06] text-white">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-black tracking-[-0.04em] text-white">
-                        {item.title}
-                      </h3>
-                      <p className="mt-2 text-base leading-8 text-white/[0.64]">
-                        {item.body}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
+                BUILD A STRONGER
+                <span className="block text-transparent [-webkit-text-stroke:1.4px_rgba(255,255,255,0.95)]">
+                  ESPORTS CULTURE
+                </span>
+                <span className="block">IN INDIA.</span>
+              </h2>
             </div>
-          </div>
 
-          <div className="relative mx-auto h-[28rem] w-full max-w-[22rem] overflow-hidden rounded-[2.5rem] border border-white/[0.1] bg-[#080808] shadow-[0_30px_90px_rgba(0,0,0,0.45)] sm:h-[34rem] sm:max-w-[24rem]">
-            <Image
-              src="/4.png"
-              alt="GLENN community and rooms preview"
-              fill
-              sizes="(max-width: 640px) 352px, 384px"
-              className="object-cover object-top"
-            />
+            <p className="max-w-xl text-base leading-8 text-white/72">
+              Glenn wants to support Indian players with visibility, better
+              teammates, stronger lineups, a more professional environment, and
+              real chances to grow from community level into serious competition.
+            </p>
           </div>
-        </div>
+        </section>
       </section>
 
       <LandingFooter />

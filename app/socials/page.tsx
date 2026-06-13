@@ -4,9 +4,9 @@ import { SocialsSection } from "@/components/home/socials-section";
 
 export default function SocialsPage() {
   return (
-    <main className="onboarding-page relative min-h-screen w-full overflow-hidden bg-[#040404] text-white">
+    <main className="relative min-h-screen overflow-hidden bg-white text-black">
       <LandingHeader activeHref="/socials" />
-      <div className="pt-18">
+      <div className="pt-4">
         <SocialsSection />
       </div>
       <LandingFooter />

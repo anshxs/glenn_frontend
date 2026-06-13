@@ -190,7 +190,7 @@ function WhyRow({ item }: { item: WhyItem }) {
 
   return (
     <article className="relative py-14 sm:py-20">
-      <OrbitDecoration reverse={item.reverse} />
+      {/* <OrbitDecoration reverse={item.reverse} /> */}
 
       <div className="grid items-center gap-14 lg:grid-cols-2">
         <div
@@ -198,7 +198,7 @@ function WhyRow({ item }: { item: WhyItem }) {
             item.reverse ? "items-start lg:order-2 lg:items-end" : "items-start"
           }`}
         >
-          <div
+          {/* <div
             className={`mb-6 flex h-10 w-10 items-center justify-center rounded-full border-4 border-[#d8f7a0] ${
               item.accent === "green" ? "bg-[#b9ef65]" : "bg-[#bb9cff]"
             }`}
@@ -206,9 +206,9 @@ function WhyRow({ item }: { item: WhyItem }) {
             <div className="flex h-4 w-4 items-center justify-center rounded-full bg-black text-white">
               <Icon className="h-3 w-3" />
             </div>
-          </div>
+          </div> */}
 
-          <h3 className="max-w-sm text-3xl font-black tracking-[-0.05em] text-white sm:text-[2.4rem]">
+          <h3 className="max-w-sm text-3xl font-medium text-white sm:text-[2.4rem]">
             {item.title}
           </h3>
 
@@ -230,7 +230,7 @@ function WhyRow({ item }: { item: WhyItem }) {
               key={note.body}
               className={`absolute w-[11rem] rounded-lg border border-black/10 bg-white px-3 py-2 shadow-[0_12px_35px_rgba(0,0,0,0.25)] sm:w-[12.5rem] ${note.className}`}
             >
-              <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-black/65">
+              <p className="text-[10px] font-medium uppercase tracking-[0.08em] text-black/65">
                 Community Note
               </p>
               <p className="mt-1 text-[11px] leading-4 text-black/85">
@@ -266,11 +266,11 @@ export function WhyGlennSection() {
     <section className="relative mt-24 bg-[#020202] px-6 py-20 sm:px-8 lg:px-12">
       <div className="mx-auto max-w-7xl">
         <div className="flex items-center justify-center gap-3 text-center">
-          <Sparkles className="h-8 w-8 text-[#d060ff]" />
-          <h2 className="text-3xl font-black tracking-[-0.05em] text-white sm:text-5xl">
+          {/* <Sparkles className="h-8 w-8 text-[#d060ff]" /> */}
+          <h2 className="text-3xl font-medium text-white sm:text-5xl">
             Why GLENN Stands Out?
           </h2>
-          <Sparkles className="h-8 w-8 text-[#d060ff]" />
+          {/* <Sparkles className="h-8 w-8 text-[#d060ff]" /> */}
         </div>
 
         <div className="mt-10">
@@ -283,11 +283,11 @@ export function WhyGlennSection() {
         <div className="mt-14 text-center">
           <div className="relative left-1/2 w-[calc(100vw+5rem)] -translate-x-1/2 sm:w-[calc(100vw+7rem)] lg:w-[calc(100vw+9rem)]">
             <div className="-rotate-[4deg]">
-              <div className="relative overflow-visible bg-[#c6ee72] px-6 py-20 sm:px-12 sm:py-24">
+              <div className="relative overflow-visible bg-[#c6ee72] px-12 py-20 sm:px-12 sm:py-60">
                 <ScallopEdge position="top" />
                 <ScallopEdge position="bottom" />
 
-                <p className="relative z-20 mx-auto max-w-5xl text-center text-2xl font-black leading-tight tracking-[-0.05em] text-black sm:text-4xl sm:leading-[1.25]">
+                <p className="relative z-20 mx-auto max-w-5xl text-center text-2xl font-medium text-black sm:text-4xl">
                   Ready to explore the next era of tournaments, communities,
                   and opportunities? Click below!
                 </p>
@@ -304,7 +304,7 @@ export function WhyGlennSection() {
                 href={downloadHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center rounded-full border border-black/20 bg-white px-8 py-4 text-lg font-black tracking-[-0.03em] text-black shadow-[0_12px_30px_rgba(255,255,255,0.08)] transition hover:scale-[1.03] sm:px-10 sm:text-[2rem]"
+                className="inline-flex items-center rounded-full border border-black/20 bg-white px-8 py-4 text-lg font-extralight text-black shadow-[0_12px_30px_rgba(255,255,255,0.08)] transition hover:scale-[1.03] sm:px-10 sm:text-[2rem]"
               >
                 Get Started with GLENN
               </a>
