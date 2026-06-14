@@ -14,45 +14,15 @@ type CarouselSlide = {
 
 const slides: CarouselSlide[] = [
   {
-    src: "https://revenantesports.com/api/assets/uploads/banners/1718524598CSRosterWebBanner.mov",
-    alt: "Gaming setup with keyboard and neon lighting",
-    href: "https://glennesports.app",
+    src: "/1bn.png",
+    alt: "Glenn Championship Cup Season 1",
+    href: "https://glennesports.app/championships/s1",
   },
   {
-    src: "https://images.unsplash.com/photo-1525104698733-6a4d2a5f4f6a?auto=format&fit=crop&w=1600&q=80",
-    alt: "Two people gaming together on a couch",
-    href: "https://www.instagram.com/glennesports7",
-  },
-  {
-    src: "https://samplelib.com/lib/preview/mp4/sample-5s.mp4",
-    alt: "Focused gamer wearing headphones at a desk",
-    href: "https://glennesports.app",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1600&q=80",
-    alt: "Gaming desk with a monitor and RGB lighting",
-    href: "https://whatsapp.com/channel/0029VbCEtxY3mFY4yhChto3h",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1538481199705-c7bddd2c2c6f?auto=format&fit=crop&w=1600&q=80",
-    alt: "Colorful gaming room with neon lighting",
+    src: "/2bn.png",
+    alt: "Glenn App Install",
     href: downloadHref,
-  },
-  {
-    src: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1600&q=80",
-    alt: "Esports player concentrating during a match",
-    href: "https://glennesports.app",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1600&q=80",
-    alt: "Bright gaming room with monitors and RGB lights",
-    href: "https://www.instagram.com/glennesports7",
-  },
-  {
-    src: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?auto=format&fit=crop&w=1600&q=80",
-    alt: "Laptop with a game on screen in a dark room",
-    href: "https://whatsapp.com/channel/0029VbCEtxY3mFY4yhChto3h",
-  },
+  }
 ];
 
 const loopSlides = [...slides, ...slides, ...slides];
