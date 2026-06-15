@@ -51,12 +51,12 @@ export function LandingFooter() {
             </div>
 
             <p className="mt-6 text-md text-white/80">
-              Made By:{" "}
+              
               <span
                 className="uppercase tracking-[0.12em] text-white"
                 style={{ fontFamily: '"Anton", sans-serif' }}
               >
-                FF Esports Community, For The Community
+                Made By:{" "}FF Esports Community, For The Community
               </span>
             </p>
           </div>
@@ -107,6 +107,14 @@ export function LandingFooter() {
             <span className="text-white/35">|</span>
             <Link href="/socials" className="transition hover:opacity-75">
               Socials
+            </Link>
+            <span className="text-white/35">|</span>
+            <Link href="/complaints" className="transition hover:opacity-75">
+              Raise a Complaint
+            </Link>
+            <span className="text-white/35">|</span>
+            <Link href="/careers" className="transition hover:opacity-75">
+              Careers
             </Link>
           </div>
         </div>

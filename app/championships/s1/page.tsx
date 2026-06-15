@@ -3,6 +3,7 @@
 import type { CSSProperties, FormEvent } from "react";
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Check,
   ChevronRight,
@@ -568,46 +569,70 @@ export default function ChampionshipSeasonOnePage() {
               </p>
             </div>
             {step === "intro" && (
-              <button
-                type="button"
-                onClick={() => goToStep("form")}
-                className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-black px-6 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black sm:ml-auto sm:w-auto sm:min-w-72"
-              >
-                Register now
-                <ChevronRight className="h-4 w-4" />
-              </button>
+              <div className="ml-auto flex w-full flex-col gap-3 sm:w-auto sm:min-w-[21rem] sm:flex-row">
+                <button
+                  type="button"
+                  onClick={() => goToStep("form")}
+                  className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-black px-6 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black"
+                >
+                  Register now
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+                <Link
+                  href="/complaints"
+                  className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-white px-6 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-black hover:text-white"
+                >
+                  Raise Complaint
+                </Link>
+              </div>
             )}
             {step === "form" && (
-              <button
-                type="button"
-                onClick={() => {
-                  const form = document.querySelector<HTMLFormElement>(
-                    "[data-registration-form]",
-                  );
-                  form?.requestSubmit();
-                }}
-                className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-black px-6 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black sm:ml-auto sm:w-auto sm:min-w-72"
-              >
-                Continue to social check
-                <ChevronRight className="h-4 w-4" />
-              </button>
+              <div className="ml-auto flex w-full flex-col gap-3 sm:w-auto sm:min-w-[21rem] sm:flex-row">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const form = document.querySelector<HTMLFormElement>(
+                      "[data-registration-form]",
+                    );
+                    form?.requestSubmit();
+                  }}
+                  className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-black px-6 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black"
+                >
+                  Continue to social check
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+                <Link
+                  href="/complaints"
+                  className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-white px-6 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-black hover:text-white"
+                >
+                  Raise Complaint
+                </Link>
+              </div>
             )}
             {step === "whatsapp" && (
-              <button
-                type="button"
-                onClick={handleVerify}
-                disabled={submitting}
-                className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-black px-6 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-70 sm:ml-auto sm:w-auto sm:min-w-72"
-              >
-                {submitting ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    Verifying
-                  </>
-                ) : (
-                  "Verify Registration"
-                )}
-              </button>
+              <div className="ml-auto flex w-full flex-col gap-3 sm:w-auto sm:min-w-[21rem] sm:flex-row">
+                <button
+                  type="button"
+                  onClick={handleVerify}
+                  disabled={submitting}
+                  className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-black px-6 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  {submitting ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Verifying
+                    </>
+                  ) : (
+                    "Verify Registration"
+                  )}
+                </button>
+                <Link
+                  href="/complaints"
+                  className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-white px-6 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-black hover:text-white"
+                >
+                  Raise Complaint
+                </Link>
+              </div>
             )}
           </div>
         </div>

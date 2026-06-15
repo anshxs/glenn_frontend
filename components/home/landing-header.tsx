@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
+  { href: "/careers", label: "Careers" },
+  { href: "/complaints", label: "Complaints" },
   { href: "/support", label: "Support" },
   { href: "/terms", label: "Terms" },
 ];
@@ -23,19 +25,8 @@ export function LandingHeader({ activeHref }: LandingHeaderProps) {
 
   useEffect(() => {
     if (isMobileMenuOpen) {
-      setIsMobileMenuMounted(true);
-      const expandFrame = window.requestAnimationFrame(() => {
-        window.requestAnimationFrame(() => {
-          setIsMobileMenuExpanded(true);
-        });
-      });
-
-      return () => {
-        window.cancelAnimationFrame(expandFrame);
-      };
+      return;
     }
-
-    setIsMobileMenuExpanded(false);
 
     const timeoutId = window.setTimeout(() => {
       setIsMobileMenuMounted(false);
@@ -60,6 +51,7 @@ export function LandingHeader({ activeHref }: LandingHeaderProps) {
   }, [isMobileMenuOpen]);
 
   const closeMobileMenu = () => {
+    setIsMobileMenuExpanded(false);
     setIsMobileMenuOpen(false);
   };
 
@@ -194,6 +186,11 @@ export function LandingHeader({ activeHref }: LandingHeaderProps) {
           onClick={() => {
             setIsMobileMenuMounted(true);
             setIsMobileMenuOpen(true);
+            window.requestAnimationFrame(() => {
+              window.requestAnimationFrame(() => {
+                setIsMobileMenuExpanded(true);
+              });
+            });
           }}
         >
           <span className="sr-only">Open navigation</span>
