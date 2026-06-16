@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Globe, Instagram, Mail, MessageCircle } from "lucide-react";
+import { getBaseUrl, getSubdomainUrl } from "@/lib/subdomains";
 
 const socialLinks = [
   {
@@ -19,7 +20,7 @@ const socialLinks = [
     icon: Mail,
   },
   {
-    href: "https://glennesports.app",
+    href: getBaseUrl(),
     label: "Website",
     icon: Globe,
   },
@@ -97,11 +98,11 @@ export function LandingFooter() {
             className="flex flex-wrap items-center gap-4 text-sm uppercase tracking-[0.12em] text-white/90 lg:justify-end"
             style={{ fontFamily: '"Anton", sans-serif' }}
           >
-            <Link href="/terms" className="transition hover:opacity-75">
+            <Link href={getSubdomainUrl("terms")} className="transition hover:opacity-75">
               Terms and Conditions
             </Link>
             <span className="text-white/35">|</span>
-            <Link href="/support" className="transition hover:opacity-75">
+            <Link href={getSubdomainUrl("support")} className="transition hover:opacity-75">
               Support
             </Link>
             <span className="text-white/35">|</span>
@@ -109,11 +110,11 @@ export function LandingFooter() {
               Socials
             </Link>
             <span className="text-white/35">|</span>
-            <Link href="/complaints" className="transition hover:opacity-75">
+            <Link href={getSubdomainUrl("complaints")} className="transition hover:opacity-75">
               Raise a Complaint
             </Link>
             <span className="text-white/35">|</span>
-            <Link href="/careers" className="transition hover:opacity-75">
+            <Link href={getSubdomainUrl("careers")} className="transition hover:opacity-75">
               Careers
             </Link>
           </div>

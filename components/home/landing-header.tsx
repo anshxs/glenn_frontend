@@ -4,14 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
+import { getSubdomainUrl } from "@/lib/subdomains";
 
 const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/careers", label: "Careers" },
-  { href: "/complaints", label: "Complaints" },
-  { href: "/support", label: "Support" },
-  { href: "/terms", label: "Terms" },
+  { href: "/", label: "Home", matchHref: "/" },
+  { href: getSubdomainUrl("about"), label: "About", matchHref: "/about" },
+  { href: getSubdomainUrl("careers"), label: "Careers", matchHref: "/careers" },
+  { href: getSubdomainUrl("complaints"), label: "Complaints", matchHref: "/complaints" },
+  { href: getSubdomainUrl("support"), label: "Support", matchHref: "/support" },
+  { href: getSubdomainUrl("terms"), label: "Terms", matchHref: "/terms" },
 ];
 
 type LandingHeaderProps = {
@@ -89,7 +90,7 @@ export function LandingHeader({ activeHref }: LandingHeaderProps) {
             style={{ fontFamily: '"Anton", sans-serif' }}
           >
             {navLinks.map((link) => {
-              const isActive = activeHref === link.href;
+              const isActive = activeHref === link.matchHref;
 
               return (
                 <Link
@@ -158,7 +159,7 @@ export function LandingHeader({ activeHref }: LandingHeaderProps) {
           style={{ fontFamily: '"Anton", sans-serif' }}
         >
           {navLinks.map((link) => {
-            const isActive = activeHref === link.href;
+              const isActive = activeHref === link.matchHref;
 
             return (
               <Link

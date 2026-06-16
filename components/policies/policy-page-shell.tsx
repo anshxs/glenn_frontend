@@ -3,12 +3,13 @@ import { ArrowRight, LifeBuoy, Mail } from "lucide-react";
 
 import { LandingFooter } from "@/components/home/landing-footer";
 import { LandingHeader } from "@/components/home/landing-header";
+import { getSubdomainUrl } from "@/lib/subdomains";
 
 const policyLinks = [
-  { href: "/terms", label: "Terms" },
-  { href: "/deposit-policy", label: "Deposit Policy" },
-  { href: "/withdrawal-policy", label: "Withdrawal Policy" },
-  { href: "/refund-policy", label: "Refund Policy" },
+  { href: getSubdomainUrl("terms"), label: "Terms", matchHref: "/terms" },
+  { href: "/deposit-policy", label: "Deposit Policy", matchHref: "/deposit-policy" },
+  { href: "/withdrawal-policy", label: "Withdrawal Policy", matchHref: "/withdrawal-policy" },
+  { href: "/refund-policy", label: "Refund Policy", matchHref: "/refund-policy" },
 ];
 
 type Tone = "lime" | "violet" | "neutral";
@@ -108,7 +109,7 @@ export function PolicyPageShell({
               </p>
               <div className="mt-6 flex flex-col border border-white/20">
                 {policyLinks.map((link) => {
-                  const isActive = link.href === currentHref;
+                  const isActive = link.matchHref === currentHref;
 
                   return (
                     <Link
@@ -139,7 +140,7 @@ export function PolicyPageShell({
                   {contactValue}
                 </a>
                 <Link
-                  href="/support"
+                  href={getSubdomainUrl("support")}
                   className="mt-6 inline-flex items-center gap-2 border border-white bg-white px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-black hover:text-white"
                 >
                   Visit Support
@@ -306,7 +307,7 @@ export function PolicyPageShell({
 
             <div className="flex flex-col gap-3 sm:flex-row">
               <Link
-                href="/support"
+                href={getSubdomainUrl("support")}
                 className="inline-flex items-center justify-center gap-2 border border-white bg-white px-6 py-4 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-black hover:text-white"
               >
                 Open Support

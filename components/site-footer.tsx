@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { getSubdomainUrl } from "@/lib/subdomains";
 
 const footerLinks = [
-  { href: "/about", label: "About" },
-  { href: "/support", label: "Support" },
-  { href: "/terms", label: "Terms" },
+  { href: getSubdomainUrl("about"), label: "About" },
+  { href: getSubdomainUrl("support"), label: "Support" },
+  { href: getSubdomainUrl("terms"), label: "Terms" },
   { href: "/deposit-policy", label: "Deposit" },
   { href: "/refund-policy", label: "Refund" },
   { href: "/withdrawal-policy", label: "Withdrawal" },

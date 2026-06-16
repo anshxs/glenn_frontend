@@ -1,7 +1,8 @@
 import { MetadataRoute } from 'next'
+import { getBaseUrl, getSubdomainUrl } from '@/lib/subdomains'
  
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://glennesports.app'
+  const baseUrl = getBaseUrl()
   const currentDate = new Date()
   
   return [
@@ -12,19 +13,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/about`,
+      url: getSubdomainUrl('about'),
       lastModified: currentDate,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/support`,
+      url: getSubdomainUrl('support'),
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.6,
     },
     {
-      url: `${baseUrl}/terms`,
+      url: getSubdomainUrl('terms'),
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: getSubdomainUrl('careers'),
+      lastModified: currentDate,
+      changeFrequency: 'monthly',
+      priority: 0.5,
+    },
+    {
+      url: getSubdomainUrl('complaints'),
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.5,

@@ -1,11 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
+import { getSubdomainUrl } from "@/lib/subdomains";
 
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
-  { href: "/support", label: "Support" },
-  { href: "/terms", label: "Terms" },
+  { href: getSubdomainUrl("about"), label: "About" },
+  { href: getSubdomainUrl("support"), label: "Support" },
+  { href: getSubdomainUrl("terms"), label: "Terms" },
 ];
 
 const downloadHref =
