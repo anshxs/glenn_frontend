@@ -103,8 +103,8 @@ export default function DepositPolicy() {
       updatedAt="March 2, 2026"
       currentHref="/deposit-policy"
       contactLabel="Deposit support"
-      contactHref="mailto:support@glenn.co"
-      contactValue="support@glenn.co"
+      contactHref="mailto:glennesports7@gmail.com"
+      contactValue="glennesports7@gmail.com"
       highlights={[
         { label: "Minimum", value: "Rs 10", tone: "lime" },
         { label: "Typical credit", value: "Usually instant", tone: "neutral" },

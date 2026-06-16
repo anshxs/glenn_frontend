@@ -98,8 +98,8 @@ export default function Terms() {
       updatedAt="February 20, 2026"
       currentHref="/terms"
       contactLabel="Questions about these terms"
-      contactHref="mailto:support@glenn.co"
-      contactValue="support@glenn.co"
+      contactHref="mailto:glennesports7@gmail.com"
+      contactValue="glennesports7@gmail.com"
       highlights={[
         { label: "Applies to", value: "All GLENN users", tone: "violet" },
         { label: "Minimum age", value: "13+", tone: "neutral" },

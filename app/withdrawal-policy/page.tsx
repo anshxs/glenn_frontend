@@ -101,8 +101,8 @@ export default function WithdrawalPolicy() {
       updatedAt="March 2, 2026"
       currentHref="/withdrawal-policy"
       contactLabel="Withdrawal support"
-      contactHref="mailto:support@glenn.co"
-      contactValue="support@glenn.co"
+      contactHref="mailto:glennesports7@gmail.com"
+      contactValue="glennesports7@gmail.com"
       highlights={[
         { label: "Minimum", value: "Rs 100", tone: "lime" },
         { label: "Typical review", value: "1 to 2 business days", tone: "neutral" },

@@ -95,8 +95,8 @@ export default function RefundPolicy() {
       updatedAt="March 2, 2026"
       currentHref="/refund-policy"
       contactLabel="Refund support"
-      contactHref="mailto:support@glenn.co"
-      contactValue="support@glenn.co"
+      contactHref="mailto:glennesports7@gmail.com"
+      contactValue="glennesports7@gmail.com"
       highlights={[
         { label: "Default rule", value: "Transactions are final", tone: "violet" },
         { label: "Tournament cancellation", value: "Eligible for refund review", tone: "lime" },
