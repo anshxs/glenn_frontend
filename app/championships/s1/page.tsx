@@ -578,12 +578,12 @@ export default function ChampionshipSeasonOnePage() {
                   Register now
                   <ChevronRight className="h-4 w-4" />
                 </button>
-                <Link
+                {/* <Link
                   href="/complaints"
                   className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-white px-6 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-black hover:text-white"
                 >
                   Raise Complaint
-                </Link>
+                </Link> */}
               </div>
             )}
             {step === "form" && (
@@ -601,12 +601,12 @@ export default function ChampionshipSeasonOnePage() {
                   Continue to social check
                   <ChevronRight className="h-4 w-4" />
                 </button>
-                <Link
+                {/* <Link
                   href="/complaints"
                   className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-white px-6 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-black hover:text-white"
                 >
                   Raise Complaint
-                </Link>
+                </Link> */}
               </div>
             )}
             {step === "whatsapp" && (
@@ -615,7 +615,7 @@ export default function ChampionshipSeasonOnePage() {
                   type="button"
                   onClick={handleVerify}
                   disabled={submitting}
-                  className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-black px-6 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-70"
+                  className="inline-flex  h-13 w-full items-center justify-center gap-2 border border-black bg-black px-6 text-sm font-bold uppercase tracking-[0.16em] text-white transition hover:bg-white hover:text-black disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {submitting ? (
                     <>
@@ -626,12 +626,12 @@ export default function ChampionshipSeasonOnePage() {
                     "Verify Registration"
                   )}
                 </button>
-                <Link
+                {/* <Link
                   href="/complaints"
                   className="inline-flex h-13 w-full items-center justify-center gap-2 border border-black bg-white px-6 text-sm font-bold uppercase tracking-[0.16em] text-black transition hover:bg-black hover:text-white"
                 >
                   Raise Complaint
-                </Link>
+                </Link> */}
               </div>
             )}
           </div>
