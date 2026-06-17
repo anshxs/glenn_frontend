@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
-import { getSubdomainUrl } from "@/lib/subdomains";
+import { getBaseUrl, getSubdomainUrl } from "@/lib/subdomains";
 
 const navLinks = [
-  { href: "/", label: "Home", matchHref: "/" },
+  { href: getBaseUrl(), label: "Home", matchHref: "/" },
   { href: getSubdomainUrl("about"), label: "About", matchHref: "/about" },
   { href: getSubdomainUrl("careers"), label: "Careers", matchHref: "/careers" },
   { href: getSubdomainUrl("complaints"), label: "Complaints", matchHref: "/complaints" },
@@ -73,7 +73,7 @@ export function LandingHeader({ activeHref }: LandingHeaderProps) {
           }}
         >
           <div className="flex items-center justify-between">
-            <Link href="/" aria-label="GLENN home" className="flex items-center">
+            <Link href={getBaseUrl()} aria-label="GLENN home" className="flex items-center">
               <Image
                 src="/logos.svg"
                 alt="GLENN"
@@ -143,7 +143,7 @@ export function LandingHeader({ activeHref }: LandingHeaderProps) {
   return (
     <header className="relative z-1000 bg-[rgba(255,255,255,0.38)] backdrop-blur-xl">
       <div className="mx-auto flex h-20 w-full items-center justify-between px-6 sm:px-8 lg:px-12">
-        <Link href="/" className="flex items-center gap-3">
+        <Link href={getBaseUrl()} className="flex items-center gap-3">
           <Image
             src="/logos.svg"
             alt="GLENN"

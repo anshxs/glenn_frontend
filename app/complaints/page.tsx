@@ -124,7 +124,7 @@ export default function ComplaintsPage() {
 
   return (
     <main className="relative h-screen w-full overflow-hidden bg-[#ffffff] text-black">
-      <LandingHeader activeHref="/support" />
+      <LandingHeader activeHref="/complaints" />
 
       <section className="flex h-[calc(100vh-5rem)] w-full items-stretch px-3 py-2 sm:px-4 lg:px-5">
         <div className="flex h-full w-full flex-1 flex-col border border-black/10 bg-white p-4 shadow-[0_24px_80px_rgba(0,0,0,0.06)] sm:p-5">
