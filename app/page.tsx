@@ -1,13 +1,28 @@
 import Image from "next/image";
 
+import CurvedLoop from "@/components/CurvedLoop";
+import { CreatorsRail } from "@/components/home/creators-rail";
+import { FloatingWhatsappCta } from "@/components/home/floating-whatsapp-cta";
+import { GuildArmySection } from "@/components/home/guild-army-section";
+import { InvestmentSection } from "@/components/home/investment-section";
 import { LandingFooter } from "@/components/home/landing-footer";
 import { LandingHeader } from "@/components/home/landing-header";
+import { DiaTextReveal } from "@/components/ui/dia-text-reveal";
 import { HeroCarousel } from "../components/home/hero-carousel";
 
 const downloadHref =
   "https://github.com/anshsxa/glenn/releases/download/v1.0.0/Glenn.apk";
 const instagramHref = "https://www.instagram.com/glennesports7";
 const whatsappHref = "https://whatsapp.com/channel/0029VbCEtxY3mFY4yhChto3h";
+const messageHref = "https://wa.me/918492892871?text=Hello!";
+const creators = [
+  {
+    handle: "@analyst.gopal",
+    href: "https://www.instagram.com/analyst.gopal/?utm_source=ig_embed&utm_campaign=loading",
+    blurb:
+      "Analyst Gopal brings sharp match breakdowns, creator energy, and community-first storytelling to the Glenn ecosystem.",
+  },
+];
 
 const championTeams: any[] = [
   // {
@@ -61,22 +76,54 @@ export default function Home() {
             India&apos;s FF Esports Community
           </div>
 
-          <div className="mt-8 space-y-1 sm:space-y-2 flex flex-wrap justify-center" style={{ fontFamily: '"Anton", sans-serif' }}>
-            <p className="text-5xl font-normal uppercase text-[#000000] sm:text-7xl lg:text-[6.5rem]">
+          <div
+            className="mt-8 space-y-1 sm:space-y-2 flex flex-wrap justify-center"
+            style={{ fontFamily: '"Anton", sans-serif' }}
+          >
+            <DiaTextReveal
+              className="text-5xl font-normal uppercase text-black sm:text-7xl lg:text-[6.5rem]"
+              text="Play."
+              colors={["#A97CF8", "#F38CB8", "#FDCC92"]}
+              textColor="#000000"
+            />
+            {/* <p className="text-5xl font-normal uppercase text-[#000000] sm:text-7xl lg:text-[6.5rem]">
               Play.
-            </p>
-            <p className="text-5xl font-normal uppercase text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.95)] sm:text-7xl lg:text-[6.5rem]">
+            </p> */}
+            <DiaTextReveal
+              className="text-5xl font-normal uppercase text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.95)] sm:text-7xl lg:text-[6.5rem]"
+              text="Connect."
+              colors={["#A97CF8", "#F38CB8", "#FDCC92"]}
+              textColor="#ffffff00"
+            />
+            {/* <p className="text-5xl font-normal uppercase text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.95)] sm:text-7xl lg:text-[6.5rem]">
               Connect.
-            </p>
-            <p className="text-5xl font-normal uppercase text-black sm:text-7xl lg:text-[6.5rem]">
-              Compete.
-            </p>
+            </p> */}
+            <DiaTextReveal
+              className="text-5xl font-normal uppercase text-black sm:text-7xl lg:text-[6.5rem]"
+              text="Compete."
+              colors={["#A97CF8", "#F38CB8", "#FDCC92"]}
+              textColor="#000000"
+            />
           </div>
 
-          <p className="mt-8 max-w-2xl text-sm leading-7 text-black/65 sm:text-base" style={{ fontFamily: '"Anton", sans-serif' }}>
-            Jump into tournaments, find your squad, build your profile, and
-            turn everyday matches into something worth showing off.
+          <p
+            className="mt-8 max-w-2xl text-sm leading-7 text-black/65 sm:text-base"
+            style={{ fontFamily: '"Anton", sans-serif' }}
+          >
+            Jump into tournaments, find your squad, build your profile, and turn
+            everyday matches into something worth showing off.
           </p>
+
+          {/* <div className="relative left-1/2 mt-8 w-screen -translate-x-1/2 overflow-hidden">
+            <CurvedLoop
+              marqueeText="GLENN ESPORTS ✦ GLENN ESPORTS ✦ GLENN ESPORTS ✦"
+              speed={2.6}
+              curveAmount={100}
+              direction="right"
+              interactive
+              className="fill-black text-[2.1rem] font-normal tracking-[0.18em] sm:text-[2.8rem] lg:text-[3.3rem]"
+            />
+          </div> */}
 
           <div className="mt-10 flex flex-col items-center">
             <Image
@@ -109,7 +156,7 @@ export default function Home() {
                 href={downloadHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative z-10 inline-flex items-center gap-3 rounded-full bg-[#000000] px-7 py-4 text-sm font-bold tracking-[0.18em] text-white shadow-[0_20px_50px_rgba(200,255,0,0.4)] transition sm:hover:scale-[1.03]"
+                className="relative z-10 inline-flex items-center gap-3 rounded-full bg-[#000000] px-7 py-4 text-sm font-bold text-white shadow-[0_20px_50px_rgba(200,255,0,0.4)] transition sm:hover:scale-[1.03]"
               >
                 <Image
                   src="/android.svg"
@@ -118,7 +165,7 @@ export default function Home() {
                   height={18}
                   className="h-4.5 w-4.5 invert-100"
                 />
-                Download Glenn
+                Download Now
               </a>
 
               <a
@@ -136,8 +183,6 @@ export default function Home() {
                   className="h-6 w-6 object-contain"
                 />
               </a>
-
-              
             </div>
           </div>
         </div>
@@ -146,16 +191,25 @@ export default function Home() {
           <HeroCarousel />
         </div>
 
-        <div className="mt-12 w-full text-left sm:mt-10" style={{ fontFamily: '"Anton", sans-serif' }}>
+        {/* <div
+          className="mt-12 w-full text-left sm:mt-10"
+          style={{ fontFamily: '"Anton", sans-serif' }}
+        >
           <p className="text-sm uppercase tracking-[0.2em] text-black/55 sm:text-base">
             GLENN ESPORTS TEAMS
           </p>
           <h2 className="mt-2 text-3xl font-normal uppercase tracking-[0.06em] sm:text-4xl lg:text-5xl">
-            MEET OUR <span className="[-webkit-text-stroke:1.4px_rgba(0,0,0,0.95)] text-transparent ">CHAMPIONS</span>
+            MEET OUR{" "}
+            <span className="[-webkit-text-stroke:1.4px_rgba(0,0,0,0.95)] text-transparent ">
+              CHAMPIONS
+            </span>
           </h2>
-        </div>
+        </div> */}
 
-        <section className="mt-8 w-full" style={{ fontFamily: '"Anton", sans-serif' }}>
+        {/* <section
+          className="mt-8 w-full"
+          style={{ fontFamily: '"Anton", sans-serif' }}
+        >
           <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 pr-6 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {championTeams.map((team) => (
               <article
@@ -173,21 +227,25 @@ export default function Home() {
                 </div>
 
                 <div className="mt-4 flex items-center justify-between gap-4">
-                  <h3 className="text-lg font-normal sm:text-3xl">{team.name}</h3>
-                  {/* <span className="text-4xl leading-none text-black/75">→</span> */}
+                  <h3 className="text-lg font-normal sm:text-3xl">
+                    {team.name}
+                  </h3>
                 </div>
               </article>
             ))}
           </div>
-        </section>
+        </section> */}
 
-        <section className="mt-16 w-full" style={{ fontFamily: '"Anton", sans-serif' }}>
-          <p className="text-sm uppercase tracking-[0.2em] text-black/55 sm:text-base">
+        {/* <section
+          className="-mx-6 mt-16 w-auto bg-black px-6 py-10 text-white sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12"
+          style={{ fontFamily: '"Anton", sans-serif' }}
+        >
+          <p className="text-sm uppercase tracking-[0.2em] text-white/55 sm:text-base">
             GLENN MILESTONES
           </p>
           <h2 className="mt-2 text-3xl font-normal uppercase tracking-[0.06em] sm:text-4xl lg:text-5xl">
             SO FAR WE{" "}
-            <span className="text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.95)]">
+            <span className="text-transparent [-webkit-text-stroke:1.4px_rgba(255,255,255,0.95)]">
               ACHIEVED
             </span>
           </h2>
@@ -198,7 +256,7 @@ export default function Home() {
                 key={item.label}
                 className="min-w-[82vw] snap-start sm:min-w-[34rem] lg:min-w-[37rem]"
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-black/5">
+                <div className="relative aspect-[16/10] overflow-hidden bg-white/5">
                   <Image
                     src={item.image}
                     alt={item.label}
@@ -209,16 +267,43 @@ export default function Home() {
                 </div>
 
                 <div className="mt-4 flex items-center justify-between gap-4">
-                  <h3 className="text-lg font-normal sm:text-3xl">{item.label}</h3>
-                  {/* <span className="text-4xl leading-none text-black/75">→</span> */}
+                  <h3 className="text-lg font-normal text-white sm:text-3xl">
+                    {item.label}
+                  </h3>
                 </div>
               </article>
             ))}
           </div>
+        </section> */}
+
+        <GuildArmySection />
+        <InvestmentSection />
+        <section
+          className="mt-16 w-full"
+          style={{ fontFamily: '"Anton", sans-serif' }}
+        >
+          <p className="text-sm uppercase tracking-[0.2em] text-black/55 sm:text-base">
+            MEET OUR CREATORS
+          </p>
+          <h2 className="mt-2 text-3xl font-normal uppercase tracking-[0.06em] sm:text-4xl lg:text-5xl">
+            THE VOICES BEHIND{" "}
+            <span className="text-transparent [-webkit-text-stroke:1.4px_rgba(0,0,0,0.95)]">
+              THE HYPE
+            </span>
+          </h2>
+
+          <CreatorsRail creators={creators} />
         </section>
+
       </section>
 
       <LandingFooter />
+      <FloatingWhatsappCta href={messageHref} />
+      {/* <ProgressiveBlur
+        className="fixed inset-x-0 bottom-0 z-20"
+        height="13vh"
+        position="bottom"
+      /> */}
     </main>
   );
 }

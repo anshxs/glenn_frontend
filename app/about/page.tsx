@@ -151,7 +151,7 @@ export default function About() {
 
           <div className="relative min-h-[24rem] bg-[#0d0d0d]">
             <Image
-              src="/4.png"
+              src="/2bn.png"
               alt="GLENN app preview"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"

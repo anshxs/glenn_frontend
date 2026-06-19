@@ -13,11 +13,11 @@ type CarouselSlide = {
 };
 
 const slides: CarouselSlide[] = [
-  {
-    src: "/1bn.png",
-    alt: "Glenn Championship Cup Season 1",
-    href: "https://glennesports.app/championships/s1",
-  },
+  // {
+  //   src: "/1bn.png",
+  //   alt: "Glenn Championship Cup Season 1",
+  //   href: "https://glennesports.app/championships/s1",
+  // },
   {
     src: "/2bn.png",
     alt: "Glenn App Install",
@@ -25,7 +25,8 @@ const slides: CarouselSlide[] = [
   }
 ];
 
-const loopSlides = [...slides, ...slides, ...slides];
+const hasMultipleSlides = slides.length > 1;
+const loopSlides = hasMultipleSlides ? [...slides, ...slides, ...slides] : slides;
 const MIDDLE_OFFSET = slides.length;
 
 function isVideoSource(src: string) {
@@ -64,9 +65,12 @@ export function HeroCarousel() {
     const frame = window.requestAnimationFrame(() => {
       const width = container.clientWidth || 1;
       setViewportWidth(width);
-      rawIndexRef.current = MIDDLE_OFFSET;
+      rawIndexRef.current = hasMultipleSlides ? MIDDLE_OFFSET : 0;
       setActiveIndex(0);
-      container.scrollTo({ left: width * MIDDLE_OFFSET, behavior: "auto" });
+      container.scrollTo({
+        left: width * (hasMultipleSlides ? MIDDLE_OFFSET : 0),
+        behavior: "auto",
+      });
       setIsReady(true);
     });
 
@@ -88,7 +92,7 @@ export function HeroCarousel() {
   }, []);
 
   useEffect(() => {
-    if (!isReady) {
+    if (!isReady || !hasMultipleSlides) {
       return;
     }
 
@@ -103,7 +107,7 @@ export function HeroCarousel() {
 
   const handleScroll = () => {
     const container = containerRef.current;
-    if (!container || !viewportWidth || !isReady) {
+    if (!container || !viewportWidth || !isReady || !hasMultipleSlides) {
       return;
     }
 
@@ -130,6 +134,10 @@ export function HeroCarousel() {
   };
 
   const goToSlide = (index: number) => {
+    if (!hasMultipleSlides) {
+      setActiveIndex(0);
+      return;
+    }
     setActiveIndex(index);
     scrollToRawIndex(MIDDLE_OFFSET + index);
   };
@@ -176,19 +184,21 @@ export function HeroCarousel() {
           ))}
         </div>
 
-        <div className="mt-5 flex items-center justify-center gap-2">
-          {slides.map((slide, index) => (
-            <button
-              key={slide.src}
-              type="button"
-              onClick={() => goToSlide(index)}
-              aria-label={`Go to slide ${index + 1}`}
-              className={`h-2.5 rounded-full transition-all duration-300 ${
-                index === activeIndex ? "w-7 bg-black" : "w-2.5 bg-black/20"
-              }`}
-            />
-          ))}
-        </div>
+        {hasMultipleSlides ? (
+          <div className="mt-5 flex items-center justify-center gap-2">
+            {slides.map((slide, index) => (
+              <button
+                key={slide.src}
+                type="button"
+                onClick={() => goToSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+                className={`h-2.5 rounded-full transition-all duration-300 ${
+                  index === activeIndex ? "w-7 bg-black" : "w-2.5 bg-black/20"
+                }`}
+              />
+            ))}
+          </div>
+        ) : null}
       </div>
     </section>
   );

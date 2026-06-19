@@ -11,6 +11,7 @@ type ComplaintInput = {
 
 const usersTable = "userdata";
 const complaintsTable = "management_complaints";
+const missingTableErrorCode = "42P01";
 
 function cleanText(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
@@ -42,9 +43,17 @@ export async function GET() {
       .not("phone", "is", null);
 
     if (error) {
+      if (error.code === missingTableErrorCode) {
+        return NextResponse.json({
+          ok: true,
+          people: [],
+          peopleSourceAvailable: false,
+        });
+      }
+
       return NextResponse.json(
         { error: error.message },
-        { status: error.code === "42P01" ? 500 : 400 },
+        { status: 400 },
       );
     }
 
@@ -66,7 +75,11 @@ export async function GET() {
         })
         .sort((a, b) => a.name.localeCompare(b.name));
 
-    return NextResponse.json({ ok: true, people });
+    return NextResponse.json({
+      ok: true,
+      people,
+      peopleSourceAvailable: true,
+    });
   } catch (error) {
     return NextResponse.json(
       { error: error instanceof Error ? error.message : "Failed to load people." },
@@ -147,7 +160,7 @@ export async function POST(request: Request) {
     if (error) {
       return NextResponse.json(
         { error: error.message },
-        { status: error.code === "42P01" ? 500 : 400 },
+        { status: error.code === missingTableErrorCode ? 500 : 400 },
       );
     }
 

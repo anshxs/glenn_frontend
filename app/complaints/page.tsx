@@ -16,6 +16,7 @@ type ManagementPerson = {
 export default function ComplaintsPage() {
   const [people, setPeople] = useState<ManagementPerson[]>([]);
   const [loadingPeople, setLoadingPeople] = useState(true);
+  const [peopleSourceAvailable, setPeopleSourceAvailable] = useState(true);
   const [complaintType, setComplaintType] =
     useState<ComplaintType>("management_member");
   const [selectedPersonKey, setSelectedPersonKey] = useState("");
@@ -33,6 +34,7 @@ export default function ComplaintsPage() {
         const result = (await response.json()) as {
           ok?: boolean;
           people?: ManagementPerson[];
+          peopleSourceAvailable?: boolean;
           error?: string;
         };
 
@@ -42,6 +44,7 @@ export default function ComplaintsPage() {
 
         if (!ignore) {
           setPeople(result.people ?? []);
+          setPeopleSourceAvailable(result.peopleSourceAvailable ?? true);
         }
       } catch (error) {
         if (!ignore) {
@@ -62,6 +65,13 @@ export default function ComplaintsPage() {
       ignore = true;
     };
   }, []);
+
+  useEffect(() => {
+    if (!loadingPeople && people.length === 0) {
+      setComplaintType("management_general");
+      setSelectedPersonKey("");
+    }
+  }, [loadingPeople, people.length]);
 
   const selectedPerson = useMemo(
     () =>
@@ -151,11 +161,12 @@ export default function ComplaintsPage() {
                 <button
                   type="button"
                   onClick={() => setComplaintType("management_member")}
+                  disabled={loadingPeople || people.length === 0}
                   className={`flex-1 px-4 py-2 text-center transition ${
                     complaintType === "management_member"
                       ? "bg-black text-white"
                       : "text-black/55 hover:text-black"
-                  }`}
+                  } disabled:cursor-not-allowed disabled:opacity-40`}
                 >
                   <p className="text-[12px] font-semibold">Specific person</p>
                 </button>
@@ -172,6 +183,13 @@ export default function ComplaintsPage() {
                   <p className="text-[12px] font-semibold">Whole management</p>
                 </button>
               </div>
+
+              {!loadingPeople && people.length === 0 ? (
+                <p className="mt-3 text-[12px] leading-5 text-black/55">
+                  Specific person complaints are unavailable right now because the
+                  management list is not configured in the database.
+                </p>
+              ) : null}
             </div>
 
             <div className="border border-black/10 bg-[#fcfcf9] p-4">
@@ -188,7 +206,11 @@ export default function ComplaintsPage() {
                       className="w-full border border-black/10 bg-white px-4 py-3 text-black outline-none transition focus:border-black/30 disabled:opacity-60"
                     >
                       <option value="">
-                        {loadingPeople ? "Loading..." : "Select person"}
+                        {loadingPeople
+                          ? "Loading..."
+                          : peopleSourceAvailable
+                            ? "Select person"
+                            : "Management list unavailable"}
                       </option>
                       {people.map((person) => (
                         <option
