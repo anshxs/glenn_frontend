@@ -107,7 +107,7 @@ export function GuildArmySection() {
               <p className="mt-2 truncate text-xs font-normal uppercase text-black sm:text-sm">
                 {player.player_name}
               </p>
-              <p className="truncate text-[11px] uppercase text-black/55 sm:text-xs">
+              <p className="truncate text-[11px] font-sans font-bold uppercase text-black/55 sm:text-xs">
                 {player.in_game_name}
               </p>
             </button>
