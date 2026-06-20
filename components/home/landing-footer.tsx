@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Globe, Instagram, Mail, MessageCircle } from "lucide-react";
-import MetallicPaint from "@/components/MetallicPaint";
 import { getBaseUrl, getSubdomainUrl } from "@/lib/subdomains";
 
 const socialLinks = [
@@ -87,33 +86,15 @@ export function LandingFooter() {
 
         <div className="mt-14 h-px w-full bg-white/12" />
 
-        <div className=" flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
+        <div className="mt-12 flex flex-col justify-between gap-8 lg:flex-row lg:items-center">
           <Link href="/" className="inline-flex items-center">
-            <div className="h-40 -ml-4 my-0">
-              <MetallicPaint
-                imageSrc="/logos.svg"
-                seed={42}
-                scale={4}
-                patternSharpness={1}
-                noiseScale={0.5}
-                speed={0.3}
-                liquid={0.75}
-                mouseAnimation={false}
-                brightness={2}
-                contrast={0.5}
-                refraction={0.01}
-                blur={0.015}
-                chromaticSpread={2}
-                fresnel={1}
-                angle={0}
-                waveAmplitude={1}
-                distortion={1}
-                contour={0.2}
-                lightColor="#ffffff"
-                darkColor="#000000"
-                tintColor="#feb3ff"
-              />
-            </div>
+            <Image
+              src="/logos.svg"
+              alt="GLENN"
+              width={220}
+              height={72}
+              className="h-auto w-44 -ml-4 invert-100 sm:w-52"
+            />
           </Link>
 
           <div
