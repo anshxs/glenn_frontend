@@ -291,6 +291,9 @@ export default function FinancePage() {
     [filteredEntries],
   );
 
+  const overallTotal = useMemo(() => spentTotal + utkarshBalance, [spentTotal, utkarshBalance]);
+  const overallTotalLabel = overallTotal >= 0 ? "Profit" : "Total Loss";
+
   const teamCards = useMemo(() => {
     const map = new Map<string, TeamCard>();
 
@@ -395,12 +398,12 @@ export default function FinancePage() {
                 <div
                   className={cn(
                     "rounded-2xl border p-3 min-w-0",
-                    getBalanceCardClass(spentTotal),
+                    getBalanceCardClass(overallTotal),
                   )}
                 >
-                  <p className="text-xs text-black/55">Spent Total</p>
-                  <p className={cn("mt-1 text-lg font-semibold", getBalanceTextClass(spentTotal))}>
-                    {formatCurrency(spentTotal)}
+                  <p className="text-xs text-black/55">{overallTotalLabel}</p>
+                  <p className={cn("mt-1 text-lg font-semibold", getBalanceTextClass(overallTotal))}>
+                    {formatCurrency(overallTotal)}
                   </p>
                 </div>
 
@@ -445,62 +448,63 @@ export default function FinancePage() {
 
               {teamCards.length ? (
                 <div className="mt-4 grid gap-3 xl:grid-cols-2">
-                  {teamCards.map((team) => (
-                    <div
-                      key={team.teamName}
-                      className="rounded-[1.5rem] border border-black/10 bg-[#fafaf7] p-4"
-                    >
-                      <div className="flex items-center justify-between gap-3">
-                        <div>
-                          {/* <p className="text-xs uppercase tracking-[0.16em] text-black/40">
-                            Team
-                          </p> */}
-                          <h3 className="mt-1 text-lg font-semibold text-black">
-                            {team.teamName}
-                          </h3>
-                        </div>
-                        <p className="text-sm text-black/45">
-                          {formatCurrency(team.scrims + team.pp + team.salary)}
-                        </p>
-                      </div>
+                  {teamCards.map((team) => {
+                    const teamTotal = team.pp - team.scrims - team.salary;
 
-                      <div className="mt-3 grid grid-cols-3 gap-2">
-                        <div className="rounded-xl border border-black/10 bg-white p-3">
-                          <p className="text-[11px] uppercase tracking-[0.14em] text-black/45">
-                            Scrims
-                          </p>
-                          <p className="mt-1 text-base font-semibold text-black">
-                            {formatCurrency(team.scrims)}
-                          </p>
-                        </div>
-                        <div className="rounded-xl border border-black/10 bg-white p-3">
-                          <p className="text-[11px] uppercase tracking-[0.14em] text-black/45">
-                            PP
-                          </p>
-                          <p className="mt-1 text-base font-semibold text-black">
-                            {formatCurrency(team.pp)}
+                    return (
+                      <div
+                        key={team.teamName}
+                        className="rounded-[1.5rem] border border-black/10 bg-[#fafaf7] p-4"
+                      >
+                        <div className="flex items-center justify-between gap-3">
+                          <div>
+                            <h3 className="mt-1 text-lg font-semibold text-black">
+                              {team.teamName}
+                            </h3>
+                          </div>
+                          <p className={cn("text-sm font-bold", getBalanceTextClass(teamTotal))}>
+                            {formatCurrency(teamTotal)}
                           </p>
                         </div>
-                        <div className="rounded-xl border border-black/10 bg-white p-3">
-                          <p className="text-[11px] uppercase tracking-[0.14em] text-black/45">
-                            Salary
-                          </p>
-                          <p className="mt-1 text-base font-semibold text-black">
-                            {formatCurrency(team.salary)}
-                          </p>
+
+                        <div className="mt-3 grid grid-cols-3 gap-2">
+                          <div className="rounded-xl border border-black/10 bg-white p-3">
+                            <p className="text-[11px] uppercase tracking-[0.14em] text-black/45">
+                              Scrims
+                            </p>
+                            <p className="mt-1 text-base font-semibold text-black">
+                              {formatCurrency(team.scrims)}
+                            </p>
+                          </div>
+                          <div className="rounded-xl border border-black/10 bg-white p-3">
+                            <p className="text-[11px] uppercase tracking-[0.14em] text-black/45">
+                              PP
+                            </p>
+                            <p className="mt-1 text-base font-semibold text-black">
+                              {formatCurrency(team.pp)}
+                            </p>
+                          </div>
+                          <div className="rounded-xl border border-black/10 bg-white p-3">
+                            <p className="text-[11px] uppercase tracking-[0.14em] text-black/45">
+                              Salary
+                            </p>
+                            <p className="mt-1 text-base font-semibold text-black">
+                              {formatCurrency(team.salary)}
+                            </p>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : null}
             </>
           ) : (
             <div className="grid gap-2 md:grid-cols-3">
               <div className="rounded-2xl border border-black/10 bg-[#fafaf7] p-3">
-                <p className="text-xs text-black/55">Total</p>
-                <p className="mt-1 text-lg font-semibold text-black">
-                  {formatCurrency(spentTotal)}
+                <p className="text-xs text-black/55">{overallTotalLabel}</p>
+                <p className={cn("mt-1 text-lg font-semibold", getBalanceTextClass(overallTotal))}>
+                  {formatCurrency(overallTotal)}
                 </p>
               </div>
               <div className="rounded-2xl border border-black/10 bg-[#fafaf7] p-3">
