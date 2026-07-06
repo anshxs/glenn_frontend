@@ -1,7 +1,7 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState } from "react";
-import { Download, Plus, Trash2 } from "lucide-react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { Download, Plus, Trash2, Users } from "lucide-react";
 
 import { LandingFooter } from "@/components/home/landing-footer";
 import { LandingHeader } from "@/components/home/landing-header";
@@ -12,7 +12,13 @@ type TeamRow = {
   name: string;
   phone: string;
   teamName: string;
+  groupName: string;
   checks: [boolean, boolean, boolean, boolean];
+};
+
+type StoredTeamsState = {
+  teams: TeamRow[];
+  groups: string[];
 };
 
 const STORAGE_KEY = "glenn-teams-list";
@@ -31,14 +37,54 @@ function createEmptyTeam(nextIndex: number): TeamRow {
     name: "",
     phone: "",
     teamName: "",
+    groupName: "",
     checks: [false, false, false, false],
   };
 }
 
+function normalizeGroups(values: unknown): string[] {
+  if (!Array.isArray(values)) {
+    return [];
+  }
+
+  return Array.from(
+    new Set(
+      values
+        .filter((value): value is string => typeof value === "string")
+        .map((value) => value.trim())
+        .filter(Boolean),
+    ),
+  );
+}
+
+function getCompletedChecks(checks: TeamRow["checks"]) {
+  return checks.filter(Boolean).length;
+}
+
+function getRowTone(team: TeamRow) {
+  const completedChecks = getCompletedChecks(team.checks);
+  const hasTeamName = team.teamName.trim().length > 0;
+
+  if (completedChecks === 4 && hasTeamName) {
+    return "bg-[#e6f8df]";
+  }
+
+  if (completedChecks >= 2 || hasTeamName) {
+    return "bg-[#fff4cc]";
+  }
+
+  return "bg-[#ffe1df]";
+}
+
 export default function TeamsListPage() {
   const [teams, setTeams] = useState<TeamRow[]>([]);
+  const [groups, setGroups] = useState<string[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [teamToDelete, setTeamToDelete] = useState<TeamRow | null>(null);
+  const [newGroupName, setNewGroupName] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [groupFilter, setGroupFilter] = useState("all");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
     try {
@@ -46,14 +92,18 @@ export default function TeamsListPage() {
 
       if (!stored) {
         setTeams([createEmptyTeam(1)]);
+        setGroups([]);
         setIsLoaded(true);
         return;
       }
 
-      const parsed = JSON.parse(stored) as TeamRow[];
-      const normalized = Array.isArray(parsed)
+      const parsed = JSON.parse(stored) as StoredTeamsState | TeamRow[];
+      const parsedTeams = Array.isArray(parsed) ? parsed : parsed.teams;
+      const parsedGroups = Array.isArray(parsed) ? [] : normalizeGroups(parsed.groups);
+
+      const normalizedTeams = Array.isArray(parsedTeams)
         ? withSerialNumbers(
-            parsed.map((row, index) => ({
+            parsedTeams.map((row, index) => ({
               id:
                 typeof row?.id === "string" && row.id
                   ? row.id
@@ -62,6 +112,7 @@ export default function TeamsListPage() {
               name: typeof row?.name === "string" ? row.name : "",
               phone: typeof row?.phone === "string" ? row.phone : "",
               teamName: typeof row?.teamName === "string" ? row.teamName : "",
+              groupName: typeof row?.groupName === "string" ? row.groupName : "",
               checks: [
                 Boolean(row?.checks?.[0]),
                 Boolean(row?.checks?.[1]),
@@ -72,9 +123,19 @@ export default function TeamsListPage() {
           )
         : [createEmptyTeam(1)];
 
-      setTeams(normalized.length > 0 ? normalized : [createEmptyTeam(1)]);
+      const derivedGroups = Array.from(
+        new Set(
+          [...parsedGroups, ...normalizedTeams.map((team) => team.groupName.trim())].filter(
+            Boolean,
+          ),
+        ),
+      );
+
+      setTeams(normalizedTeams.length > 0 ? normalizedTeams : [createEmptyTeam(1)]);
+      setGroups(derivedGroups);
     } catch {
       setTeams([createEmptyTeam(1)]);
+      setGroups([]);
     } finally {
       setIsLoaded(true);
     }
@@ -85,17 +146,62 @@ export default function TeamsListPage() {
       return;
     }
 
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(teams));
-  }, [isLoaded, teams]);
+    const payload: StoredTeamsState = {
+      teams,
+      groups,
+    };
+
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+  }, [groups, isLoaded, teams]);
+
+  const filteredTeams = useMemo(() => {
+    return teams.filter((team) => {
+      const query = searchQuery.trim().toLowerCase();
+      const completedChecks = getCompletedChecks(team.checks);
+      const isComplete = completedChecks === 4 && team.teamName.trim().length > 0;
+      const isPartial = !isComplete && (completedChecks > 0 || team.teamName.trim().length > 0);
+      const isPending = !isComplete && !isPartial;
+
+      const matchesSearch =
+        !query ||
+        team.name.toLowerCase().includes(query) ||
+        team.phone.toLowerCase().includes(query) ||
+        team.teamName.toLowerCase().includes(query) ||
+        team.groupName.toLowerCase().includes(query);
+
+      const matchesGroup =
+        groupFilter === "all" ||
+        (groupFilter === "ungrouped"
+          ? team.groupName.trim().length === 0
+          : team.groupName === groupFilter);
+
+      const matchesStatus =
+        statusFilter === "all" ||
+        (statusFilter === "complete" && isComplete) ||
+        (statusFilter === "partial" && isPartial) ||
+        (statusFilter === "pending" && isPending);
+
+      return matchesSearch && matchesGroup && matchesStatus;
+    });
+  }, [groupFilter, searchQuery, statusFilter, teams]);
 
   function updateTeam(
     id: string,
-    field: "name" | "phone" | "teamName",
+    field: "name" | "phone" | "teamName" | "groupName",
     value: string,
   ) {
     setTeams((current) =>
       current.map((team) => (team.id === id ? { ...team, [field]: value } : team)),
     );
+
+    if (field === "groupName") {
+      const normalized = value.trim();
+      if (normalized) {
+        setGroups((current) =>
+          current.includes(normalized) ? current : [...current, normalized],
+        );
+      }
+    }
   }
 
   function toggleCheck(id: string, index: number) {
@@ -114,6 +220,17 @@ export default function TeamsListPage() {
 
   function addTeam() {
     setTeams((current) => withSerialNumbers([...current, createEmptyTeam(current.length + 1)]));
+  }
+
+  function addGroup() {
+    const normalized = newGroupName.trim();
+
+    if (!normalized) {
+      return;
+    }
+
+    setGroups((current) => (current.includes(normalized) ? current : [...current, normalized]));
+    setNewGroupName("");
   }
 
   function confirmDeleteTeam() {
@@ -135,7 +252,8 @@ export default function TeamsListPage() {
   }
 
   function exportJson() {
-    const blob = new Blob([JSON.stringify(teams, null, 2)], {
+    const payload: StoredTeamsState = { teams, groups };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {
       type: "application/json",
     });
     const url = URL.createObjectURL(blob);
@@ -148,8 +266,8 @@ export default function TeamsListPage() {
 
   function handleInput(
     id: string,
-    field: "name" | "phone" | "teamName",
-    event: ChangeEvent<HTMLInputElement>,
+    field: "name" | "phone" | "teamName" | "groupName",
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) {
     updateTeam(id, field, event.target.value);
   }
@@ -160,47 +278,103 @@ export default function TeamsListPage() {
 
       <section className="flex-1 px-3 py-3 sm:px-4 lg:px-5">
         <div className="border border-black/10 bg-white p-4 shadow-[0_24px_80px_rgba(0,0,0,0.06)] sm:p-5">
-          <div className="flex flex-col gap-4 border-b border-black/10 pb-4 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-black/40">
-                Teams List
-              </p>
-              <h1 className="mt-2 text-3xl font-semibold tracking-[-0.04em]">
-                Local teams tracker
-              </h1>
-              <p className="mt-3 max-w-2xl text-sm text-black/55">
-                Add teams, tick progress, and every change saves instantly in local
-                storage on this device.
-              </p>
+          <div className="flex flex-col gap-4 border-b border-black/10 pb-4">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <p className="text-[11px] font-medium uppercase tracking-[0.22em] text-black/40">
+                  Teams List
+                </p>
+                <h1 className="mt-2 text-3xl font-semibold tracking-[-0.04em]">
+                  Local teams tracker
+                </h1>
+                <p className="mt-3 max-w-2xl text-sm text-black/55">
+                  Track team status, assign groups, filter quickly, and keep
+                  everything saved in local storage on this device.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-3">
+                <button
+                  type="button"
+                  onClick={addTeam}
+                  className="inline-flex items-center gap-2 border border-black bg-black px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
+                >
+                  <Plus className="h-4 w-4" />
+                  Add team
+                </button>
+                <button
+                  type="button"
+                  onClick={exportJson}
+                  className="inline-flex items-center gap-2 border border-black/10 bg-white px-5 py-3 text-sm font-medium text-black transition hover:border-black/25"
+                >
+                  <Download className="h-4 w-4" />
+                  Export JSON
+                </button>
+              </div>
             </div>
 
-            <div className="flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={addTeam}
-                className="inline-flex items-center gap-2 border border-black bg-black px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
-              >
-                <Plus className="h-4 w-4" />
-                Add team
-              </button>
-              <button
-                type="button"
-                onClick={exportJson}
-                className="inline-flex items-center gap-2 border border-black/10 bg-white px-5 py-3 text-sm font-medium text-black transition hover:border-black/25"
-              >
-                <Download className="h-4 w-4" />
-                Export JSON
-              </button>
+            <div className="grid gap-4 xl:grid-cols-[1.5fr_1fr]">
+              <div className="grid gap-3 md:grid-cols-3">
+                <input
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="Search name, phone, team, group"
+                  className="w-full border border-black/10 bg-white px-4 py-3 text-sm outline-none transition focus:border-black/30"
+                />
+                <select
+                  value={groupFilter}
+                  onChange={(event) => setGroupFilter(event.target.value)}
+                  className="w-full border border-black/10 bg-white px-4 py-3 text-sm outline-none transition focus:border-black/30"
+                >
+                  <option value="all">All groups</option>
+                  <option value="ungrouped">Ungrouped</option>
+                  {groups.map((group) => (
+                    <option key={group} value={group}>
+                      {group}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  value={statusFilter}
+                  onChange={(event) => setStatusFilter(event.target.value)}
+                  className="w-full border border-black/10 bg-white px-4 py-3 text-sm outline-none transition focus:border-black/30"
+                >
+                  <option value="all">All status</option>
+                  <option value="complete">Complete</option>
+                  <option value="partial">Partial</option>
+                  <option value="pending">Pending</option>
+                </select>
+              </div>
+
+              <div className="border border-black/10 bg-[#fbfbf7] p-3">
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <input
+                    value={newGroupName}
+                    onChange={(event) => setNewGroupName(event.target.value)}
+                    placeholder="Create group"
+                    className="flex-1 border border-black/10 bg-white px-4 py-3 text-sm outline-none transition focus:border-black/30"
+                  />
+                  <button
+                    type="button"
+                    onClick={addGroup}
+                    className="inline-flex items-center justify-center gap-2 border border-black bg-black px-5 py-3 text-sm font-medium text-white transition hover:opacity-90"
+                  >
+                    <Users className="h-4 w-4" />
+                    Add group
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
           <div className="mt-4 overflow-x-auto">
-            <div className="min-w-[1100px]">
-              <div className="grid grid-cols-[90px_1.15fr_1fr_1.15fr_repeat(4,70px)_70px] gap-2 border border-black/10 bg-black px-3 py-3 text-[11px] uppercase tracking-[0.18em] text-white/80">
+            <div className="min-w-[1260px]">
+              <div className="grid grid-cols-[90px_1fr_1fr_1.15fr_180px_repeat(4,70px)_70px] gap-2 border border-black/10 bg-black px-3 py-3 text-[11px] uppercase tracking-[0.18em] text-white/80">
                 <span>S No.</span>
                 <span>Name</span>
                 <span>Phone</span>
                 <span>Team Name</span>
+                <span>Group</span>
                 <span>1</span>
                 <span>2</span>
                 <span>3</span>
@@ -209,15 +383,15 @@ export default function TeamsListPage() {
               </div>
 
               <div className="border-x border-b border-black/10">
-                {teams.map((team, rowIndex) => (
+                {filteredTeams.map((team) => (
                   <div
                     key={team.id}
-                    className={`grid grid-cols-[90px_1.15fr_1fr_1.15fr_repeat(4,70px)_70px] gap-2 border-t border-black/10 px-3 py-3 ${
-                      rowIndex % 2 === 0 ? "bg-white" : "bg-[#fbfbf7]"
-                    }`}
+                    className={`grid grid-cols-[90px_1fr_1fr_1.15fr_180px_repeat(4,70px)_70px] gap-2 border-t border-black/10 px-3 py-3 ${getRowTone(
+                      team,
+                    )}`}
                   >
-                    <div className="flex h-[42px] items-center border border-black/10 bg-[#f6f6ef] px-3 text-sm font-medium text-black/70">
-                      {rowIndex + 1}
+                    <div className="flex h-[42px] items-center border border-black/10 bg-white/60 px-3 text-sm font-medium text-black/70">
+                      {team.serialNumber}
                     </div>
                     <input
                       value={team.name}
@@ -237,6 +411,18 @@ export default function TeamsListPage() {
                       placeholder="Team name"
                       className="min-w-0 border border-black/10 bg-white px-3 py-2 text-sm outline-none transition focus:border-black/30"
                     />
+                    <select
+                      value={team.groupName}
+                      onChange={(event) => handleInput(team.id, "groupName", event)}
+                      className="min-w-0 border border-black/10 bg-white px-3 py-2 text-sm outline-none transition focus:border-black/30"
+                    >
+                      <option value="">No group</option>
+                      {groups.map((group) => (
+                        <option key={group} value={group}>
+                          {group}
+                        </option>
+                      ))}
+                    </select>
 
                     {team.checks.map((checked, checkIndex) => (
                       <button
@@ -258,12 +444,18 @@ export default function TeamsListPage() {
                       type="button"
                       onClick={() => setTeamToDelete(team)}
                       className="flex h-[42px] items-center justify-center border border-black/10 bg-white text-black transition hover:border-black/25 hover:text-red-600"
-                      aria-label={`Delete row ${team.serialNumber || rowIndex + 1}`}
+                      aria-label={`Delete row ${team.serialNumber}`}
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
                   </div>
                 ))}
+
+                {filteredTeams.length === 0 ? (
+                  <div className="border-t border-black/10 bg-[#fbfbf7] px-4 py-8 text-center text-sm text-black/55">
+                    No teams match the current filters.
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
@@ -298,10 +490,16 @@ export default function TeamsListPage() {
                     {teamToDelete.phone || "-"}
                   </span>
                 </div>
-                <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center justify-between gap-3 border-b border-black/10 pb-2">
                   <span className="uppercase tracking-[0.14em] text-black/40">Team</span>
                   <span className="font-medium text-right text-black">
                     {teamToDelete.teamName || "-"}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between gap-3">
+                  <span className="uppercase tracking-[0.14em] text-black/40">Group</span>
+                  <span className="font-medium text-right text-black">
+                    {teamToDelete.groupName || "-"}
                   </span>
                 </div>
               </div>
