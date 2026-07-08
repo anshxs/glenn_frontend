@@ -32,6 +32,7 @@ const roles = [
     title: "Graphic Designer + Editor",
     description:
       "Create match creatives, edits, promo assets, and visual content for Glenn.",
+    href: "/careers/graphic-designer-editor",
   },
 ] as const;
 
@@ -59,8 +60,6 @@ export default function CareersPage() {
   const [availability, setAvailability] = useState<AvailabilityState>(
     getInitialAvailability(),
   );
-  const [description, setDescription] = useState("");
-  const [pageUrl, setPageUrl] = useState("");
   const [message, setMessage] = useState("");
   const [applicationId, setApplicationId] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -81,8 +80,6 @@ export default function CareersPage() {
     setApplicantPhone("");
     setExperienceMonths("");
     setAvailability(getInitialAvailability());
-    setDescription("");
-    setPageUrl("");
     setMessage("");
     setApplicationId("");
   }
@@ -136,16 +133,6 @@ export default function CareersPage() {
       return;
     }
 
-    if (selectedRole.slug === "graphic-designer-editor" && !description.trim()) {
-      setMessage("Description is required.");
-      return;
-    }
-
-    if (selectedRole.slug === "graphic-designer-editor" && !pageUrl.trim()) {
-      setMessage("Page URL is required.");
-      return;
-    }
-
     setSubmitting(true);
 
     try {
@@ -159,12 +146,6 @@ export default function CareersPage() {
           experienceMonths: Number(experienceMonths),
           availability:
             selectedRole.slug === "scrims-host-pt-maker" ? availability : undefined,
-          description:
-            selectedRole.slug === "graphic-designer-editor"
-              ? description
-              : undefined,
-          pageUrl:
-            selectedRole.slug === "graphic-designer-editor" ? pageUrl : undefined,
         }),
       });
 
@@ -184,8 +165,6 @@ export default function CareersPage() {
       setApplicantPhone("");
       setExperienceMonths("");
       setAvailability(getInitialAvailability());
-      setDescription("");
-      setPageUrl("");
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Application failed.");
     } finally {
@@ -230,13 +209,22 @@ export default function CareersPage() {
                       </p>
                     </div>
 
-                    <button
-                      type="button"
-                      onClick={() => openRole(role.slug)}
-                      className="mt-8 inline-flex items-center justify-center border border-black bg-black px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
-                    >
-                      Apply now
-                    </button>
+                    {"href" in role ? (
+                      <Link
+                        href={role.href}
+                        className="mt-8 inline-flex items-center justify-center border border-black bg-black px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
+                      >
+                        Apply now
+                      </Link>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => openRole(role.slug)}
+                        className="mt-8 inline-flex items-center justify-center border border-black bg-black px-6 py-3 text-sm font-medium text-white transition hover:opacity-90"
+                      >
+                        Apply now
+                      </button>
+                    )}
                   </div>
                 ))}
               </div>
@@ -305,77 +293,49 @@ export default function CareersPage() {
                   </div>
                 </div>
 
-                {selectedRole.slug === "scrims-host-pt-maker" ? (
-                  <div className="border border-black/10 bg-white p-4">
-                    <div>
-                      <p className="text-sm font-medium text-black/75">
-                        Availability
-                      </p>
-                      <p className="text-[10px] uppercase tracking-[0.18em] text-black/40">
-                        Choose multiple slots
-                      </p>
-                    </div>
+                <div className="border border-black/10 bg-white p-4">
+                  <div>
+                    <p className="text-sm font-medium text-black/75">
+                      Availability
+                    </p>
+                    <p className="text-[10px] uppercase tracking-[0.18em] text-black/40">
+                      Choose multiple slots
+                    </p>
+                  </div>
 
-                    <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
-                      {days.map((day) => (
-                        <div
-                          key={day}
-                          className="border border-black/10 bg-[#fcfcf9] p-2"
-                        >
-                          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-black">
-                            {day.slice(0, 3)}
-                          </p>
-                          <div className="mt-2 grid gap-1">
-                            {timeSlots.map((slot) => {
-                              const active = availability[day].includes(slot);
+                  <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4">
+                    {days.map((day) => (
+                      <div
+                        key={day}
+                        className="border border-black/10 bg-[#fcfcf9] p-2"
+                      >
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-black">
+                          {day.slice(0, 3)}
+                        </p>
+                        <div className="mt-2 grid gap-1">
+                          {timeSlots.map((slot) => {
+                            const active = availability[day].includes(slot);
 
-                              return (
-                                <button
-                                  key={`${day}-${slot}`}
-                                  type="button"
-                                  onClick={() => toggleSlot(day, slot)}
-                                  className={`border px-2 py-1.5 text-[10px] font-medium uppercase tracking-[0.08em] transition ${
-                                    active
-                                      ? "border-black bg-black text-white"
-                                      : "border-black/10 bg-white text-black/65 hover:border-black/25"
-                                  }`}
-                                >
-                                  {slot}
-                                </button>
-                              );
-                            })}
-                          </div>
+                            return (
+                              <button
+                                key={`${day}-${slot}`}
+                                type="button"
+                                onClick={() => toggleSlot(day, slot)}
+                                className={`border px-2 py-1.5 text-[10px] font-medium uppercase tracking-[0.08em] transition ${
+                                  active
+                                    ? "border-black bg-black text-white"
+                                    : "border-black/10 bg-white text-black/65 hover:border-black/25"
+                                }`}
+                              >
+                                {slot}
+                              </button>
+                            );
+                          })}
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
-                ) : (
-                  <div className="grid gap-4 md:grid-cols-[1.2fr_0.8fr]">
-                    <div className="border border-black/10 bg-white p-4">
-                      <label className="mb-2 block text-sm font-medium text-black/65">
-                        Description
-                      </label>
-                      <textarea
-                        value={description}
-                        onChange={(event) => setDescription(event.target.value)}
-                        placeholder="Tell us about your editing, design style, tools, and work."
-                        className="min-h-40 w-full resize-none border border-black/10 bg-[#fcfcf9] px-4 py-3 text-black outline-none transition focus:border-black/30"
-                      />
-                    </div>
-
-                    <div className="border border-black/10 bg-white p-4">
-                      <label className="mb-2 block text-sm font-medium text-black/65">
-                        Page URL
-                      </label>
-                      <input
-                        value={pageUrl}
-                        onChange={(event) => setPageUrl(event.target.value)}
-                        placeholder="Instagram, portfolio, drive, or edit page link"
-                        className="w-full border border-black/10 bg-[#fcfcf9] px-4 py-3 text-black outline-none transition focus:border-black/30"
-                      />
-                    </div>
-                  </div>
-                )}
+                </div>
 
                 {message && (
                   <div
