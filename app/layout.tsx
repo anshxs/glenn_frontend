@@ -205,7 +205,7 @@ export default function RootLayout({
         <script defer data-tracker="db35212a-244c-4c3a-a04f-03d525b61d39" data-hosts="glennesports.app" src="https://www.webtracky.com/analytics.js"></script>
       </head>
       <body
-        className={`${geistMono.variable} min-h-screen w-full bg-white text-black antialiased`}
+        className={`${geistMono.variable} min-h-screen fixed w-full bg-white text-black antialiased`}
       >
         {children}
       </body>

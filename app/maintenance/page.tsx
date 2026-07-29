@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { Instagram, MessageCircle, ArrowUpRight } from "lucide-react";
 
 export const metadata = {
   title: "Temporarily Unavailable",
@@ -10,30 +12,81 @@ export const metadata = {
 };
 
 export default function MaintenancePage() {
+  const instagramHref = "https://www.instagram.com/glennesports7";
+  const whatsappHref = "https://wa.me/918492892871?text=Hello%20GLENN%20team";
+
   return (
-    <main className="flex min-h-screen items-center justify-center bg-black px-6 py-16 text-white">
-      <section className="w-full max-w-2xl rounded-[2rem] border border-white/10 bg-white/5 p-8 text-center shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur">
-        <div className="mx-auto flex w-full max-w-md flex-col items-center gap-6">
+    <main className="flex min-h-screen items-center justify-center bg-white px-4 py-10 text-black sm:px-6">
+      <section className="w-full max-w-xl rounded-3xl bg-white p-6 sm:p-7">
+        <div className="flex flex-col items-center gap-5 text-center">
           <Image
-            src="/logo.png"
+            src="/logos.svg"
             alt="GLENN"
             width={120}
             height={120}
-            className="h-24 w-24 rounded-3xl object-cover"
+            className="h-16 w-auto rounded-2xl object-cover"
             priority
           />
 
           <div className="space-y-3">
-            <p className="text-xs uppercase tracking-[0.35em] text-[#c8ff00]">
+            <p className="text-[11px] uppercase tracking-[0.28em] text-black/45">
               Temporary Pause
             </p>
-            <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+            <h1 className="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">
               We&apos;ll be back soon.
             </h1>
-            <p className="text-sm leading-7 text-white/70 sm:text-base">
+            <p className="mx-auto max-w-lg text-sm leading-6 text-black/60">
               The GLENN website is temporarily unavailable while we make updates.
               Please check back in a little while.
             </p>
+          </div>
+
+          <div className="grid w-full gap-3 pt-2 sm:grid-cols-2">
+            <Link
+              href={instagramHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between rounded-2xl border border-black/10 bg-white px-4 py-3 text-left transition hover:border-black/20 hover:bg-black/[0.02]"
+            >
+              <span className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-black/10 bg-black text-white">
+                  <Image
+                    src="/instalogo.webp"
+                    alt="Instagram"
+                    width={20}
+                    height={20}
+                  />
+                </span>
+                <span>
+                  <span className="block text-sm font-semibold">Instagram</span>
+                  <span className="block text-xs text-black/50">@glennesports7</span>
+                </span>
+              </span>
+              <ArrowUpRight className="h-4 w-4 text-black/35 transition group-hover:text-black" />
+            </Link>
+
+            <Link
+              href={whatsappHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center justify-between rounded-2xl border border-black/10 bg-white px-4 py-3 text-left transition hover:border-black/20 hover:bg-black/[0.02]"
+            >
+              <span className="flex items-center gap-3">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-black/10 bg-black text-white">
+                  <Image
+                    src="/whatslogo.webp"
+                    alt="WhatsApp"
+                    width={20}
+                    height={20}
+                  />
+                </span>
+                <span>
+                  <span className="block text-sm font-semibold text-black">WhatsApp</span>
+                  <span className="block text-xs text-black/50">Chat with the GLENN team</span>
+                </span>
+              </span>
+              <ArrowUpRight className="h-4 w-4 text-black/35 transition group-hover:text-black" />
+            </Link>
           </div>
         </div>
       </section>
