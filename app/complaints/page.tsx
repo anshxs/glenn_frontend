@@ -104,7 +104,7 @@ export default function ComplaintsPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           complaintType,
-          sourceContext: "championship_s1",
+          sourceContext: "general",
           targetName: selectedPerson?.name ?? "",
           targetPhone: selectedPerson?.phone ?? "",
           complaintText,
@@ -276,7 +276,7 @@ export default function ComplaintsPage() {
                     )}
                   </button>
                   <Link
-                    href="/championships/s1"
+                    href="/"
                     className="inline-flex items-center justify-center gap-2  border border-black/10 bg-white px-6 py-3 text-sm font-medium text-black transition hover:border-black/25"
                   >
                     Back
