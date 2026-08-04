@@ -5,6 +5,7 @@ import { getRootDomain, getSubdomainPath, type SubdomainKey } from "@/lib/subdom
 
 const rootDomain = getRootDomain();
 const apexUrl = `https://${rootDomain}`;
+const wwwUrl = `https://www.${rootDomain}`;
 const activeSubdomains = new Set<SubdomainKey>(["about", "careers", "complaints"]);
 
 function extractHost(request: NextRequest) {
@@ -27,7 +28,15 @@ export function middleware(request: NextRequest) {
   const host = normalizeHost(extractHost(request));
   const pathname = request.nextUrl.pathname;
 
-  if (!host || host === rootDomain || pathname.startsWith("/api")) {
+  if (!host || pathname.startsWith("/api")) {
+    return NextResponse.next();
+  }
+
+  if (host === rootDomain) {
+    return NextResponse.redirect(new URL(pathname || "/", wwwUrl));
+  }
+
+  if (host === `www.${rootDomain}`) {
     return NextResponse.next();
   }
 
@@ -37,12 +46,8 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (subdomain === "www") {
-    return NextResponse.redirect(new URL(pathname || "/", apexUrl));
-  }
-
   if (!activeSubdomains.has(subdomain as SubdomainKey)) {
-    return NextResponse.redirect(new URL("/", apexUrl));
+    return NextResponse.redirect(new URL("/", wwwUrl));
   }
 
   const targetPath = getSubdomainPath(subdomain as SubdomainKey);
@@ -54,7 +59,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (pathname !== targetPath) {
-    return NextResponse.redirect(new URL("/", apexUrl));
+    return NextResponse.redirect(new URL("/", wwwUrl));
   }
 
   return NextResponse.next();
