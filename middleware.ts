@@ -4,6 +4,7 @@ import type { NextRequest } from "next/server";
 import { getRootDomain, getSubdomainPath, type SubdomainKey } from "@/lib/subdomains";
 
 const rootDomain = getRootDomain();
+const apexUrl = `https://${rootDomain}`;
 const activeSubdomains = new Set<SubdomainKey>(["about", "careers", "complaints"]);
 
 function extractHost(request: NextRequest) {
@@ -36,8 +37,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  if (subdomain === "www") {
+    return NextResponse.redirect(new URL(pathname || "/", apexUrl));
+  }
+
   if (!activeSubdomains.has(subdomain as SubdomainKey)) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/", apexUrl));
   }
 
   const targetPath = getSubdomainPath(subdomain as SubdomainKey);
@@ -49,7 +54,7 @@ export function middleware(request: NextRequest) {
   }
 
   if (pathname !== targetPath) {
-    return NextResponse.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/", apexUrl));
   }
 
   return NextResponse.next();
