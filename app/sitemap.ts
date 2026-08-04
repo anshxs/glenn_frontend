@@ -19,18 +19,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: getSubdomainUrl('support'),
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: getSubdomainUrl('terms'),
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.5,
-    },
-    {
       url: getSubdomainUrl('careers'),
       lastModified: currentDate,
       changeFrequency: 'monthly',
@@ -41,24 +29,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: currentDate,
       changeFrequency: 'monthly',
       priority: 0.5,
-    },
-    {
-      url: `${baseUrl}/deposit-policy`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.4,
-    },
-    {
-      url: `${baseUrl}/withdrawal-policy`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.4,
-    },
-    {
-      url: `${baseUrl}/refund-policy`,
-      lastModified: currentDate,
-      changeFrequency: 'monthly',
-      priority: 0.4,
     },
     {
       url: `${baseUrl}/auth/callback`,

@@ -101,18 +101,6 @@ export function LandingFooter() {
             className="flex flex-wrap items-center gap-4 text-sm uppercase tracking-[0.12em] text-white/90 lg:justify-end"
             style={{ fontFamily: '"Anton", sans-serif' }}
           >
-            <Link href={getSubdomainUrl("terms")} className="transition hover:opacity-75">
-              Terms and Conditions
-            </Link>
-            <span className="text-white/35">|</span>
-            <Link href={getSubdomainUrl("support")} className="transition hover:opacity-75">
-              Support
-            </Link>
-            <span className="text-white/35">|</span>
-            <Link href="/socials" className="transition hover:opacity-75">
-              Socials
-            </Link>
-            <span className="text-white/35">|</span>
             <Link href={getSubdomainUrl("complaints")} className="transition hover:opacity-75">
               Raise a Complaint
             </Link>

@@ -5,8 +5,6 @@ import { getSubdomainUrl } from "@/lib/subdomains";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: getSubdomainUrl("about"), label: "About" },
-  { href: getSubdomainUrl("support"), label: "Support" },
-  { href: getSubdomainUrl("terms"), label: "Terms" },
 ];
 
 const downloadHref =

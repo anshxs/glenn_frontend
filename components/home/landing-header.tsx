@@ -12,8 +12,6 @@ const navLinks = [
   { href: getSubdomainUrl("about"), label: "About", matchHref: "/about" },
   { href: getSubdomainUrl("careers"), label: "Careers", matchHref: "/careers" },
   { href: getSubdomainUrl("complaints"), label: "Complaints", matchHref: "/complaints" },
-  { href: getSubdomainUrl("support"), label: "Support", matchHref: "/support" },
-  { href: getSubdomainUrl("terms"), label: "Terms", matchHref: "/terms" },
 ];
 
 type LandingHeaderProps = {
