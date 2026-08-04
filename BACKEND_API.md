@@ -236,7 +236,7 @@ IMAGEKIT_URL_ENDPOINT=your_url_endpoint
 
 **Debug steps:**
 1. Check server logs for detailed error
-2. Verify ImageKit credentials in dashboard
+2. Verify ImageKit credentials in your ImageKit account settings
 3. Test credentials with ImageKit API directly
 4. Check file size (ImageKit free tier limits)
 
@@ -275,7 +275,7 @@ ImageKitUploadService.initialize(
 1. Build and deploy backend
 2. Update Flutter app with production URL
 3. Test image uploads
-4. Monitor ImageKit dashboard for usage
+4. Monitor ImageKit usage after launch
 
 ---
 

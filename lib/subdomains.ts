@@ -4,6 +4,7 @@ const subdomainRoutes = {
   about: "/about",
   careers: "/careers",
   complaints: "/complaints",
+  policy: "/policy",
 } as const;
 
 export type SubdomainKey = keyof typeof subdomainRoutes;

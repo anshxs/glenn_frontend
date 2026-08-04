@@ -6,7 +6,7 @@ import { getRootDomain, getSubdomainPath, type SubdomainKey } from "@/lib/subdom
 const rootDomain = getRootDomain();
 const apexUrl = `https://${rootDomain}`;
 const wwwUrl = `https://www.${rootDomain}`;
-const activeSubdomains = new Set<SubdomainKey>(["about", "careers", "complaints"]);
+const activeSubdomains = new Set<SubdomainKey>(["about", "careers", "complaints", "policy"]);
 
 function extractHost(request: NextRequest) {
   return request.headers.get("x-forwarded-host") ?? request.headers.get("host") ?? "";
