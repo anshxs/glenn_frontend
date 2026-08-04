@@ -144,20 +144,12 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    let usedSoftDelete = false;
-
-    const { error: deleteAuthError } = await supabase.auth.admin.deleteUser(user.id);
+    const { error: deleteAuthError } = await supabase.auth.admin.deleteUser(
+      user.id,
+      true,
+    );
     if (deleteAuthError) {
-      const { error: softDeleteError } = await supabase.auth.admin.deleteUser(
-        user.id,
-        true,
-      );
-
-      if (softDeleteError) {
-        throw new Error(`auth.users: ${deleteAuthError.message}`);
-      }
-
-      usedSoftDelete = true;
+      throw new Error(`auth.users: ${deleteAuthError.message}`);
     }
 
     for (const target of POST_DELETE_TARGETS) {
@@ -169,10 +161,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       deletedUserId: user.id,
-      mode: usedSoftDelete ? "soft-delete" : "hard-delete",
-      message: usedSoftDelete
-        ? "Your account has been deleted from sign-in access and linked app data was cleaned up."
-        : "Your account and linked data have been deleted.",
+      mode: "soft-delete",
+      message:
+        "Your account has been deleted from sign-in access and linked app data was cleaned up.",
     });
   } catch (error) {
     console.error("Delete account error:", error);

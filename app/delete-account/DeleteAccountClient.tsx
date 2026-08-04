@@ -2,8 +2,16 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { AlertTriangle, Loader2, Mail, ShieldAlert, Trash2 } from "lucide-react";
 import type { User } from "@supabase/supabase-js";
+import {
+  AlertTriangle,
+  ArrowRight,
+  Loader2,
+  LockKeyhole,
+  Mail,
+  ShieldAlert,
+  Trash2,
+} from "lucide-react";
 
 import { createPointCalcAccountBrowserClient } from "@/lib/pointcalc-account-supabase";
 
@@ -66,7 +74,7 @@ export default function DeleteAccountClient() {
     }
 
     setUser(data.user);
-    setMessage("Signed in. You can now delete your account.");
+    setMessage("Signed in. You can now continue with account deletion.");
     setLoading(false);
   }
 
@@ -82,9 +90,7 @@ export default function DeleteAccountClient() {
 
     const { error: signInError } = await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: {
-        redirectTo,
-      },
+      options: { redirectTo },
     });
 
     if (signInError) {
@@ -134,7 +140,10 @@ export default function DeleteAccountClient() {
     setEmail("");
     setPassword("");
     setConfirmText("");
-    setMessage("Your account deletion request has been completed.");
+    setMessage(
+      payload.message ??
+        "Your account deletion request has been completed successfully.",
+    );
     setDeleting(false);
   }
 
@@ -146,218 +155,282 @@ export default function DeleteAccountClient() {
   }
 
   return (
-    <main className="min-h-screen bg-white px-4 py-10 text-black sm:px-6">
-      <div className="mx-auto flex w-full max-w-xl flex-col gap-6 rounded-3xl border border-black/10 bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.06)] sm:p-7">
-        <div className="space-y-3">
-          <p className="text-[11px] uppercase tracking-[0.28em] text-black/45">
-            Account Deletion
-          </p>
-          <h1 className="text-3xl font-semibold tracking-[-0.04em]">
-            Delete your GLENN account
-          </h1>
-          <p className="text-sm leading-6 text-black/60">
-            This page is provided for account deletion requests. After signing in,
-            you can permanently remove your GLENN account and linked app data.
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-black/10 bg-black/[0.02] p-4 text-sm leading-6 text-black/65">
-          <div className="mb-2 flex items-center gap-2 font-medium text-black">
-            <ShieldAlert className="h-4 w-4" />
-            Permanent action
-          </div>
-          Account deletion is irreversible. Your login access and stored account
-          records will be removed after confirmation.
-        </div>
-
-        {error ? (
-          <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
-            {error}
-          </div>
-        ) : null}
-
-        {message ? (
-          <div className="rounded-2xl border border-black/10 bg-black/[0.03] px-4 py-3 text-sm text-black/75">
-            {message}
-          </div>
-        ) : null}
-
-        {booting ? (
-          <div className="flex items-center gap-2 rounded-2xl border border-black/10 px-4 py-3 text-sm text-black/60">
-            <Loader2 className="h-4 w-4 animate-spin" />
-            Loading your session…
-          </div>
-        ) : user ? (
-          <section className="space-y-4">
-            <div className="rounded-2xl border border-black/10 p-4">
-              <p className="text-xs uppercase tracking-[0.2em] text-black/40">
-                Signed In
-              </p>
-              <p className="mt-2 text-sm font-medium text-black">
-                {user.email ?? "Google account"}
+    <main className="min-h-screen bg-[#fafafa] px-4 py-8 text-black sm:px-6 sm:py-10">
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-5 lg:flex-row">
+        <section className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.05)] sm:p-8 lg:w-[58%]">
+          <div className="space-y-4">
+            <p className="text-[11px] uppercase tracking-[0.28em] text-black/45">
+              Account Deletion
+            </p>
+            <div className="space-y-3">
+              <h1 className="max-w-lg text-3xl font-semibold tracking-[-0.05em] sm:text-4xl">
+                Delete your GLENN account
+              </h1>
+              <p className="max-w-xl text-sm leading-6 text-black/60">
+                This page lets you remove your GLENN account access and request
+                deletion of linked account data. It is designed for simple,
+                direct user control.
               </p>
             </div>
+          </div>
 
-            <div className="rounded-2xl border border-black/10 p-4">
-              <label
-                htmlFor="delete-confirm"
-                className="mb-2 block text-sm font-medium text-black"
+          <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            {[
+              ["1", "Verify", "Sign in with your existing GLENN account."],
+              ["2", "Confirm", 'Type "DELETE" to approve the irreversible action.'],
+              ["3", "Remove", "We remove sign-in access and clean linked records."],
+            ].map(([step, title, copy]) => (
+              <div
+                key={step}
+                className="rounded-2xl border border-black/10 bg-black/[0.015] p-4"
               >
-                Type <span className="font-semibold">DELETE</span> to confirm
-              </label>
-              <input
-                id="delete-confirm"
-                value={confirmText}
-                onChange={(event) => setConfirmText(event.target.value)}
-                className="w-full rounded-2xl border border-black/10 px-4 py-3 text-sm outline-none transition focus:border-black/30"
-                placeholder="DELETE"
-                autoComplete="off"
-              />
+                <p className="text-xs font-medium text-black/35">{step}</p>
+                <h2 className="mt-2 text-sm font-semibold text-black">{title}</h2>
+                <p className="mt-2 text-xs leading-5 text-black/55">{copy}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 rounded-3xl border border-black/10 bg-black px-5 py-5 text-white">
+            <div className="flex items-start gap-3">
+              <div className="rounded-2xl border border-white/10 bg-white/5 p-2">
+                <ShieldAlert className="h-4 w-4" />
+              </div>
+              <div>
+                <p className="text-sm font-medium">Permanent action</p>
+                <p className="mt-1 text-sm leading-6 text-white/65">
+                  Account deletion is irreversible. Once completed, the account
+                  should no longer be usable for sign-in.
+                </p>
+              </div>
             </div>
+          </div>
 
-            <button
-              type="button"
-              onClick={handleDeleteAccount}
-              disabled={deleting}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-black px-4 py-3 text-sm font-medium text-white transition hover:bg-black/90 disabled:cursor-not-allowed disabled:opacity-65"
-            >
-              {deleting ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  Deleting account…
-                </>
-              ) : (
-                <>
-                  <Trash2 className="h-4 w-4" />
-                  Delete account permanently
-                </>
-              )}
-            </button>
+          <div className="mt-6 rounded-2xl border border-black/10 bg-white p-4">
+            <p className="text-sm font-medium text-black">What we remove</p>
+            <div className="mt-3 grid gap-2 text-sm text-black/60 sm:grid-cols-2">
+              {[
+                "Authentication access",
+                "Profile-linked account records",
+                "Social activity and interactions",
+                "Chats, stories, and notifications",
+                "Wallet and reward-related rows",
+                "Tournament and team-builder data",
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="rounded-xl border border-black/8 bg-black/[0.015] px-3 py-2"
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-            <button
-              type="button"
-              onClick={handleSignOut}
-              className="inline-flex w-full items-center justify-center rounded-2xl border border-black/10 px-4 py-3 text-sm font-medium text-black transition hover:bg-black/[0.02]"
-            >
-              Sign out
-            </button>
-          </section>
-        ) : (
-          <section className="space-y-4">
-            <div className="inline-flex rounded-2xl border border-black/10 p-1">
+        <section className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.05)] sm:p-8 lg:w-[42%]">
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-[0.24em] text-black/40">
+                Secure Request
+              </p>
+              <h2 className="mt-2 text-xl font-semibold tracking-[-0.04em]">
+                Continue
+              </h2>
+            </div>
+            <div className="rounded-2xl border border-black/10 p-2">
+              <LockKeyhole className="h-4 w-4 text-black/65" />
+            </div>
+          </div>
+
+          {error ? (
+            <div className="mb-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+              {error}
+            </div>
+          ) : null}
+
+          {message ? (
+            <div className="mb-4 rounded-2xl border border-black/10 bg-black/[0.03] px-4 py-3 text-sm text-black/75">
+              {message}
+            </div>
+          ) : null}
+
+          {booting ? (
+            <div className="flex items-center gap-2 rounded-2xl border border-black/10 px-4 py-3 text-sm text-black/60">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Loading your session…
+            </div>
+          ) : user ? (
+            <section className="space-y-4">
+              <div className="rounded-2xl border border-black/10 bg-black/[0.015] p-4">
+                <p className="text-xs uppercase tracking-[0.2em] text-black/40">
+                  Signed In
+                </p>
+                <p className="mt-2 text-sm font-medium text-black">
+                  {user.email ?? "Google account"}
+                </p>
+                <p className="mt-1 text-xs text-black/50">
+                  This deletion request applies to this account.
+                </p>
+              </div>
+
+              <div className="rounded-2xl border border-black/10 p-4">
+                <label
+                  htmlFor="delete-confirm"
+                  className="mb-2 block text-sm font-medium text-black"
+                >
+                  Type <span className="font-semibold">DELETE</span> to confirm
+                </label>
+                <input
+                  id="delete-confirm"
+                  value={confirmText}
+                  onChange={(event) => setConfirmText(event.target.value)}
+                  className="w-full rounded-2xl border border-black/10 px-4 py-3 text-sm outline-none transition focus:border-black/30"
+                  placeholder="DELETE"
+                  autoComplete="off"
+                />
+              </div>
+
               <button
                 type="button"
-                onClick={() => setMode("password")}
-                className={`rounded-xl px-3 py-2 text-sm transition ${
-                  mode === "password" ? "bg-black text-white" : "text-black/60"
-                }`}
+                onClick={handleDeleteAccount}
+                disabled={deleting}
+                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-black px-4 py-3 text-sm font-medium text-white transition hover:bg-black/90 disabled:cursor-not-allowed disabled:opacity-65"
               >
-                Email & password
+                {deleting ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Deleting account…
+                  </>
+                ) : (
+                  <>
+                    <Trash2 className="h-4 w-4" />
+                    Delete account permanently
+                  </>
+                )}
               </button>
+
               <button
                 type="button"
-                onClick={() => setMode("google")}
-                className={`rounded-xl px-3 py-2 text-sm transition ${
-                  mode === "google" ? "bg-black text-white" : "text-black/60"
-                }`}
+                onClick={handleSignOut}
+                className="inline-flex w-full items-center justify-center rounded-2xl border border-black/10 px-4 py-3 text-sm font-medium text-black transition hover:bg-black/[0.02]"
               >
-                Google
+                Sign out
               </button>
-            </div>
-
-            {mode === "password" ? (
-              <form className="space-y-3" onSubmit={handlePasswordSignIn}>
-                <label className="block">
-                  <span className="mb-2 block text-sm font-medium text-black">
-                    Email
-                  </span>
-                  <input
-                    value={email}
-                    onChange={(event) => setEmail(event.target.value)}
-                    type="email"
-                    className="w-full rounded-2xl border border-black/10 px-4 py-3 text-sm outline-none transition focus:border-black/30"
-                    placeholder="you@example.com"
-                    autoComplete="email"
-                    required
-                  />
-                </label>
-
-                <label className="block">
-                  <span className="mb-2 block text-sm font-medium text-black">
-                    Password
-                  </span>
-                  <input
-                    value={password}
-                    onChange={(event) => setPassword(event.target.value)}
-                    type="password"
-                    className="w-full rounded-2xl border border-black/10 px-4 py-3 text-sm outline-none transition focus:border-black/30"
-                    placeholder="Your password"
-                    autoComplete="current-password"
-                    required
-                  />
-                </label>
-
+            </section>
+          ) : (
+            <section className="space-y-4">
+              <div className="inline-flex rounded-2xl border border-black/10 p-1">
                 <button
-                  type="submit"
+                  type="button"
+                  onClick={() => setMode("password")}
+                  className={`rounded-xl px-3 py-2 text-sm transition ${
+                    mode === "password" ? "bg-black text-white" : "text-black/60"
+                  }`}
+                >
+                  Email & password
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setMode("google")}
+                  className={`rounded-xl px-3 py-2 text-sm transition ${
+                    mode === "google" ? "bg-black text-white" : "text-black/60"
+                  }`}
+                >
+                  Google
+                </button>
+              </div>
+
+              {mode === "password" ? (
+                <form className="space-y-3" onSubmit={handlePasswordSignIn}>
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-medium text-black">
+                      Email
+                    </span>
+                    <input
+                      value={email}
+                      onChange={(event) => setEmail(event.target.value)}
+                      type="email"
+                      className="w-full rounded-2xl border border-black/10 px-4 py-3 text-sm outline-none transition focus:border-black/30"
+                      placeholder="you@example.com"
+                      autoComplete="email"
+                      required
+                    />
+                  </label>
+
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-medium text-black">
+                      Password
+                    </span>
+                    <input
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                      type="password"
+                      className="w-full rounded-2xl border border-black/10 px-4 py-3 text-sm outline-none transition focus:border-black/30"
+                      placeholder="Your password"
+                      autoComplete="current-password"
+                      required
+                    />
+                  </label>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-black px-4 py-3 text-sm font-medium text-white transition hover:bg-black/90 disabled:cursor-not-allowed disabled:opacity-65"
+                  >
+                    {loading ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        Signing in…
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="h-4 w-4" />
+                        Sign in to continue
+                      </>
+                    )}
+                  </button>
+                </form>
+              ) : (
+                <button
+                  type="button"
+                  onClick={handleGoogleSignIn}
                   disabled={loading}
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-black px-4 py-3 text-sm font-medium text-white transition hover:bg-black/90 disabled:cursor-not-allowed disabled:opacity-65"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-black/10 px-4 py-3 text-sm font-medium text-black transition hover:bg-black/[0.02] disabled:cursor-not-allowed disabled:opacity-65"
                 >
                   {loading ? (
                     <>
                       <Loader2 className="h-4 w-4 animate-spin" />
-                      Signing in…
+                      Redirecting…
                     </>
                   ) : (
                     <>
-                      <Mail className="h-4 w-4" />
-                      Sign in to continue
+                      Continue with Google
+                      <ArrowRight className="h-4 w-4" />
                     </>
                   )}
                 </button>
-              </form>
-            ) : (
-              <button
-                type="button"
-                onClick={handleGoogleSignIn}
-                disabled={loading}
-                className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-black/10 px-4 py-3 text-sm font-medium text-black transition hover:bg-black/[0.02] disabled:cursor-not-allowed disabled:opacity-65"
-              >
-                {loading ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    Redirecting…
-                  </>
-                ) : (
-                  "Continue with Google"
-                )}
-              </button>
-            )}
-          </section>
-        )}
+              )}
+            </section>
+          )}
 
-        <div className="rounded-2xl border border-black/10 bg-black/[0.02] p-4 text-sm leading-6 text-black/60">
-          <div className="mb-2 flex items-center gap-2 font-medium text-black">
-            <AlertTriangle className="h-4 w-4" />
-            What gets deleted
+          <div className="mt-6 rounded-2xl border border-black/10 bg-black/[0.015] p-4 text-sm leading-6 text-black/60">
+            <div className="mb-2 flex items-center gap-2 font-medium text-black">
+              <AlertTriangle className="h-4 w-4" />
+              Need help instead?
+            </div>
+            Contact us on{" "}
+            <Link
+              href="https://wa.me/918492892871?text=Hello%20GLENN%20team"
+              className="underline underline-offset-4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              WhatsApp
+            </Link>{" "}
+            if you want support before deleting the account.
           </div>
-          We remove the account from authentication and delete linked rows used by
-          the app such as profile, follows, posts, likes, messages, wallet-style
-          records, notifications, tournament rows, and related user-owned data
-          where available in the current project schema.
-        </div>
-
-        <p className="text-xs leading-5 text-black/45">
-          Need help instead? Contact us on{" "}
-          <Link
-            href="https://wa.me/918492892871?text=Hello%20GLENN%20team"
-            className="underline underline-offset-4"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            WhatsApp
-          </Link>
-          .
-        </p>
+        </section>
       </div>
     </main>
   );
