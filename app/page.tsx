@@ -25,44 +25,44 @@ const creators = [
 ];
 
 const championTeams: any[] = [
-  // {
-  //   name: "Moba Legends: 5v5",
-  //   image:
-  //     "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80",
-  // },
-  // {
-  //   name: "Brawl Stars",
-  //   image:
-  //     "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80",
-  // },
-  // {
-  //   name: "BGMI",
-  //   image:
-  //     "https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=1200&q=80",
-  // },
-  // {
-  //   name: "Valorant",
-  //   image:
-  //     "https://images.unsplash.com/photo-1548686304-89d188a80029?auto=format&fit=crop&w=1200&q=80",
-  // },
+  {
+    name: "Moba Legends: 5v5",
+    image:
+      "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    name: "Brawl Stars",
+    image:
+      "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    name: "BGMI",
+    image:
+      "https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=1200&q=80",
+  },
+  {
+    name: "Valorant",
+    image:
+      "https://images.unsplash.com/photo-1548686304-89d188a80029?auto=format&fit=crop&w=1200&q=80",
+  },
 ];
 
 const awardStats: any[] = [
-  // {
-  //   image:
-  //     "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80",
-  //   label: "Championship Runs",
-  // },
-  // {
-  //   image:
-  //     "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80",
-  //   label: "Final Stage Finishes",
-  // },
-  // {
-  //   image:
-  //     "https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=1200&q=80",
-  //   label: "Community Moments",
-  // },
+  {
+    image:
+      "https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1200&q=80",
+    label: "Championship Runs",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1200&q=80",
+    label: "Final Stage Finishes",
+  },
+  {
+    image:
+      "https://images.unsplash.com/photo-1560253023-3ec5d502959f?auto=format&fit=crop&w=1200&q=80",
+    label: "Community Moments",
+  },
 ];
 
 export default function Home() {
@@ -191,7 +191,7 @@ export default function Home() {
           <HeroCarousel />
         </div>
 
-        {/* <div
+        <div
           className="mt-12 w-full text-left sm:mt-10"
           style={{ fontFamily: '"Anton", sans-serif' }}
         >
@@ -204,9 +204,9 @@ export default function Home() {
               CHAMPIONS
             </span>
           </h2>
-        </div> */}
+        </div>
 
-        {/* <section
+        <section
           className="mt-8 w-full"
           style={{ fontFamily: '"Anton", sans-serif' }}
         >
@@ -234,9 +234,9 @@ export default function Home() {
               </article>
             ))}
           </div>
-        </section> */}
+        </section>
 
-        {/* <section
+        <section
           className="-mx-6 mt-16 w-auto bg-black px-6 py-10 text-white sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12"
           style={{ fontFamily: '"Anton", sans-serif' }}
         >
@@ -274,7 +274,7 @@ export default function Home() {
               </article>
             ))}
           </div>
-        </section> */}
+        </section>
 
         <GuildArmySection />
         <InvestmentSection />
