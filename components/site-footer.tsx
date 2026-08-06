@@ -3,6 +3,7 @@ import { getSubdomainUrl } from "@/lib/subdomains";
 
 const footerLinks = [
   { href: getSubdomainUrl("about"), label: "About" },
+  { href: "/child-safety", label: "Child Safety" },
 ];
 
 const downloadHref =
