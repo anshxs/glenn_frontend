@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 
 import { createPointCalcAccountBrowserClient } from "@/lib/pointcalc-account-supabase";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 type AuthMode = "password" | "google";
 
@@ -155,8 +157,12 @@ export default function DeleteAccountClient() {
   }
 
   return (
-    <main className="min-h-screen bg-[#fafafa] px-4 py-8 text-black sm:px-6 sm:py-10">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-5 lg:flex-row">
+    <main className="min-h-screen bg-[#fafafa] text-black flex flex-col justify-between">
+      <div className="w-full bg-black">
+        <Navbar />
+      </div>
+
+      <div className="mx-auto flex w-full max-w-5xl flex-col gap-5 lg:flex-row px-4 py-8 sm:px-6 sm:py-10 flex-1">
         <section className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-[0_8px_30px_rgba(0,0,0,0.05)] sm:p-8 lg:w-[58%]">
           <div className="space-y-4">
             <p className="text-[11px] uppercase tracking-[0.28em] text-black/45">
@@ -432,6 +438,8 @@ export default function DeleteAccountClient() {
           </div>
         </section>
       </div>
+
+      <Footer />
     </main>
   );
 }

@@ -1,7 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
-
 import type { Metadata } from "next";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Privacy Policy | GLENN",
@@ -23,7 +24,7 @@ function parseInline(text: string) {
   return parts.map((part, index) => {
     if (part.startsWith("**") && part.endsWith("**")) {
       return (
-        <strong key={`${part}-${index}`} className="font-semibold text-black">
+        <strong key={`${part}-${index}`} className="font-semibold text-white">
           {part.slice(2, -2)}
         </strong>
       );
@@ -33,7 +34,7 @@ function parseInline(text: string) {
       return (
         <code
           key={`${part}-${index}`}
-          className="rounded border border-black/10 bg-black/[0.03] px-1.5 py-0.5 font-mono text-[0.92em] text-black"
+          className="rounded bg-neutral-900 px-1.5 py-0.5 font-mono text-[0.92em] text-neutral-300"
         >
           {part.slice(1, -1)}
         </code>
@@ -143,18 +144,24 @@ export default async function PolicyPage() {
   const blocks = parseMarkdown(markdown);
 
   return (
-    <main className="min-h-screen bg-white text-black">
-      <div className="mx-auto max-w-3xl px-5 py-12 sm:px-8 sm:py-16">
+    <main className="relative min-h-screen w-full bg-black text-white flex flex-col selection:bg-white selection:text-black">
+      <Navbar />
+
+      <div className="w-full max-w-4xl mx-auto px-6 sm:px-10 lg:px-16 py-12 sm:py-20 flex-1">
         <article className="space-y-6">
           {blocks.map((block, index) => {
             if (block.type === "hr") {
-              return <hr key={`hr-${index}`} className="border-black/10" />;
+              return <hr key={`hr-${index}`} className="border-neutral-900" />;
             }
 
             if (block.type === "heading") {
               if (block.level === 1) {
                 return (
-                  <h1 key={`h1-${index}`} className="text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
+                  <h1
+                    key={`h1-${index}`}
+                    style={{ fontFamily: "var(--font-unbounded), sans-serif" }}
+                    className="text-3xl font-black uppercase tracking-tight sm:text-4xl text-white"
+                  >
                     {block.text}
                   </h1>
                 );
@@ -162,14 +169,22 @@ export default async function PolicyPage() {
 
               if (block.level === 2) {
                 return (
-                  <h2 key={`h2-${index}`} className="pt-4 text-xl font-semibold tracking-[-0.02em] sm:text-2xl">
+                  <h2
+                    key={`h2-${index}`}
+                    style={{ fontFamily: "var(--font-unbounded), sans-serif" }}
+                    className="pt-6 text-xl font-bold uppercase tracking-tight sm:text-2xl text-white"
+                  >
                     {block.text}
                   </h2>
                 );
               }
 
               return (
-                <h3 key={`h3-${index}`} className="text-base font-semibold sm:text-lg">
+                <h3
+                  key={`h3-${index}`}
+                  style={{ fontFamily: "var(--font-unbounded), sans-serif" }}
+                  className="text-base font-bold sm:text-lg text-white"
+                >
                   {block.text}
                 </h3>
               );
@@ -181,7 +196,7 @@ export default async function PolicyPage() {
               return (
                 <ListTag
                   key={`list-${index}`}
-                  className={`space-y-2 pl-5 text-sm leading-7 text-black/72 sm:text-[15px] ${
+                  className={`space-y-2 pl-5 text-sm leading-7 text-neutral-400 sm:text-[15px] ${
                     block.ordered ? "list-decimal" : "list-disc"
                   }`}
                 >
@@ -195,7 +210,7 @@ export default async function PolicyPage() {
             return (
               <p
                 key={`p-${index}`}
-                className="text-sm leading-7 text-black/72 sm:text-[15px]"
+                className="text-sm leading-7 text-neutral-300 sm:text-[15px] font-normal"
               >
                 {parseInline(block.text)}
               </p>
@@ -203,6 +218,8 @@ export default async function PolicyPage() {
           })}
         </article>
       </div>
+
+      <Footer />
     </main>
   );
 }

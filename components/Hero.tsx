@@ -1,6 +1,5 @@
-'use client';
-
 import React from 'react';
+import Navbar from './Navbar';
 import Grainient from './Grainient';
 import { Android } from './ui/android';
 import { Iphone } from './ui/iphone';
@@ -8,18 +7,7 @@ import { Iphone } from './ui/iphone';
 const Hero = () => {
   return (
     <section className="relative h-screen w-full bg-black text-white overflow-hidden font-sans flex flex-col">
-      <header className="shrink-0 relative z-10 flex items-center justify-between px-6 pt-8 pb-4 lg:px-8 lg:py-6 mx-auto w-full">
-        <div className="flex items-center cursor-pointer group">
-          <img src="/logos.svg" className='w-18 invert' alt="Logo" />
-        </div>
-
-        <div className="w-24 flex items-center justify-center">
-          <img
-            src="https://thesvg.org/icons/google-play/wordmark.svg"
-            alt="Google Play"
-          />
-        </div>
-      </header>
+      <Navbar />
 
       {/* Curved rectangle hero container with side + bottom margins taking remaining screen height */}
       <div className="relative mx-4 lg:mx-8 mb-6 lg:mb-8 rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden border border-white/10 flex-1 flex flex-col justify-between shadow-2xl">
@@ -66,7 +54,7 @@ const Hero = () => {
               className="text-[2.2rem] xs:text-4xl sm:text-5xl md:text-6xl lg:text-[4.8rem] xl:text-[5.6rem] font-black text-black tracking-[-0.04em] leading-[0.92] select-none flex flex-col items-start text-left"
             >
               <span>where the</span>
-              <span className="inline-block sm:my-2 sm:-rotate-2 sm:border-4 sm:border-black sm:rounded-2xl md:rounded-[1.3rem] sm:bg-[#FF3823] sm:px-5 sm:py-1 sm:shadow-[7px_7px_0px_#000] text-black">
+              <span className="inline-block sm:my-2 sm:-rotate-2 sm:border-4 sm:border-black sm:rounded-2xl md:rounded-[1.3rem] sm:bg-[#000000] sm:px-5 sm:py-1 sm:shadow-[7px_7px_0px_#000] text-white">
                 squad
               </span>
               <span>lives</span>
@@ -74,13 +62,18 @@ const Hero = () => {
 
             {/* Google Play Download Button */}
             <div className="mt-1 sm:mt-2">
-              <button className="flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl border-2 border-black shadow-[4px_4px_0px_#000] hover:shadow-[6px_6px_0px_#000] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#000] transition-all cursor-pointer">
+              <a
+                href="https://play.google.com/store/apps/details?id=com.absolute.glenn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl border-2 border-black shadow-[4px_4px_0px_#000] hover:shadow-[6px_6px_0px_#000] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#000] transition-all cursor-pointer"
+              >
                 <img
                   src="https://thesvg.org/icons/google-play/wordmark.svg"
                   alt="Google Play"
                   className="h-5 sm:h-7 w-auto"
                 />
-              </button>
+              </a>
             </div>
           </div>
 

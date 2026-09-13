@@ -26,8 +26,8 @@ Glenn is a social esports platform that allows users to create profiles, discove
 **Brand:** Glenn / Glenn Esports  
 **Country of operation:** India  
 **Website:** https://glennesports.app  
-**Privacy email:** glennesports7gmail.com  
-**Support email:** glennesports7gmail.com  
+**Privacy email:** hello@glennesports.app  
+**Support email:** hello@glennesports.app  
 
 ---
 
@@ -710,7 +710,7 @@ The external deletion page must allow a user to submit a request without requiri
 
 Users may also contact:
 
-**Email:** glennesports7@gmail.com  
+**Email:** hello@glennesports.app  
 
 The request should include sufficient information to locate and verify the account, such as the registered email address or Glenn username.
 
@@ -804,7 +804,7 @@ Users should not create an account if:
 - They are unable to provide valid consent;
 - Required parent or guardian consent has not been obtained.
 
-Parents or guardians who believe that a child has provided personal information without the required permission may contact us at **glennesports7@gmail.com**.
+Parents or guardians who believe that a child has provided personal information without the required permission may contact us at **hello@glennesports.app**.
 
 After reasonable verification, we will take appropriate steps, which may include restricting or deleting the account and associated information.
 
@@ -898,7 +898,7 @@ Users are encouraged to review this Privacy Policy periodically.
 Users may submit privacy concerns, grievances, or complaints using the contact details below.
 
 **Privacy or grievance contact:** Anjali Sharma  
-**Email:** glennesports7@gmail.com  
+**Email:** hello@glennesports.app  
 
 Please include:
 
@@ -918,8 +918,8 @@ Questions about this Privacy Policy or Glenn’s handling of personal informatio
 
 **Glenn / Glenn Esports**  
 **Operator:** Anjali Sharma  
-**Privacy email:** glennesports7@gmail.com  
-**Support email:** glennesports7@gmail.com  
+**Privacy email:** hello@glennesports.app  
+**Support email:** hello@glennesports.app  
 **Website:** https://www.glennesports.app  
 **Account deletion page:** https://www.glennesports.app/delete-account  
 

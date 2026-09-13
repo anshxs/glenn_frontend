@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Child Safety Standards | GLENN",
@@ -12,7 +14,7 @@ export const metadata: Metadata = {
 const sections = [
   {
     id: "zero-tolerance",
-    title: "Zero-tolerance standard",
+    title: "Zero-Tolerance Standard",
     content: [
       "GLENN - The Esports App strictly prohibits child sexual abuse and exploitation (CSAE) and child sexual abuse material (CSAM). This prohibition applies to posts, stories, profiles, messages, links, images, videos, usernames, and every other form of content or conduct on GLENN.",
       "Prohibited conduct includes grooming, sextortion, sexualisation of minors, trafficking or solicitation involving minors, sharing or requesting CSAM, and any attempt to exploit, abuse, or endanger a child.",
@@ -20,89 +22,92 @@ const sections = [
   },
   {
     id: "reporting",
-    title: "How to report a concern",
+    title: "How to Report a Concern",
     content: [
-      "Users can report safety concerns through Customer Support inside the GLENN app. Reports may also be sent to our designated child-safety contact at glennesports7@gmail.com. Include the relevant username, post or message details, and any other information that can help us locate the concern.",
+      "Users can report safety concerns through Customer Support inside the GLENN app. Reports may also be sent to our designated child-safety contact at hello@glennesports.app. Include the relevant username, post or message details, and any other information that can help us locate the concern.",
       "Do not download, save, forward, or redistribute suspected CSAM when making a report. If a child is in immediate danger, contact local law enforcement or emergency services first.",
     ],
   },
   {
     id: "response",
-    title: "Our response",
+    title: "Our Response & Enforcement",
     content: [
-      "GLENN reviews child-safety reports and takes appropriate action when it obtains actual knowledge of prohibited content or conduct. Actions may include restricting access, removing content, suspending or permanently banning accounts, preserving information where legally required, and preventing repeat abuse.",
+      "GLENN reviews child-safety reports and takes immediate action when it obtains actual knowledge of prohibited content or conduct. Actions may include restricting access, removing content, suspending or permanently banning accounts, preserving information where legally required, and preventing repeat abuse.",
       "Confirmed CSAM and credible child-exploitation concerns are handled in accordance with applicable child-safety laws. Where required, GLENN reports them to the National Center for Missing & Exploited Children or the appropriate regional or national authority and cooperates with lawful investigations.",
     ],
   },
   {
     id: "contact",
-    title: "Child-safety point of contact",
+    title: "Child-Safety Point of Contact",
     content: [
-      "The designated GLENN child-safety point of contact can be reached at glennesports7@gmail.com. This contact is available to discuss GLENN's CSAM prevention, enforcement, reporting, and legal-compliance practices.",
+      "The designated GLENN child-safety point of contact can be reached at hello@glennesports.app. This contact is available to discuss GLENN's CSAM prevention, enforcement, reporting, and legal-compliance practices.",
     ],
   },
 ];
 
 export default function ChildSafetyPage() {
   return (
-    <main className="min-h-screen bg-white text-black">
-      <div className="mx-auto max-w-3xl px-5 py-12 sm:px-8 sm:py-16">
-        <article>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-black/45">
-            GLENN - The Esports App
-          </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-[-0.03em] sm:text-4xl">
-            Child Safety Standards
-          </h1>
-          <p className="mt-4 text-sm leading-7 text-black/60 sm:text-[15px]">
-            Effective August 6, 2026. These standards describe GLENN&apos;s
-            prevention and response practices for child sexual abuse and
-            exploitation.
-          </p>
+    <main className="relative min-h-screen w-full bg-black text-white flex flex-col selection:bg-white selection:text-black">
+      <Navbar />
 
-          <nav
-            aria-label="Child safety standards sections"
-            className="my-9 grid gap-2 border-y border-black/10 py-5 sm:grid-cols-2"
-          >
-            {sections.map((section) => (
-              <a
-                key={section.id}
-                href={`#${section.id}`}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-black/65 transition hover:bg-black/[0.04] hover:text-black"
-              >
-                {section.title}
-              </a>
-            ))}
-          </nav>
-
-          <div className="space-y-10">
-            {sections.map((section) => (
-              <section key={section.id} id={section.id} className="scroll-mt-8">
-                <h2 className="text-xl font-semibold tracking-[-0.02em] sm:text-2xl">
-                  {section.title}
-                </h2>
-                <div className="mt-4 space-y-4">
-                  {section.content.map((paragraph) => (
-                    <p
-                      key={paragraph}
-                      className="text-sm leading-7 text-black/70 sm:text-[15px]"
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </section>
-            ))}
+      <section className="relative w-full pt-12 sm:pt-20 pb-12 px-6 sm:px-10 lg:px-16 xl:px-24">
+        <div className="w-full max-w-4xl">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900/60 text-xs font-mono tracking-widest text-neutral-400 mb-6 uppercase">
+            <span className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
+            Safety &amp; Compliance
           </div>
 
-          <a
-            href="mailto:glennesports7@gmail.com?subject=GLENN%20Child%20Safety%20Report"
-            className="mt-10 inline-flex rounded-full bg-black px-6 py-3 text-sm font-semibold text-white transition hover:bg-black/80"
+          <h1
+            style={{ fontFamily: "var(--font-unbounded), sans-serif" }}
+            className="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tight leading-[1.06] text-white"
           >
-            Report a child-safety concern
-          </a>
-        </article>
-      </div>
+            CHILD SAFETY STANDARDS
+          </h1>
+
+          <p className="mt-4 sm:mt-6 text-base sm:text-lg text-neutral-400 max-w-2xl font-normal leading-relaxed">
+            Effective August 6, 2026. These standards describe GLENN&apos;s
+            prevention and response practices for child sexual abuse and exploitation.
+          </p>
+        </div>
+      </section>
+
+      <section className="relative w-full pb-20 sm:pb-28 px-6 sm:px-10 lg:px-16 xl:px-24 flex-1">
+        <div className="w-full max-w-4xl space-y-6">
+          {sections.map((section) => (
+            <div
+              key={section.id}
+              id={section.id}
+              className="rounded-2xl bg-neutral-950 p-6 sm:p-8 scroll-mt-8"
+            >
+              <h2
+                style={{ fontFamily: "var(--font-unbounded), sans-serif" }}
+                className="text-lg sm:text-xl font-bold text-white tracking-tight"
+              >
+                {section.title}
+              </h2>
+              <div className="mt-3 space-y-3">
+                {section.content.map((p, idx) => (
+                  <p key={idx} className="text-sm text-neutral-400 leading-relaxed font-normal">
+                    {p}
+                  </p>
+                ))}
+              </div>
+            </div>
+          ))}
+
+          <div className="pt-4">
+            <a
+              href="mailto:hello@glennesports.app?subject=GLENN%20Child%20Safety%20Report"
+              style={{ fontFamily: "var(--font-unbounded), sans-serif" }}
+              className="inline-flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl border-2 border-black shadow-[4px_4px_0px_#fff] hover:shadow-[6px_6px_0px_#fff] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#fff] transition-all cursor-pointer font-bold text-xs uppercase tracking-wider text-white gap-2"
+            >
+              <span>Report a Child Safety Concern</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </main>
   );
 }

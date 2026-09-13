@@ -157,6 +157,7 @@
 @layer base {
   html {
     background: var(--site-bg);
+    overscroll-behavior-y: none;
   }
 
   * {
@@ -171,6 +172,7 @@
     font-family: var(--font-outfit), sans-serif;
     background: #050608;
     color: #eef5ff;
+    overscroll-behavior-y: none;
   }
 
   a {
