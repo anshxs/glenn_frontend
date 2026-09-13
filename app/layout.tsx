@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
-import { Geist_Mono } from "next/font/google";
+import { Geist_Mono, Outfit, Unbounded } from "next/font/google";
 import "./globals.css";
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const outfit = Outfit({
+  variable: "--font-outfit",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const unbounded = Unbounded({
+  variable: "--font-unbounded",
+  subsets: ["latin"],
+  weight: ["900"],
 });
 
 export const metadata: Metadata = {
@@ -205,7 +217,8 @@ export default function RootLayout({
         <script defer data-tracker="db35212a-244c-4c3a-a04f-03d525b61d39" data-hosts="glennesports.app" src="https://www.webtracky.com/analytics.js"></script>
       </head>
       <body
-        className={`${geistMono.variable} min-h-screen w-full bg-white text-black antialiased`}
+        className={`${geistMono.variable} ${outfit.variable} ${unbounded.variable} min-h-screen w-full bg-[#000] text-white antialiased`}
+        style={{ fontFamily: 'var(--font-outfit), sans-serif' }}
       >
         {children}
       </body>
