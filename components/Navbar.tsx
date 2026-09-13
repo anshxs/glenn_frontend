@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { getSubdomainUrl, getHomeUrl } from '@/lib/subdomains';
 
 interface NavbarProps {
   className?: string;
@@ -29,11 +30,11 @@ export default function Navbar({ className = '' }: NavbarProps) {
   const getNavLinks = () => {
     const isHome = pathname === '/' || !pathname;
     const allLinks = [
-      { name: 'home', href: '/' },
-      { name: 'about', href: '/about' },
-      { name: 'careers', href: '/careers' },
-      { name: 'complaints', href: '/complaints' },
-      { name: 'terms', href: '/policy' }
+      { name: 'home', href: getHomeUrl() },
+      { name: 'about', href: getSubdomainUrl('about') },
+      { name: 'careers', href: getSubdomainUrl('careers') },
+      { name: 'complaints', href: getSubdomainUrl('complaints') },
+      { name: 'terms', href: getSubdomainUrl('policy') }
     ];
 
     if (isHome) {
@@ -58,7 +59,7 @@ export default function Navbar({ className = '' }: NavbarProps) {
       >
         {/* Brand Logo */}
         <div className="flex items-center cursor-pointer group">
-          <Link href="/" className="inline-flex items-center">
+          <Link href={getHomeUrl()} className="inline-flex items-center">
             <img src="/logos.svg" className="w-16 sm:w-18 invert" alt="Glenn Logo" />
           </Link>
         </div>
@@ -96,7 +97,7 @@ export default function Navbar({ className = '' }: NavbarProps) {
           {/* Top Bar inside modal */}
           <div className="flex items-center justify-between px-6 py-6">
             <Link
-              href="/"
+              href={getHomeUrl()}
               onClick={() => setIsOpen(false)}
               className="inline-flex items-center"
             >
@@ -105,7 +106,7 @@ export default function Navbar({ className = '' }: NavbarProps) {
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/15  flex items-center justify-center text-white active:scale-95 transition-all cursor-pointer"
+              className="w-10 h-10 rounded-xl bg-white/10 hover:bg-white/15 flex items-center justify-center text-white active:scale-95 transition-all cursor-pointer"
               aria-label="Close navigation menu"
             >
               <X className="w-5 h-5" />
@@ -138,7 +139,7 @@ export default function Navbar({ className = '' }: NavbarProps) {
                 onClick={() => setIsOpen(false)}
                 className="w-full flex items-center justify-center gap-3 bg-white text-black font-semibold text-sm py-3.5 px-6 rounded-2xl hover:bg-white/90 transition-all shadow-lg active:scale-98"
               >
-                <img src={'/play.png'} width={20} height={20}></img>
+                <img src={'/play.png'} width={20} height={20} alt="Play store" />
                 <span>Download on Google Play</span>
                 <ArrowUpRight className="w-4 h-4" />
               </a>

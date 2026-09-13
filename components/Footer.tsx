@@ -3,6 +3,7 @@
 import React from 'react';
 import TextLoop from './TextLoop';
 import Link from 'next/link';
+import { getSubdomainUrl } from '@/lib/subdomains';
 
 export default function Footer() {
   return (
@@ -109,14 +110,14 @@ export default function Footer() {
           {/* Terms & Privacy */}
           <div className="flex items-center gap-3 text-xs sm:text-sm text-white font-sans font-bold">
             <Link
-              href="/policy.md"
+              href={getSubdomainUrl('policy')}
               className="hover:text-white transition-colors"
             >
               Terms and Conditions
             </Link>
             <span className="text-white select-none">|</span>
             <Link
-              href="/policy.md"
+              href={getSubdomainUrl('policy')}
               className="hover:text-white transition-colors"
             >
               Privacy Policy
