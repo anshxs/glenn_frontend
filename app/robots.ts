@@ -19,6 +19,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/admin/'],
       },
     ],
-    sitemap: 'https://glennesports.app/sitemap.xml',
+    sitemap: 'https://www.glennesports.app/sitemap.xml',
   }
 }

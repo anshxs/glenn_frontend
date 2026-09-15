@@ -40,12 +40,12 @@ const Hero = () => {
         </div>
 
         {/* Foreground Content */}
-        <main className="relative z-10 flex flex-col lg:flex-row items-start lg:items-end justify-start lg:justify-between gap-4 lg:gap-8 px-6 pt-10 sm:pt-8 lg:px-16 lg:pt-12 w-full h-full flex-1">
+        <div className="relative z-10 flex flex-col lg:flex-row items-start lg:items-end justify-start lg:justify-between gap-4 lg:gap-8 px-6 pt-10 sm:pt-8 lg:px-16 lg:pt-12 w-full h-full flex-1">
           <div className="flex-none lg:flex-1 w-full flex flex-col items-start text-left gap-3 sm:gap-5 lg:pr-8 self-start lg:self-center z-20">
             {/* Tagline above headline */}
             <div className="flex items-center gap-2 text-black/90 font-bold text-xs sm:text-sm tracking-wide uppercase select-none">
               <span className="w-4 sm:w-5 h-[2.5px] bg-black inline-block rounded-full" />
-              <span>Reimagining the World of Gaming</span>
+              <span>India&apos;s Ultimate Free Fire Esports Platform</span>
             </div>
 
             {/* Main Headline */}
@@ -53,6 +53,7 @@ const Hero = () => {
               style={{ fontFamily: 'var(--font-unbounded), sans-serif' }}
               className="text-[2.2rem] xs:text-4xl sm:text-5xl md:text-6xl lg:text-[4.8rem] xl:text-[5.6rem] font-black text-black tracking-[-0.04em] leading-[0.92] select-none flex flex-col items-start text-left"
             >
+              <span className="sr-only">GLENN Esports - </span>
               <span>where the</span>
               <span className="inline-block sm:my-2 sm:-rotate-2 sm:border-4 sm:border-black sm:rounded-2xl md:rounded-[1.3rem] sm:bg-[#000000] sm:px-5 sm:py-1 sm:shadow-[7px_7px_0px_#000] text-white">
                 squad
@@ -60,12 +61,18 @@ const Hero = () => {
               <span>lives</span>
             </h1>
 
+            {/* Semantic Paragraph for SEO & User Introduction */}
+            <p className="sr-only">
+              GLENN is India&apos;s premier Free Fire esports platform offering daily tournaments, custom scrims, live KD leaderboards, player profiles, squad chat, and real rewards.
+            </p>
+
             {/* Google Play Download Button */}
             <div className="mt-1 sm:mt-2">
               <a
                 href="https://play.google.com/store/apps/details?id=com.absolute.glenn"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Download GLENN App on Google Play Store"
                 className="inline-flex items-center justify-center bg-neutral-900 hover:bg-neutral-800 px-4 py-2.5 sm:px-5 sm:py-3 rounded-2xl border-2 border-black shadow-[4px_4px_0px_#000] hover:shadow-[6px_6px_0px_#000] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#000] transition-all cursor-pointer"
               >
                 <img
@@ -86,7 +93,7 @@ const Hero = () => {
               />
             </div>
           </div>
-        </main>
+        </div>
       </div>
     </section>
   );
